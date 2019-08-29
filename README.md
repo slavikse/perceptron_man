@@ -2,10 +2,10 @@
 
 ### Директории собранных проектов:
 > web  
-`C:\Projects\Unique-Clone\build\web-desktop`
+`C:\Projects\unique_clone\build\web-desktop`
 
 > exe  
-`C:\Projects\Unique-Clone\build\jsb-default\frameworks\runtime-src\proj.win32\Release.win32`
+`C:\Projects\unique_clone\build\jsb-default\frameworks\runtime-src\proj.win32\Release.win32`
 
 > apk  
-`C:\Projects\Unique-Clone\build\jsb-default\frameworks\runtime-src\proj.android-studio\app\build\outputs\apk\release`
+`C:\Projects\unique_clone\build\jsb-default\frameworks\runtime-src\proj.android-studio\app\build\outputs\apk\release`
