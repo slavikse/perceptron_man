@@ -3,7 +3,7 @@
   "_name": "test",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.9333333333333333,
+  "_duration": 0.9166666666666666,
   "sample": 60,
   "speed": 1,
   "wrapMode": 22,
@@ -18,11 +18,11 @@
           "curve": "cubicOut"
         },
         {
-          "frame": 0.5166666666666667,
+          "frame": 0.26666666666666666,
           "value": -80.78
         },
         {
-          "frame": 0.9333333333333333,
+          "frame": 0.9166666666666666,
           "value": 45.791
         }
       ],
@@ -36,7 +36,7 @@
           }
         },
         {
-          "frame": 0.5166666666666667,
+          "frame": 0.26666666666666666,
           "value": {
             "__type__": "cc.Vec2",
             "x": 1,
@@ -46,5 +46,13 @@
       ]
     }
   },
-  "events": []
+  "events": [
+    {
+      "frame": 0.9166666666666666,
+      "func": "editorAnimCompleted",
+      "params": [
+        "done"
+      ]
+    }
+  ]
 }

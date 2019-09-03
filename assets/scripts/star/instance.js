@@ -1,21 +1,20 @@
 cc.Class({
   extends: cc.Component,
 
-  properties: {
-    pickDistance: 60,
-    minDurationLive: 3,
-    maxDurationLive: 5,
-  },
-
   onLoad() {
     this.playerNode = cc.find('level1/player');
     this.playerJumpingComponent = this.playerNode.getComponent('jumping');
+
+    this.pickDistance = 60;
+    this.minDurationLive = 3;
+    this.maxDurationLive = 5;
 
     this.timer = 0;
     this.durationLive = this.minDurationLive + Math.random()
       * (this.maxDurationLive - this.minDurationLive);
 
-    this.node.setPosition(...this.getPosition());
+    // todo теперь будет срабатывать по пересечению в физической системе.
+    // this.node.setPosition(...this.getPosition());
   },
 
   update(dt) {
@@ -49,7 +48,7 @@ cc.Class({
 
   gameOver() {
     // todo
-    // cc.director.dispatchEvent(new Event('level1/gameOver'));
+    // cc.director.dispatchEvent(new CustomEvent('level1/gameOver'));
   },
 
   getDistanceToPlayer() {
@@ -65,7 +64,7 @@ cc.Class({
   },
 
   starPicked() {
-    cc.director.dispatchEvent(new Event('star/picked'));
+    cc.director.dispatchEvent(new CustomEvent('star/picked'));
     this.node.destroy();
   },
 });

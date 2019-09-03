@@ -12,4 +12,9 @@ cc.Class({
   onGameOver() {
     this.node.stopAllActions();
   },
+
+  // todo
+  // editorAnimCompleted(status) {
+  //   console.log(`status: ${status}`);
+  // },
 });

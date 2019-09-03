@@ -3,48 +3,44 @@ cc.Class({
 
   properties: {
     audio: { type: cc.AudioClip, default: undefined },
-    duration: 0.4,
-    height: 200,
+    acceleration: 4000,
   },
 
   onLoad() {
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
 
+    this.rigidBody = this.node.getComponent(cc.RigidBody);
+    this.impulse = cc.v2(0, this.acceleration);
+    this.localCenter = this.rigidBody.getLocalCenter();
+
     this.isIdle = true;
+    this.isAcceleration = false;
   },
 
   onDestroy() {
     cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
   },
 
-  onKeyDown({ keyCode }) {
-    if (this.isIdle && keyCode === cc.macro.KEY.w) {
-      this.node.runAction(this.jump());
+  onBeginContact(contact, selfCollider, otherCollider) {
+    if (otherCollider.tag === window.game.tag.ground) {
+      this.isIdle = true;
     }
   },
 
-  // todo add easing function
-  jump() {
-    this.isIdle = false;
+  onKeyDown({ keyCode }) {
+    if (this.isIdle && keyCode === cc.macro.KEY.w) {
+      this.isIdle = false;
 
-    const playAudio = cc.callFunc(this.playAudio, this);
-
-    const jumpUp = cc.moveBy(this.duration, cc.v2(0, this.height))
-      .easing(cc.easeCubicActionOut());
-
-    const jumpDown = cc.moveBy(this.duration, cc.v2(0, -this.height))
-      .easing(cc.easeCubicActionIn());
-
-    const idle = cc.callFunc(this.setIdle, this);
-
-    return cc.sequence(playAudio, jumpUp, jumpDown, idle);
+      this.playAudio();
+      this.jump();
+    }
   },
 
   playAudio() {
     cc.audioEngine.playEffect(this.audio, false);
   },
 
-  setIdle() {
-    this.isIdle = true;
+  jump() {
+    this.rigidBody.applyLinearImpulse(this.impulse, this.localCenter);
   },
 });

@@ -2,17 +2,19 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
-    acceleration: 20,
-    speedLimiter: 500,
+    acceleration: 2000,
+    speedLimiter: 2000 * 15, // acceleration * N
   },
 
   onLoad() {
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
+    this.rigidBody = this.node.getComponent(cc.RigidBody);
+
+    this.speed = 0;
     this.isAccelerationLeft = false;
     this.isAccelerationRight = false;
-    this.speed = 0;
   },
 
   update(dt) {
@@ -25,21 +27,22 @@ cc.Class({
   },
 
   onKeyDown({ keyCode }) {
-    this.responseToKey(keyCode, true);
+    this.setAcceleration(keyCode, true);
   },
 
   onKeyUp({ keyCode }) {
-    this.responseToKey(keyCode, false);
+    this.setAcceleration(keyCode, false);
   },
 
-  responseToKey(keyCode, isAction) {
+  setAcceleration(keyCode, isPressed) {
     if (keyCode === cc.macro.KEY.a) {
-      this.isAccelerationLeft = isAction;
+      this.isAccelerationLeft = isPressed;
     } else if (keyCode === cc.macro.KEY.d) {
-      this.isAccelerationRight = isAction;
+      this.isAccelerationRight = isPressed;
     }
   },
 
+  // todo обратное движение сбрасывает скорость сразу в 0 (zeroingSpeed).
   movement(dt) {
     if (this.isAccelerationLeft) {
       this.increaseSpeedToLeft();
@@ -49,7 +52,7 @@ cc.Class({
       this.zeroingSpeed();
     }
 
-    this.node.x += this.speed * dt;
+    this.combiningJumpAccelerationWithMovement(dt);
   },
 
   increaseSpeedToLeft() {
@@ -70,5 +73,10 @@ cc.Class({
     } else if (this.speed < 0) {
       this.speed += this.acceleration;
     }
+  },
+
+  combiningJumpAccelerationWithMovement(dt) {
+    const { y } = this.rigidBody.linearVelocity;
+    this.rigidBody.linearVelocity = cc.v2(this.speed * dt, y);
   },
 });

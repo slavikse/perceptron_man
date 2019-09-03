@@ -867,7 +867,7 @@
     },
     "component": "",
     "_componentId": "b9f45gtLvZDwq4yguC2+MH7",
-    "handler": "editorStart",
+    "handler": "editorEventRun",
     "customEventData": "level1"
   },
   {

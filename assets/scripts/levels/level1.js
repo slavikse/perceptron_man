@@ -24,6 +24,9 @@ cc.Class({
 //   .to(2, { scale: 0.5 }, { easing: 'sineOutIn' })
 //   .start();
 
+// todo управление предварительно настроенной анимации: anims
+// https://docs.cocos.com/creator/2.1/manual/en/animation/scripting-animation.html
+
 // todo планировщик
 // this.schedule(() => {
 //   console.log('1');
