@@ -631,7 +631,8 @@
       "__id__": 11
     },
     "_enabled": true,
-    "maximumSpeed": 30000,
+    "acceleration": 2000,
+    "speedLimiter": 30000,
     "_id": "05TcQdSftBMqluXMyxugQu"
   },
   {

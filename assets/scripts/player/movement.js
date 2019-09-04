@@ -6,7 +6,6 @@ cc.Class({
     speedLimiter: 2000 * 15, // acceleration * N
   },
 
-  // todo не набирать скорость, когда персонаж упирается в стену.
   onLoad() {
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
@@ -20,14 +19,18 @@ cc.Class({
 
   update(dt) {
     if (this.isMovementLeft === this.isMovementRight) {
-      this.zeroingSpeed();
+      this.deceleration();
     } else if (this.isMovementLeft) {
-      this.increaseSpeedToLeft();
+      this.accelerationLeft();
     } else if (this.isMovementRight) {
-      this.increaseSpeedToRight();
+      this.accelerationRight();
     }
 
-    this.combiningJumpingWithMovement(dt);
+    this.jumpWithSpeed(dt);
+  },
+
+  lateUpdate() {
+    this.accelerationPrevention();
   },
 
   onDestroy() {
@@ -51,19 +54,7 @@ cc.Class({
     }
   },
 
-  increaseSpeedToLeft() {
-    if (this.speed > -this.speedLimiter) {
-      this.speed -= this.acceleration;
-    }
-  },
-
-  increaseSpeedToRight() {
-    if (this.speed < this.speedLimiter) {
-      this.speed += this.acceleration;
-    }
-  },
-
-  zeroingSpeed() {
+  deceleration() {
     if (this.speed > 0) {
       this.speed -= this.acceleration;
     } else if (this.speed < 0) {
@@ -71,8 +62,35 @@ cc.Class({
     }
   },
 
-  combiningJumpingWithMovement(dt) {
+  accelerationLeft() {
+    if (this.speed > -this.speedLimiter) {
+      this.speed -= this.acceleration;
+    }
+  },
+
+  accelerationRight() {
+    if (this.speed < this.speedLimiter) {
+      this.speed += this.acceleration;
+    }
+  },
+
+  // Чтобы сохранить ускорение прыжка при перемещении,
+  // присваивается общее ускорение для прыжка и перемещения.
+  jumpWithSpeed(dt) {
     const { y } = this.rigidBody.linearVelocity;
     this.rigidBody.linearVelocity = cc.v2(this.speed * dt, y);
+  },
+
+  // Когда ускорение падает до нуля, а скорость продолжает набираться,
+  // это означает, что персонаж не перемещается, а уперся в стену.
+  accelerationPrevention() {
+    const { x } = this.rigidBody.linearVelocity;
+    // Погрешность эмуляции физических тел.
+    const infelicity = 5;
+
+    // Диапазон ускорения в пределах погрешности при столновении с объектом.
+    if (x > -infelicity && x < infelicity) {
+      this.speed = 0;
+    }
   },
 });
