@@ -7,10 +7,18 @@
     [
       false,
       false,
+      true,
       true
     ],
     [
       false,
+      true,
+      false,
+      true
+    ],
+    [
+      false,
+      true,
       true,
       true
     ]
@@ -39,7 +47,8 @@
   "group-list": [
     "default",
     "player",
-    "ground"
+    "ground",
+    "block"
   ],
   "last-module-event-record-time": 1566943656482,
   "simulator-orientation": false,
@@ -48,5 +57,6 @@
     "width": 960
   },
   "use-customize-simulator": true,
-  "use-project-simulator-setting": false
+  "use-project-simulator-setting": false,
+  "start-scene": "current"
 }
