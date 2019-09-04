@@ -329,7 +329,7 @@
     "anchor": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 51
+      "y": 50
     },
     "connectedAnchor": {
       "__type__": "cc.Vec2",

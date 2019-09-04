@@ -48,7 +48,7 @@ cc.Class({
 
   gameOver() {
     // todo
-    // cc.director.dispatchEvent(new CustomEvent('level1/gameOver'));
+    // cc.director.dispatchEvent(new Event('level1/gameOver'));
   },
 
   getDistanceToPlayer() {
@@ -64,7 +64,7 @@ cc.Class({
   },
 
   starPicked() {
-    cc.director.dispatchEvent(new CustomEvent('star/picked'));
+    cc.director.dispatchEvent(new Event('star/picked'));
     this.node.destroy();
   },
 });
