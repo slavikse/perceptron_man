@@ -1,3 +1,5 @@
+const reactionGroups = ['ground'];
+
 cc.Class({
   extends: cc.Component,
 
@@ -8,39 +10,71 @@ cc.Class({
 
   onLoad() {
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
     this.rigidBody = this.node.getComponent(cc.RigidBody);
     this.impulse = cc.v2(0, this.acceleration);
     this.localCenter = this.rigidBody.getLocalCenter();
 
+    this.isPressedW = false;
     this.isIdle = true;
-    this.isAcceleration = false;
+    this.contactsAmount = 0;
   },
 
-  onDestroy() {
-    cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-  },
-
-  onBeginContact(contact, selfCollider, otherCollider) {
-    if (otherCollider.tag === window.game.tag.ground) {
-      this.isIdle = true;
-    }
-  },
-
-  onKeyDown({ keyCode }) {
-    if (this.isIdle && keyCode === cc.macro.KEY.w) {
-      this.isIdle = false;
-
-      this.playAudio();
+  update() {
+    if (this.isPressedW && this.isIdle) {
       this.jump();
     }
   },
 
-  playAudio() {
-    cc.audioEngine.playEffect(this.audio, false);
+  onDestroy() {
+    cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
   },
 
+  onBeginContact(contact, selfCollider, otherCollider) {
+    if (reactionGroups.includes(otherCollider.node.group)) {
+      if (this.contactsAmount === 0) {
+        this.isIdle = true;
+      }
+
+      this.contactsAmount += 1;
+    }
+  },
+
+  onEndContact(contact, selfCollider, otherCollider) {
+    if (reactionGroups.includes(otherCollider.node.group)) {
+      if (this.contactsAmount === 0) {
+        this.isIdle = false;
+      }
+
+      this.contactsAmount -= 1;
+    }
+  },
+
+  onKeyDown({ keyCode }) {
+    const isKeyW = keyCode === cc.macro.KEY.w;
+
+    if (isKeyW && this.isIdle) {
+      this.isPressedW = true;
+      this.jump();
+    }
+  },
+
+  onKeyUp({ keyCode }) {
+    const isKeyW = keyCode === cc.macro.KEY.w;
+
+    if (isKeyW) {
+      this.isPressedW = false;
+    }
+  },
+
+  // todo если в прыжке нажать прыгать, то будет задержка для следующего прыжка,
+  //  а если при зажатом прыжке в прыжке начать передвижение, персонаж перестаёт прыгать.
   jump() {
+    this.isIdle = false;
+
+    cc.audioEngine.playEffect(this.audio, false);
     this.rigidBody.applyLinearImpulse(this.impulse, this.localCenter);
   },
 });
