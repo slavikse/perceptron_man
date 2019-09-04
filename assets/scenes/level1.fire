@@ -597,7 +597,7 @@
       "__id__": 11
     },
     "_enabled": true,
-    "_id": "b2hMFjj1FJV4aBhd+Vkl9e"
+    "_id": "b87vOHNl5Heau0Z5pgagZy"
   },
   {
     "__type__": "24716i+8SFJtLgS0dS4N/IY",
@@ -966,7 +966,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 90
+      "z": 89.99999999999999
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1113,7 +1113,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": -90
+      "z": -89.99999999999999
     },
     "_skewX": 0,
     "_skewY": 0,

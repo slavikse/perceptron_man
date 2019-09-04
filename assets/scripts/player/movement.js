@@ -2,9 +2,11 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
-    maximumSpeed: 30000,
+    acceleration: 2000,
+    speedLimiter: 2000 * 15, // acceleration * N
   },
 
+  // todo не набирать скорость, когда персонаж упирается в стену.
   onLoad() {
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
@@ -18,11 +20,11 @@ cc.Class({
 
   update(dt) {
     if (this.isMovementLeft === this.isMovementRight) {
-      this.speed = 0;
+      this.zeroingSpeed();
     } else if (this.isMovementLeft) {
-      this.speed = -this.maximumSpeed;
+      this.increaseSpeedToLeft();
     } else if (this.isMovementRight) {
-      this.speed = this.maximumSpeed;
+      this.increaseSpeedToRight();
     }
 
     this.combiningJumpingWithMovement(dt);
@@ -46,6 +48,26 @@ cc.Class({
       this.isMovementLeft = isPressed;
     } else if (keyCode === cc.macro.KEY.d) {
       this.isMovementRight = isPressed;
+    }
+  },
+
+  increaseSpeedToLeft() {
+    if (this.speed > -this.speedLimiter) {
+      this.speed -= this.acceleration;
+    }
+  },
+
+  increaseSpeedToRight() {
+    if (this.speed < this.speedLimiter) {
+      this.speed += this.acceleration;
+    }
+  },
+
+  zeroingSpeed() {
+    if (this.speed > 0) {
+      this.speed -= this.acceleration;
+    } else if (this.speed < 0) {
+      this.speed += this.acceleration;
     }
   },
 
