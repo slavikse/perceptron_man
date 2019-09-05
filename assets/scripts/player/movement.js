@@ -1,9 +1,14 @@
+const hasPermissibleInfelicity = require('utils/hasPermissibleInfelicity');
+
+const acceleration = 3000;
+const multiplier = 15;
+
 cc.Class({
   extends: cc.Component,
 
   properties: {
-    acceleration: 2000,
-    speedLimiter: 2000 * 15, // acceleration * N
+    acceleration,
+    speedLimiter: acceleration * multiplier,
   },
 
   onLoad() {
@@ -39,14 +44,14 @@ cc.Class({
   },
 
   onKeyDown({ keyCode }) {
-    this.setAcceleration(keyCode, true);
+    this.setMovementSide(keyCode, true);
   },
 
   onKeyUp({ keyCode }) {
-    this.setAcceleration(keyCode, false);
+    this.setMovementSide(keyCode, false);
   },
 
-  setAcceleration(keyCode, isPressed) {
+  setMovementSide(keyCode, isPressed) {
     if (keyCode === cc.macro.KEY.a) {
       this.isMovementLeft = isPressed;
     } else if (keyCode === cc.macro.KEY.d) {
@@ -81,15 +86,10 @@ cc.Class({
     this.rigidBody.linearVelocity = cc.v2(this.speed * dt, y);
   },
 
-  // Когда ускорение падает до нуля, а скорость продолжает набираться,
-  // это означает, что персонаж не перемещается, а уперся в стену.
   accelerationPrevention() {
     const { x } = this.rigidBody.linearVelocity;
-    // Погрешность эмуляции физических тел.
-    const infelicity = 5;
 
-    // Диапазон ускорения в пределах погрешности при столновении с объектом.
-    if (x > -infelicity && x < infelicity) {
+    if (hasPermissibleInfelicity(x)) {
       this.speed = 0;
     }
   },

@@ -1,4 +1,4 @@
-const reactionGroups = ['ground'];
+const hasPermissibleInfelicity = require('utils/hasPermissibleInfelicity');
 
 cc.Class({
   extends: cc.Component,
@@ -16,13 +16,13 @@ cc.Class({
     this.impulse = cc.v2(0, this.acceleration);
     this.localCenter = this.rigidBody.getLocalCenter();
 
-    this.isPressedW = false;
-    this.isIdle = true;
-    this.contactsAmount = 0;
+    this.isPressedKeyW = false;
   },
 
   update() {
-    if (this.isPressedW && this.isIdle) {
+    const { y } = this.rigidBody.linearVelocity;
+
+    if (this.isPressedKeyW && hasPermissibleInfelicity(y)) {
       this.jump();
     }
   },
@@ -32,32 +32,11 @@ cc.Class({
     cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
   },
 
-  onBeginContact(contact, selfCollider, otherCollider) {
-    if (reactionGroups.includes(otherCollider.node.group)) {
-      if (this.contactsAmount === 0) {
-        this.isIdle = true;
-      }
-
-      this.contactsAmount += 1;
-    }
-  },
-
-  onEndContact(contact, selfCollider, otherCollider) {
-    if (reactionGroups.includes(otherCollider.node.group)) {
-      if (this.contactsAmount === 0) {
-        this.isIdle = false;
-      }
-
-      this.contactsAmount -= 1;
-    }
-  },
-
   onKeyDown({ keyCode }) {
     const isKeyW = keyCode === cc.macro.KEY.w;
 
-    if (isKeyW && this.isIdle) {
-      this.isPressedW = true;
-      this.jump();
+    if (isKeyW) {
+      this.isPressedKeyW = true;
     }
   },
 
@@ -65,14 +44,11 @@ cc.Class({
     const isKeyW = keyCode === cc.macro.KEY.w;
 
     if (isKeyW) {
-      this.isPressedW = false;
+      this.isPressedKeyW = false;
     }
   },
 
-  // todo если в прыжке нажать прыгать, то будет задержка для следующего прыжка
   jump() {
-    this.isIdle = false;
-
     cc.audioEngine.playEffect(this.audio, false);
     this.rigidBody.applyLinearImpulse(this.impulse, this.localCenter);
   },
