@@ -12,15 +12,15 @@ cc.Class({
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
-    this.rigidBody = this.node.getComponent(cc.RigidBody);
+    this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
     this.impulse = cc.v2(0, this.acceleration);
-    this.localCenter = this.rigidBody.getLocalCenter();
+    this.localCenter = this.rigidBodyComponent.getLocalCenter();
 
     this.isPressedKeyW = false;
   },
 
   update() {
-    const { y } = this.rigidBody.linearVelocity;
+    const { y } = this.rigidBodyComponent.linearVelocity;
 
     if (this.isPressedKeyW && hasPermissibleInfelicity(y)) {
       this.jump();
@@ -50,6 +50,6 @@ cc.Class({
 
   jump() {
     cc.audioEngine.playEffect(this.audio, false);
-    this.rigidBody.applyLinearImpulse(this.impulse, this.localCenter);
+    this.rigidBodyComponent.applyLinearImpulse(this.impulse, this.localCenter);
   },
 });

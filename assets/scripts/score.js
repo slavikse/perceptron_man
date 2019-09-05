@@ -7,7 +7,7 @@ cc.Class({
 
   onLoad() {
     cc.director.on('star/picked', this.gainScore, this);
-    cc.director.on('level1/gameOver', this.gameOver, this);
+    cc.director.on('gameOver', this.gameOver, this);
 
     this.scoreComponent = this.node.getComponent(cc.Label);
     this.score = 0;
@@ -15,7 +15,7 @@ cc.Class({
 
   onDestroy() {
     cc.director.off('star/picked', this.gainScore, this);
-    cc.director.off('level1/gameOver', this.gameOver, this);
+    cc.director.off('gameOver', this.gameOver, this);
   },
 
   gainScore() {

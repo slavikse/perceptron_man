@@ -48,7 +48,7 @@ cc.Class({
 
   gameOver() {
     // todo
-    // cc.director.dispatchEvent(new Event('level1/gameOver'));
+    // cc.director.dispatchEvent(new Event('gameOver'));
   },
 
   getDistanceToCharacter() {

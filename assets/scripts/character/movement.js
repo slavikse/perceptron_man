@@ -15,8 +15,8 @@ cc.Class({
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
-    this.level = cc.find('level1');
-    this.rigidBody = this.node.getComponent(cc.RigidBody);
+    this.levelNode = cc.find('level1');
+    this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
 
     this.speed = 0;
     this.isMovementLeft = false;
@@ -36,7 +36,7 @@ cc.Class({
   },
 
   lateUpdate() {
-    this.accelerationPrevention();
+    this.accelerationMovementPrevention();
     this.levelDropoutLimiter();
   },
 
@@ -84,12 +84,12 @@ cc.Class({
   // Чтобы сохранить ускорение прыжка при перемещении,
   // присваивается общее ускорение для прыжка и перемещения.
   jumpWithSpeed(dt) {
-    const { y } = this.rigidBody.linearVelocity;
-    this.rigidBody.linearVelocity = cc.v2(this.speed * dt, y);
+    const { y } = this.rigidBodyComponent.linearVelocity;
+    this.rigidBodyComponent.linearVelocity = cc.v2(this.speed * dt, y);
   },
 
-  accelerationPrevention() {
-    const { x } = this.rigidBody.linearVelocity;
+  accelerationMovementPrevention() {
+    const { x } = this.rigidBodyComponent.linearVelocity;
 
     if (hasPermissibleInfelicity(x)) {
       this.resetSpeed();
@@ -101,7 +101,7 @@ cc.Class({
   },
 
   levelDropoutLimiter() {
-    const halfLevelWidth = this.level.width / 2;
+    const halfLevelWidth = this.levelNode.width / 2;
     const levelBorderLeft = -halfLevelWidth;
     const levelBorderRight = halfLevelWidth;
 
