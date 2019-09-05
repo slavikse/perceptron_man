@@ -40,8 +40,8 @@
   "fit-width": false,
   "group-list": [
     "default",
-    "player",
-    "ground",
+    "character",
+    "platform",
     ""
   ],
   "last-module-event-record-time": 1567634804518,

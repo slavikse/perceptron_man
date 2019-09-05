@@ -15,6 +15,7 @@ cc.Class({
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
+    this.level = cc.find('level1');
     this.rigidBody = this.node.getComponent(cc.RigidBody);
 
     this.speed = 0;
@@ -36,6 +37,7 @@ cc.Class({
 
   lateUpdate() {
     this.accelerationPrevention();
+    this.levelDropoutLimiter();
   },
 
   onDestroy() {
@@ -90,7 +92,32 @@ cc.Class({
     const { x } = this.rigidBody.linearVelocity;
 
     if (hasPermissibleInfelicity(x)) {
-      this.speed = 0;
+      this.resetSpeed();
     }
+  },
+
+  resetSpeed() {
+    this.speed = 0;
+  },
+
+  levelDropoutLimiter() {
+    const halfLevelWidth = this.level.width / 2;
+    const levelBorderLeft = -halfLevelWidth;
+    const levelBorderRight = halfLevelWidth;
+
+    const halfCharacterWidth = this.node.width / 2;
+    const characterBorderLeft = this.node.x - halfCharacterWidth;
+    const characterBorderRight = this.node.x + halfCharacterWidth;
+
+    if (characterBorderLeft < levelBorderLeft) {
+      this.movementLimiter(levelBorderLeft + halfCharacterWidth);
+    } else if (characterBorderRight > levelBorderRight) {
+      this.movementLimiter(levelBorderRight - halfCharacterWidth);
+    }
+  },
+
+  movementLimiter(x) {
+    this.resetSpeed();
+    this.node.x = x;
   },
 });

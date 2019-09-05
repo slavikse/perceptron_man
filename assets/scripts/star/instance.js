@@ -2,8 +2,8 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
-    this.playerNode = cc.find('level1/player');
-    this.playerJumpingComponent = this.playerNode.getComponent('jumping');
+    this.characterNode = cc.find('level1/character');
+    this.characterJumpingComponent = this.characterNode.getComponent('jumping');
 
     this.pickDistance = 60;
     this.minDurationLive = 3;
@@ -22,7 +22,7 @@ cc.Class({
 
     if (this.timer > this.durationLive) {
       this.gameOver();
-    } else if (this.getDistanceToPlayer() > this.pickDistance) {
+    } else if (this.getDistanceToCharacter() > this.pickDistance) {
       this.hideStar();
     } else {
       this.starPicked();
@@ -41,7 +41,7 @@ cc.Class({
     const groundY = groundNode.y + groundNode.height / 2;
     const maxX = groundNode.width / 4;
     const randX = (Math.random() - 0.5) * 2 * maxX;
-    const randY = groundY + Math.random() * this.playerJumpingComponent.height + 50;
+    const randY = groundY + Math.random() * this.characterJumpingComponent.height + 50;
 
     return [randX, randY];
   },
@@ -51,9 +51,9 @@ cc.Class({
     // cc.director.dispatchEvent(new Event('level1/gameOver'));
   },
 
-  getDistanceToPlayer() {
-    const playerPosition = this.playerNode.getPosition();
-    return this.node.position.sub(playerPosition).mag();
+  getDistanceToCharacter() {
+    const characterPosition = this.characterNode.getPosition();
+    return this.node.position.sub(characterPosition).mag();
   },
 
   hideStar() {

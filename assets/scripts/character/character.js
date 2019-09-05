@@ -3,6 +3,9 @@ cc.Class({
 
   onLoad() {
     cc.director.on('level1/gameOver', this.onGameOver, this);
+
+    const physicsManager = cc.director.getPhysicsManager();
+    physicsManager.enabled = true;
   },
 
   onDestroy() {
