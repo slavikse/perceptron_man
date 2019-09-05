@@ -290,9 +290,6 @@
       "__id__": 1
     },
     "_enabled": true,
-    "pickDistance": 60,
-    "minDurationLive": 3,
-    "maxDurationLive": 5,
     "_id": ""
   },
   {

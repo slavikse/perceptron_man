@@ -3,7 +3,7 @@ cc.Class({
 
   onLoad() {
     this.characterNode = cc.find('level1/character');
-    this.characterJumpingComponent = this.characterNode.getComponent('jumping');
+    this.platformNode = cc.find('level1/platform');
 
     this.pickDistance = 60;
     this.minDurationLive = 3;
@@ -13,8 +13,7 @@ cc.Class({
     this.durationLive = this.minDurationLive + Math.random()
       * (this.maxDurationLive - this.minDurationLive);
 
-    // todo теперь будет срабатывать по пересечению в физической системе.
-    // this.node.setPosition(...this.getPosition());
+    this.node.setPosition(...this.getPosition());
   },
 
   update(dt) {
@@ -37,18 +36,20 @@ cc.Class({
   },
 
   getPosition() {
-    const groundNode = cc.find('level1/ground');
-    const groundY = groundNode.y + groundNode.height / 2;
-    const maxX = groundNode.width / 4;
+    const groundY = this.platformNode.y + this.platformNode.height / 2;
+    const maxX = this.platformNode.width / 4;
     const randX = (Math.random() - 0.5) * 2 * maxX;
-    const randY = groundY + Math.random() * this.characterJumpingComponent.height + 50;
+    const randY = groundY + Math.random() * 100;
 
     return [randX, randY];
   },
 
   gameOver() {
-    // todo
-    // cc.director.dispatchEvent(new Event('gameOver'));
+    if (window.game.godMode) {
+      this.node.destroy();
+    } else {
+      cc.director.dispatchEvent(new Event('gameOver'));
+    }
   },
 
   getDistanceToCharacter() {
