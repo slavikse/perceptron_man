@@ -14,18 +14,18 @@
     "orientation": "portrait",
     "subContext": ""
   },
-  "encryptJs": true,
+  "encryptJs": false,
   "excludeScenes": [
     "ceafdfc7-dabe-4d95-9ff2-4863c4eaefca"
   ],
   "fb-instant-games": {},
   "includeAnySDK": false,
   "includeSDKBox": false,
-  "inlineSpriteFrames": false,
+  "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": false,
-  "md5Cache": true,
+  "md5Cache": false,
   "mergeStartScene": false,
-  "optimizeHotUpdate": true,
+  "optimizeHotUpdate": false,
   "orientation": {
     "landscapeLeft": true,
     "landscapeRight": true,

@@ -19,7 +19,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        paths: ['assets/scripts'],
+        paths: ['assets/scripts/utils'],
       },
     },
   },

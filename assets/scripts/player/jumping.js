@@ -1,4 +1,4 @@
-const hasPermissibleInfelicity = require('utils/hasPermissibleInfelicity');
+const hasPermissibleInfelicity = require('hasPermissibleInfelicity');
 
 cc.Class({
   extends: cc.Component,

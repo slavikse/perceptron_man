@@ -1,4 +1,4 @@
-const hasPermissibleInfelicity = require('utils/hasPermissibleInfelicity');
+const hasPermissibleInfelicity = require('hasPermissibleInfelicity');
 
 const acceleration = 3000;
 const multiplier = 15;

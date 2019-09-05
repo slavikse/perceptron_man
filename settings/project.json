@@ -25,13 +25,7 @@
   ],
   "design-resolution-height": 640,
   "design-resolution-width": 960,
-  "excluded-modules": [
-    "Spine Skeleton",
-    "VideoPlayer",
-    "WebView",
-    "3D",
-    "3D Primitive"
-  ],
+  "excluded-modules": [],
   "facebook": {
     "appID": "",
     "audience": {
