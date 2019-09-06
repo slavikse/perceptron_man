@@ -15,7 +15,7 @@ cc.Class({
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
-    this.levelNode = cc.find('level1');
+    this.groundNode = cc.find('level1/ground');
     this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
 
     this.speed = 0;
@@ -101,7 +101,7 @@ cc.Class({
   },
 
   levelDropoutLimiter() {
-    const halfLevelWidth = this.levelNode.width / 2;
+    const halfLevelWidth = this.groundNode.width / 2;
     const levelBorderLeft = -halfLevelWidth;
     const levelBorderRight = halfLevelWidth;
 
