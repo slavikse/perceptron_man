@@ -45,7 +45,7 @@ cc.Class({
   },
 
   gameOver() {
-    if (window.game.godMode) {
+    if (window.state.godMode) {
       this.node.destroy();
     } else {
       cc.director.dispatchEvent(new Event('gameOver'));

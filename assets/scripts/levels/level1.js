@@ -14,5 +14,6 @@ cc.Class({
   },
 });
 
+// todo вести камеру за игроком вместе с количеством очков.
 // todo при движении по широкой сцене - смещать фон. параллакс эффект
-// todo вести камеру за игроком.
+// fixme loadScene: Failed to load scene 'start' because 'start' is already being loaded.

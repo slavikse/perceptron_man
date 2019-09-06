@@ -888,7 +888,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "god mode toggle",
+    "_name": "toggle",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -1056,7 +1056,7 @@
       "__id__": 20
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_level": 0,
     "_components": [
       {
@@ -1206,7 +1206,7 @@
     "_N$target": {
       "__id__": 21
     },
-    "_N$isChecked": false,
+    "_N$isChecked": true,
     "toggleGroup": null,
     "checkMark": {
       "__id__": 24
@@ -1225,7 +1225,7 @@
     },
     "component": "",
     "_componentId": "b9f45gtLvZDwq4yguC2+MH7",
-    "handler": "editorEnableGodMode",
+    "handler": "editorSetGodMode",
     "customEventData": ""
   },
   {
@@ -1240,7 +1240,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "god mode title",
+    "_name": "title",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -1275,7 +1275,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -29,
-      "y": -6,
+      "y": -8,
       "z": 0
     },
     "_scale": {

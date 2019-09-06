@@ -1,0 +1,3 @@
+window.state = {
+  godMode: true,
+};

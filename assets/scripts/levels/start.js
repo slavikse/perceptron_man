@@ -1,8 +1,15 @@
 cc.Class({
   extends: cc.Component,
 
-  editorEnableGodMode(e) {
-    window.game.godMode = e.isChecked;
+  onLoad() {
+    const toggleNode = cc.find('start/toggle');
+    const toggleComponent = toggleNode.getComponent(cc.Toggle);
+
+    window.state.godMode = toggleComponent.isChecked;
+  },
+
+  editorSetGodMode(e) {
+    window.state.godMode = e.isChecked;
   },
 
   editorEventRun(_, level = 'level1') {

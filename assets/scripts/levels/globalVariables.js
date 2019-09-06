@@ -1,3 +1,0 @@
-window.game = {
-  godMode: false,
-};
