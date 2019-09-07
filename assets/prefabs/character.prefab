@@ -120,52 +120,6 @@
     "_id": ""
   },
   {
-    "__type__": "92ab1vJuB5MLLBdOJGnMgRx",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_id": ""
-  },
-  {
-    "__type__": "d31c90YXoNN5qhInHOtXA+e",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_id": ""
-  },
-  {
-    "__type__": "a2fdbLOK11Bw7JHXgpwdktl",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "audio": {
-      "__uuid__": "fe05a5eb-3dee-4982-a174-cf21fbc6e4e4"
-    },
-    "acceleration": 4000,
-    "_id": ""
-  },
-  {
-    "__type__": "81d9dTK5/tCKZbhkSuG5a/w",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "acceleration": 3000,
-    "speedLimiter": 45000,
-    "_id": ""
-  },
-  {
     "__type__": "cc.RigidBody",
     "_name": "",
     "_objFlags": 0,
@@ -274,12 +228,58 @@
     "_id": ""
   },
   {
+    "__type__": "5cbf7IUa9JET52ToQhMJYHn",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_id": ""
+  },
+  {
+    "__type__": "f709e/o7xFMPa98S+SesUs3",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_id": ""
+  },
+  {
+    "__type__": "7cc74qgEkNJ77P8oEZu9mIR",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "audio": {
+      "__uuid__": "fe05a5eb-3dee-4982-a174-cf21fbc6e4e4"
+    },
+    "acceleration": 4000,
+    "_id": ""
+  },
+  {
+    "__type__": "8fd81yqlZ5PEoWaJdLrbcG9",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "acceleration": 3000,
+    "speedLimiter": 45000,
+    "_id": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "f1c8e2e3-4d69-466d-92fa-d87ba10e2fc3"
+      "__uuid__": "908742d0-70cf-47fa-9612-be99c04588f2"
     },
     "fileId": "e9Mu2bXIBEoqhPJmLr3jiH",
     "sync": false

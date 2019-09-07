@@ -111,16 +111,6 @@
     "_id": ""
   },
   {
-    "__type__": "3676cOl161AkJ6Ac1046faM",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_id": ""
-  },
-  {
     "__type__": "cc.RigidBody",
     "_name": "",
     "_objFlags": 0,
@@ -172,12 +162,22 @@
     "_id": ""
   },
   {
+    "__type__": "33652jSP/dCaIEEwCtQbHuk",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_id": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "78557f54-9812-471a-aea5-4614e2ee0708"
+      "__uuid__": "de629360-33ad-4640-801c-a5f024255e0f"
     },
     "fileId": "01Y9bb+C5GBoLUMZ8CXL63",
     "sync": false
