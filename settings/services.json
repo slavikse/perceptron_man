@@ -96,7 +96,19 @@
 		}
 	],
 	"game": {
-		"name": "UNKNOW GAME",
-		"appid": "UNKNOW"
-	}
+		"name": "unique_clone",
+		"appid": "678824317",
+		"cid": "0"
+	},
+	"configs": [
+		{
+			"appid": "678824317",
+			"services": [
+				{
+					"service_id": "241",
+					"enable": false
+				}
+			]
+		}
+	]
 }

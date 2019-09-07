@@ -1,6 +1,7 @@
 cc.Class({
   extends: cc.Component,
 
+  // todo проверить работоспособность.
   onLoad() {
     const toggleNode = cc.find('start/toggle');
     const toggleComponent = toggleNode.getComponent(cc.Toggle);

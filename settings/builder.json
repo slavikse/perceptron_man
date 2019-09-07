@@ -15,8 +15,11 @@
     "subContext": ""
   },
   "encryptJs": false,
-  "excludeScenes": [],
+  "excludeScenes": [
+    "54da08e0-6efd-4582-b656-802f07082b00"
+  ],
   "fb-instant-games": {},
+  "includeAnySDK": false,
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": false,
@@ -35,7 +38,7 @@
     "orientation": "portrait",
     "zip": false
   },
-  "startScene": "ceafdfc7-dabe-4d95-9ff2-4863c4eaefca",
+  "startScene": "f17922e1-c206-41be-a54f-4303127d386f",
   "title": "Unique-Clone",
   "webOrientation": "landscape",
   "wechatgame": {

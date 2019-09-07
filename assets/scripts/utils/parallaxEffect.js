@@ -2,11 +2,10 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
-    // Найденный диапазон значений экспериментальным путем.
     perspective: {
       default: 0.1,
       min: 0.1,
-      max: 0.7,
+      max: 0.9,
       step: 0.1,
       slide: true,
     },
@@ -14,9 +13,11 @@ cc.Class({
 
   onLoad() {
     this.characterNode = cc.find('level1/character');
+
+    this.initialX = this.node.x;
   },
 
-  update() {
-    this.node.x = this.characterNode.x * this.perspective;
+  lateUpdate() {
+    this.node.x = this.characterNode.x * this.perspective + this.initialX;
   },
 });
