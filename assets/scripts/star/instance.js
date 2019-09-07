@@ -3,7 +3,7 @@ cc.Class({
 
   onLoad() {
     this.characterNode = cc.find('level1/character');
-    this.platformNode = cc.find('level1/platform');
+    this.groundNode = cc.find('level1/ground');
 
     this.pickDistance = 60;
     this.minDurationLive = 3;
@@ -36,8 +36,8 @@ cc.Class({
   },
 
   getPosition() {
-    const groundY = this.platformNode.y + this.platformNode.height / 2;
-    const maxX = this.platformNode.width / 4;
+    const groundY = this.groundNode.y + this.groundNode.height / 2;
+    const maxX = this.groundNode.width / 4;
     const randX = (Math.random() - 0.5) * 2 * maxX;
     const randY = groundY + Math.random() * 100;
 
