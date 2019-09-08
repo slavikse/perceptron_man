@@ -19,8 +19,13 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        paths: ['assets/scripts/utils'],
+        paths: [
+          'assets/scripts/character/util',
+        ],
       },
     },
+  },
+  rules: {
+    'no-plusplus': 'off',
   },
 };

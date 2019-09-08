@@ -10,10 +10,6 @@ cc.Class({
   },
 
   onGameOver() {
-    this.node.stopAllActions();
+    cc.director.loadScene('start');
   },
-
-  // editorAnimCompleted(status) {
-  //   console.log(`status: ${status}`);
-  // },
 });
