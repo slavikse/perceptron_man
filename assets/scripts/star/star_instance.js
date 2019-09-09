@@ -2,8 +2,8 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
-    this.groundNode = cc.find('level1/ground');
-    this.characterNode = cc.find('level1/character');
+    this.groundNode = cc.find('level/ground');
+    this.characterNode = cc.find('level/character');
 
     this.pickDistance = 60;
     this.minDurationLive = 3;

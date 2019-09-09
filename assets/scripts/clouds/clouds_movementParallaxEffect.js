@@ -3,25 +3,25 @@ cc.Class({
 
   properties: {
     perspective: {
-      default: 0.1,
+      default: 0.01,
       slide: true,
       min: 0.1,
       max: 0.9,
-      step: 0.1,
-      tooltip: 'Чем меньше значение, тем медленнее будет двигаться объект.',
+      step: 0.01,
+      tooltip: 'Чем меньше, тем медленнее будет перемещаться относительно движущихся объектов.',
     },
     movement: {
-      default: 0.1,
+      default: 0.01,
       slide: true,
       min: 0.1,
       max: 3.0,
-      step: 0.1,
+      step: 0.01,
     },
   },
 
   onLoad() {
-    this.groundNode = cc.find('level1/ground');
-    this.characterNode = cc.find('level1/character');
+    this.groundNode = cc.find('level/ground');
+    this.characterNode = cc.find('level/character');
 
     this.levelBorderLeft = -this.groundNode.position.x;
     this.levelBorderRight = this.groundNode.width;

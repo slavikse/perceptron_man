@@ -1,4 +1,4 @@
-const hasPermissibleInfelicity = require('character_util_hasPermissibleInfelicity');
+const hasPermissibleInfelicity = require('character_utils_hasPermissibleInfelicity');
 
 const acceleration = 3000;
 const multiplier = 15;
@@ -15,7 +15,7 @@ cc.Class({
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
-    this.groundNode = cc.find('level1/ground');
+    this.groundNode = cc.find('level/ground');
     this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
 
     this.speed = 0;

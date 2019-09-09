@@ -8,12 +8,12 @@ cc.Class({
       min: 0.1,
       max: 0.9,
       step: 0.1,
-      tooltip: 'Чем меньше значение, тем медленнее будет двигаться объект.',
+      tooltip: 'Чем меньше, тем медленнее будет перемещаться относительно движущихся объектов.',
     },
   },
 
   onLoad() {
-    this.characterNode = cc.find('level1/character');
+    this.characterNode = cc.find('level/character');
 
     this.initialNodeX = this.node.x;
   },

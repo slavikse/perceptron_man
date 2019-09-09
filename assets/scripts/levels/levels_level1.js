@@ -3,6 +3,12 @@ cc.Class({
 
   onLoad() {
     cc.director.on('gameOver', this.onGameOver, this);
+
+    // todo
+    // touchstart touchmove touchend
+    // cc.director.on('touchstart', (e) => {
+    //   console.log('r', e);
+    // });
   },
 
   onDestroy() {

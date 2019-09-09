@@ -1,4 +1,4 @@
-const hasPermissibleInfelicity = require('character_util_hasPermissibleInfelicity');
+const hasPermissibleInfelicity = require('character_utils_hasPermissibleInfelicity');
 
 cc.Class({
   extends: cc.Component,
@@ -13,6 +13,7 @@ cc.Class({
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
     this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
+
     this.impulseVector = cc.v2(0, this.acceleration);
     this.localCenter = this.rigidBodyComponent.getLocalCenter();
 
