@@ -145,7 +145,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Main Camera",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 2
     },
@@ -180,7 +180,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 554.2562584220408
+      "z": 623.5382907247958
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -3395,7 +3395,7 @@
     "_parent": {
       "__id__": 2
     },
-    "_id": "44OSHKK+ZCbKnbLCVRJLeV",
+    "_id": "7b+7SvJSRFaIW3ZrRtuSjs",
     "_prefab": {
       "__id__": 165
     },
@@ -3403,8 +3403,8 @@
     "_active": true,
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -818.358,
-      "y": -116.15,
+      "x": -475,
+      "y": 194,
       "z": 0
     }
   },
@@ -3414,9 +3414,9 @@
       "__id__": 164
     },
     "asset": {
-      "__uuid__": "908742d0-70cf-47fa-9612-be99c04588f2"
+      "__uuid__": "d02600f0-fd66-48a0-bf07-9f08fb0ab5bf"
     },
-    "fileId": "e9Mu2bXIBEoqhPJmLr3jiH",
+    "fileId": "468NC+DCVDz58CMbKJbQCw",
     "sync": true
   },
   {

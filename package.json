@@ -1,12 +1,13 @@
 {
   "name": "unique_clone",
-  "version": "0.0.2",
-  "description": "Игра",
+  "version": "0.1.0",
+  "description": "todo",
   "dependencies": {},
   "devDependencies": {
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-promise": "^4.2.1"
   },
   "scripts": {},
   "author": "slavikse <gslavikse@gmail.com>",
