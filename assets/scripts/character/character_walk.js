@@ -15,29 +15,35 @@ cc.Class({
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
+    this.armLeftIdle = cc.find('arm_left_idle', this.node);
+    this.armRightIdle = cc.find('arm_right_idle', this.node);
+
+    this.armLeftWalk = cc.find('arm_left_walk', this.node);
+    this.armRightWalk = cc.find('arm_right_walk', this.node);
+
     this.groundNode = cc.find('level/ground');
+
     this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
+    this.animationComponent = this.node.getComponent(cc.Animation);
+    this.animationState = this.animationComponent.getAnimationState('idle');
 
     this.speed = 0;
+
     this.isMovementLeft = false;
     this.isMovementRight = false;
   },
 
   update(dt) {
-    if (this.isMovementLeft === this.isMovementRight) {
-      this.deceleration();
-    } else if (this.isMovementLeft) {
-      this.accelerationLeft();
-    } else if (this.isMovementRight) {
-      this.accelerationRight();
-    }
-
+    this.setAccelerationState();
     this.jumpWithSpeed(dt);
   },
 
+  // todo звук шагов - пока скорость не равна 0. вызов функции из анимации. Анимационное событие.
   lateUpdate() {
     this.accelerationMovementPrevention();
-    this.levelDropoutLimiter();
+    this.dropoutMovementLimiter();
+
+    this.switchAnimationState();
   },
 
   onDestroy() {
@@ -58,6 +64,16 @@ cc.Class({
       this.isMovementLeft = isPressed;
     } else if (keyCode === cc.macro.KEY.d) {
       this.isMovementRight = isPressed;
+    }
+  },
+
+  setAccelerationState() {
+    if (this.isMovementLeft === this.isMovementRight) {
+      this.deceleration();
+    } else if (this.isMovementLeft) {
+      this.accelerationLeft();
+    } else if (this.isMovementRight) {
+      this.accelerationRight();
     }
   },
 
@@ -100,7 +116,7 @@ cc.Class({
     this.speed = 0;
   },
 
-  levelDropoutLimiter() {
+  dropoutMovementLimiter() {
     const stockDistance = 1000;
     const levelBorderLeft = -this.groundNode.position.x + stockDistance;
     const levelBorderRight = this.groundNode.width - stockDistance;
@@ -119,5 +135,47 @@ cc.Class({
   movementLimiter(x) {
     this.resetSpeed();
     this.node.x = x;
+  },
+
+  // todo зависимость: скорость анимации от текущей скорости передвижения.
+  //  animState.speed = 2;
+  // todo можно резко изменить сторону движения
+
+  // this.animationComponent.setCurrentTime(0, previousName);
+  // todo для корректной остановки анимации, ускорять анимацию и слушать событие
+  //  из редактора о завершении анимации и тогда начинать проигрывать другую анимаю.
+  // todo обратное движение: когда шёл в одну сторону и резко развернулся, замедление скорости.
+  switchAnimationState() {
+    if (this.speed < 0) {
+      this.setAnimationStateWalk(-1);
+    } else if (this.speed > 0) {
+      this.setAnimationStateWalk(1);
+    } else {
+      this.setAnimationStateIdle();
+    }
+  },
+
+  setAnimationStateWalk(signInvert) {
+    if (this.animationState.name === 'idle') {
+      this.node.scaleX = signInvert * Math.abs(this.node.scaleX);
+
+      this.setArmsActive({ isIdle: false, isWalk: true });
+      this.animationState = this.animationComponent.play('walk');
+    }
+  },
+
+  setAnimationStateIdle() {
+    if (this.animationState.name === 'walk') {
+      this.setArmsActive({ isIdle: true, isWalk: false });
+      this.animationState = this.animationComponent.play('idle');
+    }
+  },
+
+  setArmsActive({ isIdle, isWalk }) {
+    this.armLeftIdle.active = isIdle;
+    this.armRightIdle.active = isIdle;
+
+    this.armRightWalk.active = isWalk;
+    this.armLeftWalk.active = isWalk;
   },
 });

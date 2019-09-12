@@ -15,16 +15,16 @@
             {
               "frame": 0,
               "value": 0,
-              "curve": "quadOut"
+              "curve": "quartOut"
             },
             {
               "frame": 0.16666666666666666,
-              "value": -30
+              "value": -26
             },
             {
               "frame": 0.3333333333333333,
-              "value": 30,
-              "curve": "quadIn"
+              "value": 26,
+              "curve": "quartIn"
             },
             {
               "frame": 0.5,
@@ -39,7 +39,7 @@
                 -16,
                 0
               ],
-              "curve": "expoOut"
+              "curve": "quartOut"
             },
             {
               "frame": 0.16666666666666666,
@@ -56,7 +56,7 @@
                 -10,
                 0
               ],
-              "curve": "expoIn"
+              "curve": "quartIn"
             },
             {
               "frame": 0.5,
@@ -67,16 +67,7 @@
               ]
             }
           ],
-          "scale": [
-            {
-              "frame": 0,
-              "value": {
-                "__type__": "cc.Vec2",
-                "x": 1,
-                "y": 1
-              }
-            }
-          ]
+          "scale": []
         }
       },
       "leg_right": {
@@ -89,7 +80,7 @@
                 -16,
                 0
               ],
-              "curve": "expoOut"
+              "curve": "quartOut"
             },
             {
               "frame": 0.16666666666666666,
@@ -106,7 +97,7 @@
                 -16,
                 0
               ],
-              "curve": "expoIn"
+              "curve": "quartIn"
             },
             {
               "frame": 0.5,
@@ -125,16 +116,15 @@
             {
               "frame": 0,
               "value": 0,
-              "curve": "expoOut"
+              "curve": "quadOut"
             },
             {
               "frame": 0.16666666666666666,
-              "value": -2,
-              "curve": "linear"
+              "value": -1
             },
             {
               "frame": 0.3333333333333333,
-              "value": 2,
+              "value": 1,
               "curve": "expoIn"
             },
             {
@@ -150,7 +140,7 @@
                 0,
                 0
               ],
-              "curve": "expoOut"
+              "curve": "sineOut"
             },
             {
               "frame": 0.16666666666666666,
@@ -187,16 +177,16 @@
               "frame": 0,
               "value": [
                 0,
-                14,
+                8,
                 0
               ],
-              "curve": "expoOut"
+              "curve": "sineOut"
             },
             {
               "frame": 0.16666666666666666,
               "value": [
                 -1,
-                15,
+                9,
                 0
               ]
             },
@@ -204,7 +194,7 @@
               "frame": 0.3333333333333333,
               "value": [
                 1,
-                15,
+                9,
                 0
               ],
               "curve": "expoIn"
@@ -213,7 +203,67 @@
               "frame": 0.5,
               "value": [
                 0,
+                8,
+                0
+              ]
+            }
+          ],
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0,
+              "curve": "sineOut"
+            },
+            {
+              "frame": 0.16666666666666666,
+              "value": 0.5
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": -0.5,
+              "curve": "expoIn"
+            },
+            {
+              "frame": 0.5,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "arm_right_walk": {
+        "comps": {},
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                13,
+                13,
+                0
+              ]
+            },
+            {
+              "frame": 0.16666666666666666,
+              "value": [
+                12,
                 14,
+                0
+              ]
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": [
+                14,
+                14,
+                0
+              ],
+              "curve": "expoIn"
+            },
+            {
+              "frame": 0.5,
+              "value": [
+                13,
+                13,
                 0
               ]
             }
@@ -225,11 +275,12 @@
             },
             {
               "frame": 0.16666666666666666,
-              "value": 1
+              "value": -4
             },
             {
               "frame": 0.3333333333333333,
-              "value": -1
+              "value": 4,
+              "curve": "expoIn"
             },
             {
               "frame": 0.5,
@@ -238,7 +289,8 @@
           ]
         }
       },
-      "arm_left": {
+      "arm_left_walk": {
+        "comps": {},
         "props": {
           "position": [
             {
@@ -247,8 +299,7 @@
                 -13,
                 13,
                 0
-              ],
-              "curve": "expoOut"
+              ]
             },
             {
               "frame": 0.16666666666666666,
@@ -279,81 +330,20 @@
           "angle": [
             {
               "frame": 0,
-              "value": -14,
-              "curve": "expoOut"
+              "value": 0
             },
             {
               "frame": 0.16666666666666666,
-              "value": -20
+              "value": 4
             },
             {
               "frame": 0.3333333333333333,
-              "value": -16,
+              "value": -4,
               "curve": "expoIn"
             },
             {
               "frame": 0.5,
-              "value": -14
-            }
-          ]
-        }
-      },
-      "arm_right": {
-        "props": {
-          "position": [
-            {
-              "frame": 0,
-              "value": [
-                13,
-                13,
-                0
-              ],
-              "curve": "expoOut"
-            },
-            {
-              "frame": 0.16666666666666666,
-              "value": [
-                12,
-                13,
-                0
-              ]
-            },
-            {
-              "frame": 0.3333333333333333,
-              "value": [
-                13,
-                14,
-                0
-              ],
-              "curve": "expoIn"
-            },
-            {
-              "frame": 0.5,
-              "value": [
-                13,
-                13,
-                0
-              ]
-            }
-          ],
-          "angle": [
-            {
-              "frame": 0,
-              "value": 14,
-              "curve": "expoOut"
-            },
-            {
-              "frame": 0.16666666666666666,
-              "value": 10
-            },
-            {
-              "frame": 0.3333333333333333,
-              "value": 16,
-              "curve": "expoIn"
-            },
-            {
-              "frame": 0.5,
-              "value": 14
+              "value": 0
             }
           ]
         }
