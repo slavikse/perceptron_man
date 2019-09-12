@@ -3395,7 +3395,7 @@
     "_parent": {
       "__id__": 2
     },
-    "_id": "dc7z1rYiJDY7S7Kxa68pQc",
+    "_id": "38PR9QU+JLnI6H6zEwRXKy",
     "_prefab": {
       "__id__": 165
     },
@@ -3403,7 +3403,7 @@
     "_active": true,
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 215.643,
+      "x": 579.403,
       "y": 0,
       "z": 0
     }
