@@ -20,6 +20,7 @@ module.exports = {
     'import/resolver': {
       node: {
         paths: [
+          'assets/scripts/utils',
           'assets/scripts/character/utils',
         ],
       },

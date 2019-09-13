@@ -31,7 +31,6 @@ cc.Class({
     this.jumpWithSpeed(dt);
   },
 
-  // todo звук шагов - пока скорость не равна 0. вызов функции из анимации. Анимационное событие.
   lateUpdate() {
     this.accelerationMovementPrevention();
     this.dropoutMovementLimiter();

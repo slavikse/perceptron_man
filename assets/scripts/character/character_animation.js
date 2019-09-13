@@ -1,5 +1,11 @@
+const getRandomRangeInt = require('utils_getRandomRangeInt');
+
 cc.Class({
   extends: cc.Component,
+
+  properties: {
+    audios: { type: cc.AudioClip, default: undefined },
+  },
 
   onLoad() {
     this.armLeftIdle = cc.find('arm_left_idle', this.node);
@@ -52,5 +58,10 @@ cc.Class({
 
     this.armRightWalk.active = isWalk;
     this.armLeftWalk.active = isWalk;
+  },
+
+  editorAnimationCompleted() {
+    const index = getRandomRangeInt(0, this.audios.length - 1);
+    cc.audioEngine.playEffect(this.audios[index], false);
   },
 });

@@ -27,7 +27,8 @@ cc.Class({
 
   gainScore() {
     this.increaseScore(true);
-    cc.audioEngine.playEffect(this.gainAudio, false);
+    // todo
+    // cc.audioEngine.playEffect(this.gainAudio, false);
   },
 
   increaseScore(isIncrease) {
