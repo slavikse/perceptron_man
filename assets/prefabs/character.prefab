@@ -31,10 +31,16 @@
       },
       {
         "__id__": 5
+      },
+      {
+        "__id__": 6
+      },
+      {
+        "__id__": 7
       }
     ],
     "_prefab": {
-      "__id__": 6
+      "__id__": 8
     },
     "_opacity": 255,
     "_color": {
@@ -46,8 +52,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 226,
+      "height": 182
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -76,6 +82,38 @@
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 1,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "87d7c040-005f-4ed2-b7c0-c43cbf2372eb"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": null,
     "_id": ""
   },
   {
@@ -125,23 +163,28 @@
     "points": [
       {
         "__type__": "cc.Vec2",
-        "x": -50,
-        "y": -50
+        "x": -115,
+        "y": -108
       },
       {
         "__type__": "cc.Vec2",
-        "x": 50,
-        "y": -50
+        "x": 112,
+        "y": -108
       },
       {
         "__type__": "cc.Vec2",
-        "x": 50,
-        "y": 50
+        "x": 101,
+        "y": -72
       },
       {
         "__type__": "cc.Vec2",
-        "x": -50,
-        "y": 50
+        "x": -2,
+        "y": 73
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -116,
+        "y": 73
       }
     ],
     "_id": ""
@@ -164,6 +207,18 @@
       "__id__": 1
     },
     "_enabled": true,
+    "_id": ""
+  },
+  {
+    "__type__": "b0adcMUBuRJmY2tCjPFSnMU",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "acceleration": 200,
+    "speedLimiter": 10000,
     "_id": ""
   },
   {
