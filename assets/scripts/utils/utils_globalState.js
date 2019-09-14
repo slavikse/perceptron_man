@@ -1,3 +1,1 @@
-window.state = {
-  godMode: true,
-};
+window.state = {};

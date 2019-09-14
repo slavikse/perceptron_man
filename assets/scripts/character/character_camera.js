@@ -2,8 +2,8 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
-    this.characterNode = cc.find('level/character');
     this.cameraNode = cc.find('level/Main Camera');
+    this.characterNode = cc.find('level/character');
   },
 
   update() {

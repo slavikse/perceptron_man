@@ -2,49 +2,28 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
-    gainAudio: { type: cc.AudioClip, default: undefined },
+    // increaseAudio: { type: cc.AudioClip, default: undefined },
   },
 
   onLoad() {
-    cc.director.on('star/picked', this.gainScore, this);
-    cc.director.on('gameOver', this.gameOver, this);
-
     this.characterNode = cc.find('level/character');
-    this.scoreComponent = this.node.getComponent(cc.Label);
+    this.labelComponent = this.node.getComponent(cc.Label);
 
-    this.score = 0;
-    this.setScore();
+    this.energy = 0;
+
+    this.setEnergy();
   },
 
   lateUpdate() {
     this.node.x = this.characterNode.x;
   },
 
-  onDestroy() {
-    cc.director.off('star/picked', this.gainScore, this);
-    cc.director.off('gameOver', this.gameOver, this);
+  increaseEnergy() {
+    this.energy += 1;
+    this.setEnergy();
   },
 
-  gainScore() {
-    this.increaseScore(true);
-    cc.audioEngine.playEffect(this.gainAudio, false);
-  },
-
-  increaseScore(isIncrease) {
-    if (isIncrease) {
-      this.score += 1;
-    } else {
-      this.score = 0;
-    }
-
-    this.setScore();
-  },
-
-  setScore() {
-    this.scoreComponent.string = `Энергия: ${this.score}`;
-  },
-
-  gameOver() {
-    this.increaseScore(false);
+  setEnergy() {
+    this.labelComponent.string = `Энергия: ${this.energy}`;
   },
 });
