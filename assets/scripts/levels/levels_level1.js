@@ -16,7 +16,8 @@ cc.Class({
   },
 
   onGameOver() {
-    cc.director.loadScene('start');
+    console.log('onGameOver');
+    // cc.director.loadScene('start');
   },
 });
 

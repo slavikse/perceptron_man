@@ -6,16 +6,16 @@ cc.Class({
   },
 
   onLoad() {
-    this.characterNode = cc.find('level/character');
+    // this.characterNode = cc.find('level/character');
     this.labelComponent = this.node.getComponent(cc.Label);
 
     this.energy = 0;
 
-    this.setEnergy();
+    // this.setEnergy();
   },
 
   lateUpdate() {
-    this.node.x = this.characterNode.x;
+    // this.node.x = this.characterNode.x;
   },
 
   increaseEnergy() {

@@ -29,14 +29,14 @@
     "portrait": false,
     "upsideDown": false
   },
-  "packageName": "org.cocos2d.Unique_Clone",
+  "packageName": "org.cocos2d.perceptron_man",
   "qqplay": {
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait",
     "zip": false
   },
-  "startScene": "54da08e0-6efd-4582-b656-802f07082b00",
-  "title": "Unique-Clone",
+  "startScene": "7bd94730-8911-4799-8d57-44eafec0774b",
+  "title": "perceptron_man",
   "webOrientation": "landscape",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
