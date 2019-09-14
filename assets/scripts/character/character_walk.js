@@ -1,14 +1,11 @@
 const hasPermissibleInfelicity = require('character_utils_hasPermissibleInfelicity');
 
-const acceleration = 3000;
-const multiplier = 15;
-
 cc.Class({
   extends: cc.Component,
 
   properties: {
-    acceleration,
-    speedLimiter: acceleration * multiplier,
+    acceleration: 500,
+    speedLimiter: 3000,
   },
 
   onLoad() {

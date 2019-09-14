@@ -68,10 +68,13 @@
       },
       {
         "__id__": 45
+      },
+      {
+        "__id__": 46
       }
     ],
     "_prefab": {
-      "__id__": 46
+      "__id__": 47
     },
     "_opacity": 255,
     "_color": {
@@ -1425,7 +1428,7 @@
     "tag": 0,
     "_density": 1,
     "_sensor": false,
-    "_friction": 0.1,
+    "_friction": 0,
     "_restitution": 0,
     "body": null,
     "_offset": {
@@ -1436,23 +1439,43 @@
     "points": [
       {
         "__type__": "cc.Vec2",
-        "x": -34,
-        "y": -49
+        "x": -31,
+        "y": -40
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -22,
+        "y": -48
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 22,
+        "y": -48
       },
       {
         "__type__": "cc.Vec2",
         "x": 30,
-        "y": -49
+        "y": -40
       },
       {
         "__type__": "cc.Vec2",
         "x": 30,
-        "y": 45
+        "y": 28
       },
       {
         "__type__": "cc.Vec2",
-        "x": -34,
-        "y": 45
+        "x": 20,
+        "y": 43
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -20,
+        "y": 43
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -31,
+        "y": 28
       }
     ],
     "_id": ""
@@ -1488,7 +1511,7 @@
     "audio": {
       "__uuid__": "fe05a5eb-3dee-4982-a174-cf21fbc6e4e4"
     },
-    "acceleration": 6000,
+    "acceleration": 3500,
     "_id": ""
   },
   {
@@ -1499,8 +1522,8 @@
       "__id__": 1
     },
     "_enabled": true,
-    "acceleration": 3000,
-    "speedLimiter": 45000,
+    "acceleration": 500,
+    "speedLimiter": 3000,
     "_id": ""
   },
   {
@@ -1511,38 +1534,42 @@
       "__id__": 1
     },
     "_enabled": true,
-    "audios": [
+    "walkAudios": [
       {
-        "__uuid__": "94c9fab7-a37d-437c-8d29-6d2837833a0c"
+        "__uuid__": "84a1348e-802c-4b64-b08e-213f69bbaeb3"
       },
       {
-        "__uuid__": "63fe0f1b-4eec-4115-99ac-270046c5dddf"
+        "__uuid__": "9f164d3a-7904-4ab7-bdb4-93f81a756b07"
       },
       {
-        "__uuid__": "3e760d71-f95f-4bb1-b278-bdebcddc413d"
+        "__uuid__": "e268e9f8-02d7-4bff-950b-051174b3871c"
       },
       {
-        "__uuid__": "50f28ada-31e7-4200-b68a-542aaf67dc34"
+        "__uuid__": "a06bc9e0-1ad0-4902-9ace-3c21a8939937"
       },
       {
-        "__uuid__": "a374c07f-c213-4def-8e42-b92cf5785c6c"
+        "__uuid__": "5934488a-eac1-41b5-b263-f67c00dee56d"
       },
       {
-        "__uuid__": "0596abe8-c8db-4892-a4a0-ddafd86503be"
+        "__uuid__": "db9d4078-f094-48bb-a7bd-be97318d4175"
       },
       {
-        "__uuid__": "2c0dffd8-7d59-44b9-82f3-859e0ecaacb5"
+        "__uuid__": "7fcf8f4e-da50-4a3b-8e09-d61532c44c03"
       },
       {
-        "__uuid__": "164beada-3b1f-4aa3-8ae1-d5a57b9fd82e"
-      },
-      {
-        "__uuid__": "ae7308c0-88c4-437e-96b7-e793bfe95090"
-      },
-      {
-        "__uuid__": "353034ac-de7f-4669-89b7-9df329fd2725"
+        "__uuid__": "6fbd480d-8919-4113-b199-fe5c8babc590"
       }
     ],
+    "_id": ""
+  },
+  {
+    "__type__": "2b609lFkn1KUYq6BL3fYtrx",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
     "_id": ""
   },
   {

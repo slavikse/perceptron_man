@@ -5,7 +5,7 @@ cc.Class({
 
   properties: {
     audio: { type: cc.AudioClip, default: undefined },
-    acceleration: 6000,
+    acceleration: 3500,
   },
 
   onLoad() {

@@ -27,8 +27,7 @@ cc.Class({
 
   gainScore() {
     this.increaseScore(true);
-    // todo
-    // cc.audioEngine.playEffect(this.gainAudio, false);
+    cc.audioEngine.playEffect(this.gainAudio, false);
   },
 
   increaseScore(isIncrease) {
@@ -42,7 +41,7 @@ cc.Class({
   },
 
   setScore() {
-    this.scoreComponent.string = `Energy: ${this.score}`;
+    this.scoreComponent.string = `Энергия: ${this.score}`;
   },
 
   gameOver() {

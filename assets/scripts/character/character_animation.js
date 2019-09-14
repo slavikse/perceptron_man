@@ -4,7 +4,7 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
-    audios: { type: cc.AudioClip, default: undefined },
+    // walkAudios: { type: cc.AudioClip, default: [] },
   },
 
   onLoad() {
@@ -16,16 +16,11 @@ cc.Class({
 
     this.animationComponent = this.node.getComponent(cc.Animation);
     this.animationState = this.animationComponent.getAnimationState('idle');
+
+    // todo
+    this.walkAudios = [];
   },
 
-  // todo зависимость: скорость анимации от текущей скорости передвижения.
-  //  animState.speed = 2;
-  // todo можно резко изменить сторону движения
-
-  // this.animationComponent.setCurrentTime(0, previousName);
-  // todo для корректной остановки анимации, ускорять анимацию и слушать событие
-  //  из редактора о завершении анимации и тогда начинать проигрывать другую анимаю.
-  // todo обратное движение: когда шёл в одну сторону и резко развернулся, замедление скорости.
   externalSwitchAnimationState(speed) {
     if (speed < 0) {
       this.setAnimationStateWalk(-1);
@@ -61,7 +56,8 @@ cc.Class({
   },
 
   editorAnimationCompleted() {
-    const index = getRandomRangeInt(0, this.audios.length - 1);
-    cc.audioEngine.playEffect(this.audios[index], false);
+    const index = getRandomRangeInt(0, this.walkAudios.length - 1);
+    const audioId = cc.audioEngine.playEffect(this.walkAudios[index], false);
+    cc.audioEngine.setVolume(audioId, 0.3);
   },
 });
