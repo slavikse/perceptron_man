@@ -7,22 +7,24 @@
     [
       false,
       false,
+      false,
       true
     ],
     [
       false,
-      true,
+      false,
+      false,
       false
     ],
     [
       false,
+      true,
       false,
-      false,
-      false
+      true
     ]
   ],
-  "design-resolution-height": 1136,
-  "design-resolution-width": 640,
+  "design-resolution-height": 720,
+  "design-resolution-width": 1280,
   "excluded-modules": [],
   "facebook": {
     "appID": "",
@@ -34,13 +36,13 @@
       "enable": false
     }
   },
-  "fit-height": true,
-  "fit-width": false,
+  "fit-height": false,
+  "fit-width": true,
   "group-list": [
     "default",
+    "playground",
     "perceptron",
-    "ground",
-    ""
+    "neuron"
   ],
   "last-module-event-record-time": 1568482807852,
   "simulator-orientation": false,

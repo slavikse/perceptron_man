@@ -13,12 +13,12 @@ cc.Class({
   },
 
   onLoad() {
-    this.characterNode = cc.find('level/character');
+    this.perceptronNode = cc.find('level/perceptron');
 
     this.initialNodeX = this.node.x;
   },
 
   lateUpdate() {
-    this.node.x = this.characterNode.x * this.perspective + this.initialNodeX;
+    this.node.x = this.perceptronNode.x * this.perspective + this.initialNodeX;
   },
 });
