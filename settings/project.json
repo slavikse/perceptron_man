@@ -38,7 +38,7 @@
   "fit-width": false,
   "group-list": [
     "default",
-    "character",
+    "perceptron",
     "ground",
     ""
   ],
