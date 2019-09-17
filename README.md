@@ -6,22 +6,22 @@
 
 **Пример:**
 * Путь до компонента: `character/utils`
-* Имя компонента - это имя функции на экспорт: `hasPermissibleInfelicity`
+* Имя компонента / имя функции на экспорт: `hasPermissibleInfelicity`
 * Результат - имя файла: `character_utils_hasPermissibleInfelicity.js`
 
-### Общие соглашения
-* `Prefab` только для клонирования объекта из кода.
-
-## Переменные
+### Переменные
 **Примеры:**
 * Узел: `${name}Node` = `cc.find(name)`
-* Компонент: `${name}Component` = `node.getComponent(name)`
+* Компонент: `${name}Component` = `this.node.getComponent(name)`
 
-## Вызов функций
+### Функции
 **Примеры:**
 * Из редактора (кнопка): `editor${name}`
 * Из анимации по имени: `editorAnimation${name}`
 * Из внешнего компонента: `externalComponent${name}`
+
+## Общие соглашения
+* `Prefab` только для клонирования объекта из кода.
 
 ## Директории собранного проекта:
 > exe:  

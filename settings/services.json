@@ -96,7 +96,7 @@
 		}
 	],
 	"game": {
-		"name": "unique_clone",
+		"name": "perceptron_man",
 		"appid": "678824317",
 		"cid": "0"
 	},
@@ -109,6 +109,9 @@
 					"enable": false
 				}
 			]
+		},
+		{
+			"appid": "UNKNOW"
 		}
 	]
 }

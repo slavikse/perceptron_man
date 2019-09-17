@@ -3,12 +3,6 @@ cc.Class({
 
   onLoad() {
     cc.director.on('gameOver', this.onGameOver, this);
-
-    // todo
-    // touchstart touchmove touchend
-    // cc.director.on('touchstart', (e) => {
-    //   console.log('r', e);
-    // });
   },
 
   onDestroy() {
@@ -21,6 +15,8 @@ cc.Class({
   },
 });
 
+// const scene = cc.director.getScene();
+// scene.addChild(node)
 // const starNode = cc.instantiate(this.starPrefab);
 // const instanceComponent = starNode.getComponent('star_instance');
 // instanceComponent.externalInitialize(item);

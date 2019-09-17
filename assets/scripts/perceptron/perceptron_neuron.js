@@ -1,12 +1,65 @@
 cc.Class({
   extends: cc.Component,
 
-  properties: {},
-
   onLoad() {
     const physicsManager = cc.director.getPhysicsManager();
     physicsManager.enabled = true;
+
+    this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
+
+    this.node.on('touchstart', this.onStartCapture, this);
+    this.node.on('touchmove', this.onMoveCaptured, this);
+    this.node.on('touchend', this.onEndCapture, this);
+    this.node.on('touchcancel', this.onEndCapture, this);
+
+    this.isCaptured = false;
+    this.position = cc.v2();
+    this.savedGravityScale = 0;
   },
 
-  // update(dt) {},
+  // todo ? движение при броске.
+  update(dt) {
+    if (this.isCaptured) {
+      this.holdingEmulationPhysicalForces();
+      this.node.setPosition(this.position);
+    }
+  },
+
+  onDestroy() {
+    this.node.off('touchstart', this.onStartCapture, this);
+    this.node.off('touchmove', this.onMoveCaptured, this);
+    this.node.off('touchend', this.onEndCapture, this);
+    this.node.off('touchcancel', this.onEndCapture, this);
+  },
+
+  onStartCapture() {
+    this.isCaptured = true;
+    this.position = this.node.getPosition();
+
+    this.resetGravityScale();
+    this.holdingEmulationPhysicalForces();
+  },
+
+  onMoveCaptured(e) {
+    this.position = this.position.addSelf(e.getDelta());
+  },
+
+  onEndCapture() {
+    this.isCaptured = false;
+    this.restoreGravityScale();
+  },
+
+  resetGravityScale() {
+    this.savedGravityScale = this.rigidBodyComponent.gravityScale;
+    this.rigidBodyComponent.gravityScale = 0;
+  },
+
+  restoreGravityScale() {
+    this.rigidBodyComponent.gravityScale = this.savedGravityScale;
+  },
+
+  holdingEmulationPhysicalForces() {
+    this.rigidBodyComponent.linearVelocity = cc.v2();
+    this.rigidBodyComponent.angularVelocity = 0;
+  },
 });
