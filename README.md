@@ -15,15 +15,16 @@
 
 ### Переменные
 **Примеры:**
-* Узел: `nameNode` = `cc.find(name)`
-* Компонент: `nameComponent` = `this.node.getComponent(name)`
+* Узел: `${name}Node` = `cc.find(name)`
+* Клон: `${name}Node = cc.instantiate(prefab)`
+* Компонент: `${name}Component` = `this.node.getComponent(name)`
 
 ### Функции
-**Примеры:**
-* Из редактора (кнопка): `editorName`
-* Из анимации по имени: `editorAnimationName`
-* Из внешнего компонента: `externalComponentName`
-* Метод реакции на событие: `onName`
+**Примеры реакций:**
+* На событие: `on${actionName}`
+* Из внешнего компонента: `externalComponent${actionName}`
+* Из редактора (кнопка): `editor${actionName}`
+* Из анимации по имени: `editorAnimation${actionName}`
 
 ## Общие соглашения
 * `Prefab` только для клонирования объекта из кода.

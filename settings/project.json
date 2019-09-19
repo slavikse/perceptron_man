@@ -7,20 +7,20 @@
     [
       false,
       false,
+      true,
+      false
+    ],
+    [
       false,
-      true
+      true,
+      true,
+      false
     ],
     [
       false,
       false,
       false,
       false
-    ],
-    [
-      false,
-      true,
-      false,
-      true
     ]
   ],
   "design-resolution-height": 720,
@@ -41,8 +41,8 @@
   "group-list": [
     "default",
     "playground",
-    "perceptron",
-    "neuron"
+    "neuron",
+    ""
   ],
   "last-module-event-record-time": 1568482807852,
   "simulator-orientation": false,
@@ -51,6 +51,5 @@
     "width": 960
   },
   "use-customize-simulator": true,
-  "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "use-project-simulator-setting": false
 }

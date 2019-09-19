@@ -17,6 +17,7 @@
   "encryptJs": false,
   "excludeScenes": [],
   "fb-instant-games": {},
+  "includeAnySDK": false,
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": false,
@@ -35,7 +36,7 @@
     "orientation": "portrait",
     "zip": false
   },
-  "startScene": "7bd94730-8911-4799-8d57-44eafec0774b",
+  "startScene": "23f8cadb-10bd-4d1e-ae73-c6074412caf4",
   "title": "perceptron_man",
   "webOrientation": "landscape",
   "wechatgame": {

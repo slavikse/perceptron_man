@@ -2,19 +2,21 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
+    this.perceptronCreatorNode = cc.find('level/perceptron/creator');
+
+    this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
+
     const physicsManager = cc.director.getPhysicsManager();
     physicsManager.enabled = true;
 
-    this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
+    this.isCaptured = false;
+    this.position = cc.v2();
+    this.savedGravityScale = 0;
 
     this.node.on('touchstart', this.onStartCapture, this);
     this.node.on('touchmove', this.onMoveCaptured, this);
     this.node.on('touchend', this.onEndCapture, this);
     this.node.on('touchcancel', this.onEndCapture, this);
-
-    this.isCaptured = false;
-    this.position = cc.v2();
-    this.savedGravityScale = 0;
   },
 
   update(dt) {
@@ -60,5 +62,10 @@ cc.Class({
   holdingEmulationPhysicalForces() {
     this.rigidBodyComponent.linearVelocity = cc.v2();
     this.rigidBodyComponent.angularVelocity = 0;
+  },
+
+  // todo
+  neuronDestroyed(neuron) {
+    this.perceptronCreatorNode.externalComponentNeuronDestroyed(neuron);
   },
 });
