@@ -2,21 +2,22 @@
 cc.Class({
   extends: cc.Component,
 
+  properties: {
+    isEnabled: true,
+    isAccumulator: false,
+    frameRate: 60,
+    velocityIterations: 10,
+    positionIterations: 10,
+  },
+
   onLoad() {
     const physicsManager = cc.director.getPhysicsManager();
-    physicsManager.enabled = true;
 
-    // Enable settings for physics timestep
-    // physicsManager.enabledAccumulator = true;
-
-    // Physics timestep, default FIXED_TIME_STEP is 1/60
-    // physicsManager.FIXED_TIME_STEP = 1 / 30;
-
-    // The number of iterations per update of the Physics System processing speed is 10 by default
-    // physicsManager.VELOCITY_ITERATIONS = 8;
-
-    // The number of iterations per update of the Physics processing location is 10 by default
-    // physicsManager.POSITION_ITERATIONS = 8;
+    physicsManager.enabled = this.isEnabled;
+    physicsManager.enabledAccumulator = this.isAccumulator;
+    physicsManager.FIXED_TIME_STEP = 1 / this.frameRate;
+    physicsManager.VELOCITY_ITERATIONS = this.velocityIterations;
+    physicsManager.POSITION_ITERATIONS = this.positionIterations;
 
     // physicsManager.debugDrawFlags = cc.PhysicsManager.DrawBits.e_aabbBit
     //   | cc.PhysicsManager.DrawBits.e_pairBit

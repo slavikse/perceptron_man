@@ -3,11 +3,7 @@ cc.Class({
 
   onLoad() {
     this.perceptronCreatorNode = cc.find('level/perceptron/creator');
-
     this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
-
-    const physicsManager = cc.director.getPhysicsManager();
-    physicsManager.enabled = true;
 
     this.isCaptured = false;
     this.position = cc.v2();
@@ -26,6 +22,10 @@ cc.Class({
     }
   },
 
+  // todo визуализация связей.
+  // todo ограничения: можно располагать нейрон только в ряд в новом слое, либо в существующем.
+  //  для нового нейрона - переплетение связями со всеми нейронами.
+  // todo после установки в сеть - нейрон нельзя перетаскивать. touchstart
   onStartCapture() {
     this.isCaptured = true;
     this.position = this.node.getPosition();

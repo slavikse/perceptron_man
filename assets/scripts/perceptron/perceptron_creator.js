@@ -44,8 +44,7 @@ cc.Class({
   },
 
   onDestroy() {
-    this.neuronsPool.clear();
-
     this.node.off('touchstart', this.onAddNeuronToScene, this);
+    this.neuronsPool.clear();
   },
 });
