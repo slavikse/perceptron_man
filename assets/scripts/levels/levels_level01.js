@@ -15,9 +15,10 @@ cc.Class({
   },
 });
 
+// const node = cc.instantiate(this.prefab);
 // const scene = cc.director.getScene();
 // scene.addChild(node)
-// const starNode = cc.instantiate(this.starPrefab);
+
 // const instanceComponent = starNode.getComponent('star_instance');
 // instanceComponent.externalInitialize(item);
 

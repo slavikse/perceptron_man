@@ -9,16 +9,21 @@
 * Имя компонента / имя функции на экспорт: `hasPermissibleInfelicity`
 * Результат - имя файла: `character_utils_hasPermissibleInfelicity.js`
 
+### Свойства компонента
+* Тип *prefab*: `namePrefab`
+* Тип *audio*: `nameAudio`
+
 ### Переменные
 **Примеры:**
-* Узел: `${name}Node` = `cc.find(name)`
-* Компонент: `${name}Component` = `this.node.getComponent(name)`
+* Узел: `nameNode` = `cc.find(name)`
+* Компонент: `nameComponent` = `this.node.getComponent(name)`
 
 ### Функции
 **Примеры:**
-* Из редактора (кнопка): `editor${name}`
-* Из анимации по имени: `editorAnimation${name}`
-* Из внешнего компонента: `externalComponent${name}`
+* Из редактора (кнопка): `editorName`
+* Из анимации по имени: `editorAnimationName`
+* Из внешнего компонента: `externalComponentName`
+* Метод реакции на событие: `onName`
 
 ## Общие соглашения
 * `Prefab` только для клонирования объекта из кода.

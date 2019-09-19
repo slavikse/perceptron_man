@@ -17,7 +17,6 @@ cc.Class({
     this.savedGravityScale = 0;
   },
 
-  // todo ? движение при броске.
   update(dt) {
     if (this.isCaptured) {
       this.holdingEmulationPhysicalForces();

@@ -107,6 +107,14 @@
 				{
 					"service_id": "241",
 					"enable": false
+				},
+				{
+					"service_id": "235",
+					"enable": false
+				},
+				{
+					"service_id": "242",
+					"enable": false
 				}
 			]
 		},
