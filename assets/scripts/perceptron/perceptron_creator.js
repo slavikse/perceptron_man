@@ -13,12 +13,6 @@ cc.Class({
     this.node.on('touchstart', this.onAddNeuronToScene, this);
   },
 
-  onDestroy() {
-    this.neuronsPool.clear();
-
-    this.node.off('touchstart', this.onAddNeuronToScene, this);
-  },
-
   createNeuronsPool() {
     const quantity = 30;
     const neuronsPool = new cc.NodePool('neurons');
@@ -31,6 +25,7 @@ cc.Class({
     return neuronsPool;
   },
 
+  // todo пока ящик не освобожден от созданного нейрона - новый создавать нельзя.
   onAddNeuronToScene() {
     let neuronNode;
 
@@ -46,5 +41,11 @@ cc.Class({
 
   externalComponentNeuronDestroyed(neuronNode) {
     this.neuronsPool.put(neuronNode);
+  },
+
+  onDestroy() {
+    this.neuronsPool.clear();
+
+    this.node.off('touchstart', this.onAddNeuronToScene, this);
   },
 });
