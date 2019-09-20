@@ -8,34 +8,28 @@ cc.Class({
   onLoad() {
     this.perceptronNode = cc.find('level/perceptron');
 
-    this.neuronsPool = this.createNeuronsPool();
+    this.neuronsPool = new cc.NodePool('neurons');
+    this.createNeurons();
 
     this.node.on('touchstart', this.onAddNeuronToScene, this);
   },
 
-  createNeuronsPool() {
-    const quantity = 30;
-    const neuronsPool = new cc.NodePool('neurons');
-
+  createNeurons(quantity = 30) {
     for (let i = 0; i < quantity; i++) {
       const neuronNode = cc.instantiate(this.neuronPrefab);
-      neuronsPool.put(neuronNode);
+      this.neuronsPool.put(neuronNode);
     }
-
-    return neuronsPool;
   },
 
   // todo пока ящик не освобожден от созданного нейрона - новый создавать нельзя.
   onAddNeuronToScene() {
-    let neuronNode;
-
-    if (this.neuronsPool.size() > 0) {
-      neuronNode = this.neuronsPool.get();
-    } else {
-      neuronNode = cc.instantiate(this.neuronPrefab);
+    if (this.neuronsPool.size() === 0) {
+      this.createNeurons();
     }
 
+    const neuronNode = this.neuronsPool.get();
     neuronNode.setPosition(this.node.position);
+
     this.perceptronNode.addChild(neuronNode);
   },
 
@@ -45,6 +39,7 @@ cc.Class({
 
   onDestroy() {
     this.node.off('touchstart', this.onAddNeuronToScene, this);
+
     this.neuronsPool.clear();
   },
 });
