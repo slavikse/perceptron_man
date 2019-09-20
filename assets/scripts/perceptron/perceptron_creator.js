@@ -21,7 +21,7 @@ cc.Class({
     }
   },
 
-  // todo пока ящик не освобожден от созданного нейрона - новый создавать нельзя.
+  // todo пока есть свободный нейрон - новый создавать нельзя (не свободный - когда установлен).
   onAddNeuronToScene() {
     this.neuronsPoolSizeCheck();
     this.addNeuronToScene();

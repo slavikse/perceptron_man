@@ -4,10 +4,10 @@ cc.Class({
   properties: {
     perspective: {
       default: 0.1,
-      slide: true,
       min: 0.1,
       max: 0.9,
       step: 0.1,
+      slide: true,
       tooltip: 'Чем больше, тем медленнее будет перемещаться относительно движущихся объектов.',
     },
   },
