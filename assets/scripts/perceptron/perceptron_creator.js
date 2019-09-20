@@ -23,10 +23,17 @@ cc.Class({
 
   // todo пока ящик не освобожден от созданного нейрона - новый создавать нельзя.
   onAddNeuronToScene() {
+    this.neuronsPoolSizeCheck();
+    this.addNeuronToScene();
+  },
+
+  neuronsPoolSizeCheck() {
     if (this.neuronsPool.size() === 0) {
       this.createNeurons();
     }
+  },
 
+  addNeuronToScene() {
     const neuronNode = this.neuronsPool.get();
     neuronNode.setPosition(this.node.position);
 

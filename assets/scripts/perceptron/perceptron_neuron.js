@@ -6,7 +6,7 @@ cc.Class({
     this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
 
     this.isCaptured = false;
-    this.position = cc.v2();
+    this.position = cc.v2.ZERO;
     this.savedGravityScale = 0;
 
     this.node.on('touchstart', this.onStartCapture, this);
@@ -15,7 +15,7 @@ cc.Class({
     this.node.on('touchcancel', this.onEndCapture, this);
   },
 
-  update(dt) {
+  update() {
     if (this.isCaptured) {
       this.holdingEmulationPhysicalForces();
       this.node.setPosition(this.position);
@@ -40,7 +40,7 @@ cc.Class({
   },
 
   holdingEmulationPhysicalForces() {
-    this.rigidBodyComponent.linearVelocity = cc.v2();
+    this.rigidBodyComponent.linearVelocity = cc.v2.ZERO;
     this.rigidBodyComponent.angularVelocity = 0;
   },
 
