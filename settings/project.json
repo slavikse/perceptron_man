@@ -25,7 +25,27 @@
   ],
   "design-resolution-height": 720,
   "design-resolution-width": 1280,
-  "excluded-modules": [],
+  "excluded-modules": [
+    "Canvas Renderer",
+    "Label Effect",
+    "Mask",
+    "Spine Skeleton",
+    "RichText",
+    "MotionStreak",
+    "ScrollBar",
+    "ScrollView",
+    "PageView",
+    "PageViewIndicator",
+    "Layout",
+    "VideoPlayer",
+    "WebView",
+    "Action",
+    "StudioComponent",
+    "Native Socket",
+    "Geom Utils",
+    "3D",
+    "3D Primitive"
+  ],
   "facebook": {
     "appID": "",
     "audience": {

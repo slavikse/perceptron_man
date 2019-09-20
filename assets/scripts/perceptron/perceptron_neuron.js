@@ -1,13 +1,15 @@
 cc.Class({
   extends: cc.Component,
 
-  onLoad() {
-    this.perceptronCreatorNode = cc.find('level/perceptron/creator');
-    this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
+  // todo вынести функционал работы со связами в компонент
+  properties: {
+    connectionPrefab: cc.Prefab,
+  },
 
-    this.isCaptured = false;
-    this.position = cc.v2();
-    this.savedGravityScale = 0;
+  onLoad() {
+    const perceptronCreatorNode = cc.find('level/perceptron/creator');
+    this.perceptronCreatorComponent = perceptronCreatorNode.getComponent('perceptron_creator');
+    this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
 
     this.node.on('touchstart', this.onStartCapture, this);
     this.node.on('touchmove', this.onMoveCaptured, this);
@@ -15,57 +17,73 @@ cc.Class({
     this.node.on('touchcancel', this.onEndCapture, this);
   },
 
-  update() {
-    if (this.isCaptured) {
-      this.holdingEmulationPhysicalForces();
-      this.node.setPosition(this.position);
-    }
-  },
-
-  // todo визуализация связей.
-  // todo ограничения: можно располагать нейрон только в ряд в новом слое, либо в существующем.
-  //  для нового нейрона - переплетение связями со всеми нейронами.
-  // todo после установки в сеть - нейрон нельзя перетаскивать. touchstart
+  // todo после установки в сеть - нейрон нельзя перетаскивать?
+  // todo появляются новые возможности: разрушение при двойном клике. другой компонент?
   onStartCapture() {
-    this.isCaptured = true;
-    this.position = this.node.getPosition();
-
-    this.resetGravityScale();
-    this.holdingEmulationPhysicalForces();
-  },
-
-  resetGravityScale() {
-    this.savedGravityScale = this.rigidBodyComponent.gravityScale;
     this.rigidBodyComponent.gravityScale = 0;
+    this.rigidBodyComponent.linearVelocity = cc.v2();
+
+    // todo
+    this.createShadowConnections();
   },
 
-  holdingEmulationPhysicalForces() {
-    this.rigidBodyComponent.linearVelocity = cc.v2();
-    this.rigidBodyComponent.angularVelocity = 0;
+  // todo создание прозрачных связей
+  // todo вынести функционал работы со связами в компонент
+  createShadowConnections() {
+    const neuronsNode = cc.find('level/perceptron/neurons');
+
+    const [one, two] = neuronsNode.children;
+    // todo кроме текущего
+    console.log('>', one, two);
+
+    // todo node pool
+    // todo угол. длина .mag
+    const connectionNode = cc.instantiate(this.connectionPrefab);
+    const [wheelJointOne, wheelJointTwo] = connectionNode.getComponents(cc.WheelJoint);
+
+    wheelJointOne.connectedBody = one.getComponent(cc.RigidBody);
+    wheelJointTwo.connectedBody = two.getComponent(cc.RigidBody);
+
+    neuronsNode.addChild(connectionNode);
   },
 
   onMoveCaptured(e) {
-    this.position = this.position.addSelf(e.getDelta());
+    this.node.position = this.node.position.add(e.getDelta());
+
+    // todo
+    this.movementShadowConnections();
+  },
+
+  // todo
+  movementShadowConnections() {
   },
 
   onEndCapture() {
-    this.isCaptured = false;
-    this.restoreGravityScale();
+    this.rigidBodyComponent.gravityScale = 1;
+
+    // todo связи можно будет создать при выполнении условий.
+    //  ограничения: можно располагать нейрон только в ряд в новом слое, либо в существующем.
+    this.mountingShadowConnections();
+
+    this.neuronDocked();
   },
 
-  restoreGravityScale() {
-    this.rigidBodyComponent.gravityScale = this.savedGravityScale;
-    this.savedGravityScale = 0;
+  // todo визуализация связей при установке - прозрачные, после установки нормальные.
+  // todo увеличение длины связи до нейронов.
+  //  для нового нейрона - переплетение связями со всеми нейронами.
+  //  .mag()
+  // todo отключать физику.
+  mountingShadowConnections() {
   },
 
   // todo
   neuronDocked(neuron) {
-    this.perceptronCreatorNode.externalComponentNeuronDocked(neuron);
+    this.perceptronCreatorComponent.externalComponentNeuronDocked(neuron);
   },
 
   // todo
   neuronDestroyed(neuron) {
-    this.perceptronCreatorNode.externalComponentNeuronDestroyed(neuron);
+    this.perceptronCreatorComponent.externalComponentNeuronDestroyed(neuron);
   },
 
   onDestroy() {

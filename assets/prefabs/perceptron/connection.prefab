@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "neuron",
+    "_name": "connection",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -34,10 +34,16 @@
       },
       {
         "__id__": 6
+      },
+      {
+        "__id__": 7
+      },
+      {
+        "__id__": 8
       }
     ],
     "_prefab": {
-      "__id__": 7
+      "__id__": 9
     },
     "_opacity": 255,
     "_color": {
@@ -49,8 +55,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 55,
-      "height": 57
+      "width": 100,
+      "height": 2
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -78,7 +84,9 @@
     "_skewX": 0,
     "_skewY": 0,
     "_is3DNode": false,
-    "groupIndex": 2,
+    "groupIndex": 0,
+    "_rotationX": 0,
+    "_rotationY": 0,
     "_id": ""
   },
   {
@@ -97,7 +105,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "ea42529f-675f-4b71-87bd-4e6f5b71795e"
+      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -123,8 +131,8 @@
     "_enabled": true,
     "_type": 2,
     "_allowSleep": false,
-    "_gravityScale": 1,
-    "_linearDamping": 0,
+    "_gravityScale": 0,
+    "_linearDamping": 1000,
     "_angularDamping": 0,
     "_linearVelocity": {
       "__type__": "cc.Vec2",
@@ -132,14 +140,14 @@
       "y": 0
     },
     "_angularVelocity": 0,
-    "_fixedRotation": true,
+    "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
     "awakeOnLoad": true,
     "_id": ""
   },
   {
-    "__type__": "cc.PhysicsPolygonCollider",
+    "__type__": "cc.PhysicsBoxCollider",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -147,9 +155,9 @@
     },
     "_enabled": true,
     "tag": 0,
-    "_density": 1,
+    "_density": 0.001,
     "_sensor": false,
-    "_friction": 0.2,
+    "_friction": 0,
     "_restitution": 0,
     "body": null,
     "_offset": {
@@ -157,38 +165,75 @@
       "x": 0,
       "y": 0
     },
-    "points": [
-      {
-        "__type__": "cc.Vec2",
-        "x": -0.5,
-        "y": 26.5
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": -27.5,
-        "y": 12.5
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": -27.5,
-        "y": -14.5
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": -0.5,
-        "y": -28.5
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": 27.5,
-        "y": -14.5
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": 27.5,
-        "y": 12.5
-      }
-    ],
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 100,
+      "height": 2
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.WheelJoint",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "anchor": {
+      "__type__": "cc.Vec2",
+      "x": 50,
+      "y": 0
+    },
+    "connectedAnchor": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "connectedBody": null,
+    "collideConnected": false,
+    "_maxMotorTorque": 0,
+    "_motorSpeed": 0,
+    "_enableMotor": false,
+    "_frequency": 0,
+    "_dampingRatio": 0,
+    "localAxisA": {
+      "__type__": "cc.Vec2",
+      "x": 1,
+      "y": 0
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.WheelJoint",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "anchor": {
+      "__type__": "cc.Vec2",
+      "x": -49,
+      "y": 0
+    },
+    "connectedAnchor": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "connectedBody": null,
+    "collideConnected": false,
+    "_maxMotorTorque": 0,
+    "_motorSpeed": 0,
+    "_enableMotor": false,
+    "_frequency": 0,
+    "_dampingRatio": 0,
+    "localAxisA": {
+      "__type__": "cc.Vec2",
+      "x": 1,
+      "y": 0
+    },
     "_id": ""
   },
   {
@@ -204,20 +249,23 @@
     "frameRate": 60,
     "positionIterations": 10,
     "velocityIterations": 10,
-    "debugDrawFlags": [],
+    "debugDrawFlags": [
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
     "_id": ""
   },
   {
-    "__type__": "c991aaQmR1DbpIDbDGfAhrG",
+    "__type__": "0c46fyVs81BBKhQGzG9Igfz",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "connectionPrefab": {
-      "__uuid__": "0574bab4-1690-4752-ab64-b3ce4e0df196"
-    },
     "_id": ""
   },
   {
@@ -226,9 +274,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "669bfd07-4ace-4af3-a7b2-c25d313aa81b"
+      "__uuid__": "0574bab4-1690-4752-ab64-b3ce4e0df196"
     },
-    "fileId": "7fhNnvgcZET5kkXX51D2rR",
+    "fileId": "84ECQyNfhINaa4EaILx7RY",
     "sync": false
   }
 ]

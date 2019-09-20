@@ -18,6 +18,7 @@
 * Узел: `${name}Node` = `cc.find(name)`
 * Клон: `${name}Node = cc.instantiate(prefab)`
 * Компонент: `${name}Component` = `this.node.getComponent(name)`
+* Состояние для узла: `this.node.data = { }`
 
 ### Функции
 **Примеры реакций:**

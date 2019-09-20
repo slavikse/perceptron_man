@@ -6,9 +6,9 @@ cc.Class({
   },
 
   onLoad() {
-    this.perceptronNode = cc.find('level/perceptron');
+    this.neuronsNode = cc.find('level/perceptron/neurons');
 
-    this.neuronsPool = new cc.NodePool('neurons');
+    this.neuronsPool = new cc.NodePool();
     this.createNeurons();
 
     this.isNotWaitingNeuronDocking = true;
@@ -16,7 +16,7 @@ cc.Class({
     this.node.on('touchstart', this.onAddNeuronToScene, this);
   },
 
-  createNeurons(quantity = 30) {
+  createNeurons(quantity = 2 ** 5) {
     for (let i = 0; i < quantity; i++) {
       const neuronNode = cc.instantiate(this.neuronPrefab);
       this.neuronsPool.put(neuronNode);
@@ -42,12 +42,11 @@ cc.Class({
     const neuronNode = this.neuronsPool.get();
     neuronNode.setPosition(this.node.position);
 
-    this.perceptronNode.addChild(neuronNode);
+    this.neuronsNode.addChild(neuronNode);
   },
 
-  externalComponentNeuronDocked(neuron) {
+  externalComponentNeuronDocked() {
     this.isNotWaitingNeuronDocking = true;
-    console.log('neuron', neuron);
   },
 
   externalComponentNeuronDestroyed(neuronNode) {
