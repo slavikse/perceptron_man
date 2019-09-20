@@ -107,7 +107,7 @@
     "_id": ""
   },
   {
-    "__type__": "d5eadfxQM5CA4plYvudOVIK",
+    "__type__": "115b208eidOP7qSTwdVeffs",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -115,7 +115,7 @@
     },
     "_enabled": true,
     "neuronPrefab": {
-      "__uuid__": "669bfd07-4ace-4af3-a7b2-c25d313aa81b"
+      "__uuid__": "8bad1bab-ccbe-41b4-8867-4e3b63b73a65"
     },
     "_id": ""
   },
@@ -125,7 +125,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "cd40613a-7944-4591-bb5b-14d659e58f87"
+      "__uuid__": "7045dcdc-5581-4c6f-af87-ae0991ebffd4"
     },
     "fileId": "91aDo3SdZBKYwHZjnF6Eld",
     "sync": false

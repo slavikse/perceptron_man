@@ -61,8 +61,7 @@
   "group-list": [
     "default",
     "playground",
-    "neuron",
-    ""
+    "neuron"
   ],
   "last-module-event-record-time": 1568482807852,
   "simulator-orientation": false,
@@ -71,5 +70,6 @@
     "width": 960
   },
   "use-customize-simulator": true,
-  "use-project-simulator-setting": false
+  "use-project-simulator-setting": false,
+  "start-scene": "current"
 }

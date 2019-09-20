@@ -1,6 +1,6 @@
 {
   "ver": "2.3.1",
-  "uuid": "e77f75bd-a70c-4d1a-b96c-d27f2f76cb44",
+  "uuid": "341f29e0-f4e6-49dd-abc2-bb68cd8ec218",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -9,8 +9,8 @@
   "subMetas": {
     "neuron": {
       "ver": "1.0.4",
-      "uuid": "ea42529f-675f-4b71-87bd-4e6f5b71795e",
-      "rawTextureUuid": "e77f75bd-a70c-4d1a-b96c-d27f2f76cb44",
+      "uuid": "98e8d494-4a54-4e00-b8ec-1a3c5969acc4",
+      "rawTextureUuid": "341f29e0-f4e6-49dd-abc2-bb68cd8ec218",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

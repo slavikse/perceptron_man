@@ -1,6 +1,6 @@
 {
   "ver": "2.3.1",
-  "uuid": "2514fa63-ace6-4f7c-85ab-a25a3326067c",
+  "uuid": "9ae110f6-d794-452e-9b97-106231a15c56",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -9,8 +9,8 @@
   "subMetas": {
     "rocks_01": {
       "ver": "1.0.4",
-      "uuid": "590cd49d-54bc-4047-87f8-c71531e5fac2",
-      "rawTextureUuid": "2514fa63-ace6-4f7c-85ab-a25a3326067c",
+      "uuid": "26bd3806-270e-4593-be33-492e16dd1c5e",
+      "rawTextureUuid": "9ae110f6-d794-452e-9b97-106231a15c56",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
