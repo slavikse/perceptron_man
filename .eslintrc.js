@@ -22,12 +22,12 @@ module.exports = {
       node: {
         paths: [
           'assets/scripts/utils',
-          'assets/scripts/character/utils',
         ],
       },
     },
   },
   rules: {
     'no-plusplus': 'off',
+    'no-param-reassign': 'off',
   },
 };
