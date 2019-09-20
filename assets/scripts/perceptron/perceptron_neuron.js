@@ -6,7 +6,7 @@ cc.Class({
     this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
 
     this.isCaptured = false;
-    this.position = cc.v2.ZERO;
+    this.position = cc.v2();
     this.savedGravityScale = 0;
 
     this.node.on('touchstart', this.onStartCapture, this);
@@ -40,7 +40,7 @@ cc.Class({
   },
 
   holdingEmulationPhysicalForces() {
-    this.rigidBodyComponent.linearVelocity = cc.v2.ZERO;
+    this.rigidBodyComponent.linearVelocity = cc.v2();
     this.rigidBodyComponent.angularVelocity = 0;
   },
 
@@ -56,6 +56,11 @@ cc.Class({
   restoreGravityScale() {
     this.rigidBodyComponent.gravityScale = this.savedGravityScale;
     this.savedGravityScale = 0;
+  },
+
+  // todo
+  neuronDocked(neuron) {
+    this.perceptronCreatorNode.externalComponentNeuronDocked(neuron);
   },
 
   // todo

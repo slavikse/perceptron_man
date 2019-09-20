@@ -11,6 +11,8 @@ cc.Class({
     this.neuronsPool = new cc.NodePool('neurons');
     this.createNeurons();
 
+    this.isNotWaitingNeuronDocking = true;
+
     this.node.on('touchstart', this.onAddNeuronToScene, this);
   },
 
@@ -21,10 +23,13 @@ cc.Class({
     }
   },
 
-  // todo пока есть свободный нейрон - новый создавать нельзя (не свободный - когда установлен).
   onAddNeuronToScene() {
-    this.neuronsPoolSizeCheck();
-    this.addNeuronToScene();
+    if (this.isNotWaitingNeuronDocking) {
+      this.isNotWaitingNeuronDocking = false;
+
+      this.neuronsPoolSizeCheck();
+      this.addNeuronToScene();
+    }
   },
 
   neuronsPoolSizeCheck() {
@@ -38,6 +43,11 @@ cc.Class({
     neuronNode.setPosition(this.node.position);
 
     this.perceptronNode.addChild(neuronNode);
+  },
+
+  externalComponentNeuronDocked(neuron) {
+    this.isNotWaitingNeuronDocking = true;
+    console.log('neuron', neuron);
   },
 
   externalComponentNeuronDestroyed(neuronNode) {
