@@ -15,14 +15,6 @@ cc.Class({
   },
 });
 
-// const node = cc.instantiate(this.prefab);
-// const scene = cc.director.getScene();
-// scene.addChild(node)
-
-// const instanceComponent = starNode.getComponent('star_instance');
-// instanceComponent.externalInitialize(item);
-
 // cc.director.dispatchEvent(new Event('star/picked'));
 // cc.director.on('star/picked', this.onReSpawnStar, this);
-
 // cc.audioEngine.playEffect(this.gainAudio, false);

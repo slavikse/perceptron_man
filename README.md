@@ -1,4 +1,4 @@
-# Game project: perceptron_man
+# Игровой проект на движке Cocos2d-x: Perceptron Man
 
 ## Соглашения по именованию
 ### Файлы
@@ -18,7 +18,7 @@
 * Узел: `${name}Node` = `cc.find(name)`
 * Клон: `${name}Node = cc.instantiate(prefab)`
 * Компонент: `${name}Component` = `this.node.getComponent(name)`
-* Состояние для узла: `this.node.data = { }`
+* Состояние для узла: `this.node.state = { }`
 
 ### Функции
 **Примеры реакций:**

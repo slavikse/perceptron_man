@@ -6,56 +6,60 @@ cc.Class({
   },
 
   onLoad() {
-    this.neuronsNode = cc.find('level/perceptron/neurons');
+    const perceptronNode = this.node.parent;
+    this.neuronsNodes = cc.find('neurons', perceptronNode);
 
-    this.neuronsPool = new cc.NodePool();
-    this.createNeurons();
+    this.neuronsNodesPool = new cc.NodePool();
+    this.createNeuronsNodes();
 
-    this.isNotWaitingNeuronDocking = true;
+    this.isNotWaitingNeuronNodeDocking = true;
 
-    this.node.on('touchstart', this.onAddNeuronToScene, this);
+    this.node.on('touchstart', this.onAddNeuronNodeToScene, this);
   },
 
-  createNeurons(quantity = 2 ** 5) {
+  createNeuronsNodes(quantity = 2 ** 5) {
     for (let i = 0; i < quantity; i++) {
       const neuronNode = cc.instantiate(this.neuronPrefab);
-      this.neuronsPool.put(neuronNode);
+      this.neuronsNodesPool.put(neuronNode);
     }
   },
 
-  onAddNeuronToScene() {
-    if (this.isNotWaitingNeuronDocking) {
-      this.isNotWaitingNeuronDocking = false;
+  onAddNeuronNodeToScene() {
+    if (this.isNotWaitingNeuronNodeDocking) {
+      this.isNotWaitingNeuronNodeDocking = false;
 
-      this.neuronsPoolSizeCheck();
-      this.addNeuronToScene();
+      this.neuronsNodesPoolSizeCheck();
+      this.addNeuronNodeToScene();
     }
   },
 
-  neuronsPoolSizeCheck() {
-    if (this.neuronsPool.size() === 0) {
-      this.createNeurons();
+  neuronsNodesPoolSizeCheck() {
+    if (this.neuronsNodesPool.size() === 0) {
+      this.createNeuronsNodes();
     }
   },
 
-  addNeuronToScene() {
-    const neuronNode = this.neuronsPool.get();
+  addNeuronNodeToScene() {
+    const neuronNode = this.neuronsNodesPool.get();
+    const neuronComponent = neuronNode.getComponent('perceptron_neuron');
+    neuronComponent.externalComponentRunSchedulerDestroy({ lifeTime: 5 });
+
     neuronNode.setPosition(this.node.position);
-
-    this.neuronsNode.addChild(neuronNode);
+    this.neuronsNodes.addChild(neuronNode);
   },
 
   externalComponentNeuronDocked() {
-    this.isNotWaitingNeuronDocking = true;
+    this.isNotWaitingNeuronNodeDocking = true;
   },
 
   externalComponentNeuronDestroyed(neuronNode) {
-    this.neuronsPool.put(neuronNode);
+    this.isNotWaitingNeuronNodeDocking = true;
+    this.neuronsNodesPool.put(neuronNode);
   },
 
   onDestroy() {
     this.node.off('touchstart', this.onAddNeuronToScene, this);
 
-    this.neuronsPool.clear();
+    this.neuronsNodesPool.clear();
   },
 });
