@@ -18,14 +18,14 @@
 * Узел: `${name}Node` = `cc.find(name)`
 * Клон: `${name}Node = cc.instantiate(prefab)`
 * Компонент: `${name}Component` = `this.node.getComponent(name)`
-* Состояние для узла: `this.node.state = { }`
+* Состояние: `this.node.state = { }`
 
 ### Функции
-**Примеры реакций:**
-* На событие: `on${actionName}`
-* Из внешнего компонента: `externalComponent${actionName}`
-* Из редактора (кнопка): `editor${actionName}`
-* Из анимации по имени: `editorAnimation${actionName}`
+**Примеры:**
+* Событие: `on${actionName}`
+* Внешние: `externalComponent${actionName}`
+* Редактор: `editor${actionName}`
+* Анимация: `editorAnimation${actionName}`
 
 ## Общие соглашения
 * `Prefab` только для клонирования объекта из кода.

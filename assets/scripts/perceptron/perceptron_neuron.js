@@ -1,7 +1,6 @@
 cc.Class({
   extends: cc.Component,
 
-  // todo эффект появления: частицы.
   onLoad() {
     const perceptronNode = this.node.parent.parent; // node.neuronsNode.perceptronNode
     const creatorNode = cc.find('creator', perceptronNode);
@@ -15,13 +14,28 @@ cc.Class({
     this.node.on('touchcancel', this.onEndCapture, this);
   },
 
-  // todo эффект времени до уничтожения.
-  externalComponentRunSchedulerDestroy({ lifeTime }) {
-    this.scheduleOnce(this.neuronDestroyed, lifeTime);
+  onDestroy() {
+    this.node.off('touchstart', this.onStartCapture, this);
+    this.node.off('touchmove', this.onMoveCaptured, this);
+    this.node.off('touchend', this.onEndCapture, this);
+    this.node.off('touchcancel', this.onEndCapture, this);
   },
 
-  onStartCapture() {
-    this.unschedule(this.neuronDestroyed, this);
+  // todo эффект времени до уничтожения.
+  externalComponentRunSchedulerNeuronNodeDestroy({ lifeTime }) {
+    this.scheduleOnce(this.neuronNodeDestroyed, lifeTime);
+  },
+
+  // todo эффект разрушения нейрона: частицы.
+  neuronNodeDestroyed() {
+    this.creatorComponent.externalComponentNeuronNodeDestroyed(this.node);
+  },
+
+  // todo разрушение нейрона и его соединения. (разрушение через долгое зажатие)
+  onStartCapture(e) {
+    console.log('e', e);
+
+    this.unschedule(this.neuronNodeDestroyed, this);
     this.connectionsComponent.externalComponentCreateShadowConnections(this.node);
   },
 
@@ -37,22 +51,10 @@ cc.Class({
     // todo только после закрепления в сети
     //  после закрепления отправляет флаг готовности.
     // todo эффект пристыковки: частицы.
-    this.creatorComponent.externalComponentNeuronDocked();
+    this.creatorComponent.externalComponentNeuronNodeDocked();
     this.connectionsComponent.externalComponentMountingShadowConnections();
 
     // todo если нейрон не был закреплен в сети и просто отпущен.
     // this.neuronDestroyed();
-  },
-
-  // todo эффект разрушения: частицы.
-  neuronDestroyed() {
-    this.creatorComponent.externalComponentNeuronDestroyed(this.node);
-  },
-
-  onDestroy() {
-    this.node.off('touchstart', this.onStartCapture, this);
-    this.node.off('touchmove', this.onMoveCaptured, this);
-    this.node.off('touchend', this.onEndCapture, this);
-    this.node.off('touchcancel', this.onEndCapture, this);
   },
 });

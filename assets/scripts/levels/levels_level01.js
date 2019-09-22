@@ -5,13 +5,13 @@ cc.Class({
     cc.director.on('gameOver', this.onGameOver, this);
   },
 
+  onDestroy() {
+    cc.director.off('gameOver', this.onGameOver, this);
+  },
+
   onGameOver() {
     console.log('onGameOver');
     // cc.director.loadScene('start');
-  },
-
-  onDestroy() {
-    cc.director.off('gameOver', this.onGameOver, this);
   },
 });
 

@@ -17,6 +17,11 @@ cc.Class({
     this.node.on('touchstart', this.onAddNeuronNodeToScene, this);
   },
 
+  onDestroy() {
+    this.node.off('touchstart', this.onAddNeuronToScene, this);
+    this.neuronsNodesPool.clear();
+  },
+
   createNeuronsNodes(quantity = 2 ** 5) {
     for (let i = 0; i < quantity; i++) {
       const neuronNode = cc.instantiate(this.neuronPrefab);
@@ -39,26 +44,22 @@ cc.Class({
     }
   },
 
+  // todo эффект появления: частицы.
   addNeuronNodeToScene() {
     const neuronNode = this.neuronsNodesPool.get();
     const neuronComponent = neuronNode.getComponent('perceptron_neuron');
-    neuronComponent.externalComponentRunSchedulerDestroy({ lifeTime: 5 });
+    neuronComponent.externalComponentRunSchedulerNeuronNodeDestroy({ lifeTime: 5 });
 
     neuronNode.setPosition(this.node.position);
     this.neuronsNode.addChild(neuronNode);
   },
 
-  externalComponentNeuronDocked() {
+  externalComponentNeuronNodeDocked() {
     this.isNotWaitingNeuronNodeDocking = true;
   },
 
-  externalComponentNeuronDestroyed(neuronNode) {
+  externalComponentNeuronNodeDestroyed(neuronNode) {
     this.isNotWaitingNeuronNodeDocking = true;
     this.neuronsNodesPool.put(neuronNode);
-  },
-
-  onDestroy() {
-    this.node.off('touchstart', this.onAddNeuronToScene, this);
-    this.neuronsNodesPool.clear();
   },
 });
