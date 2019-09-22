@@ -37,7 +37,6 @@ cc.Class({
   externalComponentCreateShadowConnections(capturedNeuronNode) {
     const neuronsNode = this.node.parent;
 
-    // todo когда нейронов на сцене нет, связи строить не с кем.
     if (neuronsNode.childrenCount < 1) {
       return;
     }

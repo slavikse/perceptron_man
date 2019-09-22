@@ -23,7 +23,7 @@ cc.Class({
   onStartCapture() {
     this.unschedule(this.neuronDestroyed, this);
 
-    // todo ограничения
+    // todo ограничения. описание ниже
     this.connectionsComponent.externalComponentCreateShadowConnections(this.node);
   },
 
@@ -36,13 +36,14 @@ cc.Class({
   // todo после установки в сеть - нейрон нельзя перетаскивать, только разрешить.
   // todo появляются новые возможности: разрушение при двойном клике
   onEndCapture() {
-    // todo если нейрон не был закреплен в сети и просто отпущен.
-    // this.neuronDestroyed();
-
     // todo только после закрепления в сети
+    //  после закрепления отправляет флаг готовности.
     // todo эффект пристыковки: частицы.
     this.creatorComponent.externalComponentNeuronDocked();
     this.connectionsComponent.externalComponentMountingShadowConnections();
+
+    // todo если нейрон не был закреплен в сети и просто отпущен.
+    // this.neuronDestroyed();
   },
 
   // todo эффект разрушения: частицы.
