@@ -22,8 +22,6 @@ cc.Class({
 
   onStartCapture() {
     this.unschedule(this.neuronDestroyed, this);
-
-    // todo ограничения. описание ниже
     this.connectionsComponent.externalComponentCreateShadowConnections(this.node);
   },
 

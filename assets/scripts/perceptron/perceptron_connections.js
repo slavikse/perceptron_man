@@ -69,11 +69,13 @@ cc.Class({
 
   setStateNodesConnection(connectionNode) {
     const { capturedNeuronNode, neuronNode } = connectionNode.neuronsNodes;
-    connectionNode.width = capturedNeuronNode.position.sub(neuronNode.position).mag();
+    const subtractedPosition = capturedNeuronNode.position.sub(neuronNode.position);
 
-    const { x, y } = capturedNeuronNode.position.sub(neuronNode.position);
+    const { x, y } = subtractedPosition;
     const degB = Math.atan(x / y) * radianToDegrees;
     const normalAngle = 90 - degB;
+
+    connectionNode.width = subtractedPosition.mag();
 
     if (y > 0) {
       connectionNode.angle = normalAngle;
