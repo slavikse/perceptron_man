@@ -7,7 +7,7 @@ cc.Class({
 
   onLoad() {
     const perceptronNode = this.node.parent;
-    this.neuronsNodes = cc.find('neurons', perceptronNode);
+    this.neuronsNode = cc.find('neurons', perceptronNode);
 
     this.neuronsNodesPool = new cc.NodePool();
     this.createNeuronsNodes();
@@ -45,7 +45,7 @@ cc.Class({
     neuronComponent.externalComponentRunSchedulerDestroy({ lifeTime: 5 });
 
     neuronNode.setPosition(this.node.position);
-    this.neuronsNodes.addChild(neuronNode);
+    this.neuronsNode.addChild(neuronNode);
   },
 
   externalComponentNeuronDocked() {
@@ -59,7 +59,6 @@ cc.Class({
 
   onDestroy() {
     this.node.off('touchstart', this.onAddNeuronToScene, this);
-
     this.neuronsNodesPool.clear();
   },
 });

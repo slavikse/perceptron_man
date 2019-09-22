@@ -3,7 +3,7 @@ cc.Class({
 
   // todo эффект появления: частицы.
   onLoad() {
-    const perceptronNode = this.node.parent.parent; // node -> neuronsNode -> perceptronNode
+    const perceptronNode = this.node.parent.parent; // node.neuronsNode.perceptronNode
     const creatorNode = cc.find('creator', perceptronNode);
     this.creatorComponent = creatorNode.getComponent('perceptron_creator');
 
@@ -22,9 +22,13 @@ cc.Class({
 
   onStartCapture() {
     this.unschedule(this.neuronDestroyed, this);
-    this.connectionsComponent.externalComponentCreateShadowConnections();
+
+    // todo ограничения
+    this.connectionsComponent.externalComponentCreateShadowConnections(this.node);
   },
 
+  // todo связи можно будет создать при выполнении условий.
+  //  ограничения: можно располагать нейрон только в ряд в новом слое, либо в существующем.
   onMoveCaptured(e) {
     this.node.position = this.node.position.add(e.getDelta());
   },
