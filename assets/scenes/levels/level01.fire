@@ -774,8 +774,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -80.179,
-      "y": 121.938,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -796,7 +796,7 @@
     "groupIndex": 0,
     "_rotationX": 0,
     "_rotationY": 0,
-    "_id": "37DpQaiwFGqYExHJNfF0VZ"
+    "_id": "23xV+sNgROaqZWESajeCF1"
   },
   {
     "__type__": "cc.Sprite",
@@ -828,7 +828,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": null,
-    "_id": "34PVnV2JZIUrLc0r1l9Trd"
+    "_id": "64G6aOZu9GXYNHc4OO84h/"
   },
   {
     "__type__": "115b208eidOP7qSTwdVeffs",
@@ -841,7 +841,7 @@
     "neuronPrefab": {
       "__uuid__": "8bad1bab-ccbe-41b4-8867-4e3b63b73a65"
     },
-    "_id": "3bHD+b9/1Pcob6DMjJc7BP"
+    "_id": "5ajokT8p5KsYQHBFWcIJjD"
   },
   {
     "__type__": "cc.PrefabInfo",

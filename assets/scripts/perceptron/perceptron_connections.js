@@ -77,7 +77,7 @@ cc.Class({
 
     connectionNode.width = subtractedPosition.mag();
 
-    if (y > 0) {
+    if (y >= 0) {
       connectionNode.angle = normalAngle;
     } else {
       connectionNode.angle = 180 + normalAngle;
