@@ -17,6 +17,10 @@ cc.Class({
   },
 
   onDestroy() {
+    this.removeEventsListeners();
+  },
+
+  removeEventsListeners() {
     this.node.off('touchstart', this.onStartCapture, this);
     this.node.off('touchmove', this.onMoveCaptured, this);
     this.node.off('touchend', this.onEndCapture, this);
@@ -33,10 +37,6 @@ cc.Class({
     this.perceptronNeuronCreatorComponent.externalNeuronNodeDestroy(this.node);
   },
 
-  // fixme если нажать на размещенный узел, дублируются соединения.
-
-  // todo нейрон не будет ловить нажатия после размещения, только зажатие для разрушения.
-  // todo разрушение нейрона и его соединения. (разрушение через долгое зажатие)
   onStartCapture() {
     this.unschedule(this.neuronNodeDestroy, this);
     this.perceptronConnectionsComponent.externalCreateShadowConnectionsNodes(this.node);
@@ -45,20 +45,21 @@ cc.Class({
   // todo связи можно будет создать при выполнении условий.
   //  ограничения: можно располагать нейрон только в ряд в новом слое, либо в существующем.
   onMoveCaptured(e) {
-    // todo только целые числа. под пиксельный стиль.
     this.node.position = this.node.position.add(e.getDelta());
   },
 
-  // todo после установки в сеть - нейрон нельзя перетаскивать, только разрешить.
-  // todo появляются новые возможности: разрушение при двойном клике
   onEndCapture() {
-    // todo только после закрепления в сети
-    //  после закрепления отправляет флаг готовности.
+    // todo нейрон будет ловить зажатие для разрушения нейрона и его соединения.
+    this.removeEventsListeners();
+
+    // todo если нейрон остался без соединений - он разрушается.
+
+    // todo только после закрепления в сети вызывать: NeuronNodeDocked и MountingShadowConnections.
     // todo эффект пристыковки: частицы.
     this.perceptronNeuronCreatorComponent.externalNeuronNodeDocked();
     this.perceptronConnectionsComponent.externalMountingShadowConnectionsNodes();
 
-    // todo если нейрон не был закреплен в сети и просто отпущен.
+    // todo удалять, если нейрон не был закреплен в сети.
     // this.neuronDestroyed();
   },
 });

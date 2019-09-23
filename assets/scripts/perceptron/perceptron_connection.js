@@ -2,7 +2,9 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
-    this.lifeTime = 3;
+    this.perceptronConnectionsComponent = this.node.parent.getComponent('perceptron_connections');
+
+    this.lifeTime = 1;
 
     this.node.on('touchstart', this.onRunSchedulerConnectionNodeDestroy, this);
     this.node.on('touchend', this.onStopSchedulerConnectionNodeDestroy, this);
@@ -24,10 +26,8 @@ cc.Class({
     this.unschedule(this.connectionNodeDestroy, this);
   },
 
-  // todo разрушение соединения (разрушение через долгое зажатие)
-  //  если нейрон остался без соединений - он разрушается.
   // todo эффект для полного разрушения соединения.
   connectionNodeDestroy() {
-    this.node.destroy();
+    this.perceptronConnectionsComponent.externalConnectionNodeDestroy(this.node);
   },
 });

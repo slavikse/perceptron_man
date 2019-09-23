@@ -49,7 +49,7 @@ cc.Class({
     const neuronNode = this.neuronsNodesPool.get();
 
     neuronNode.getComponent('perceptron_neuron')
-      .externalRunSchedulerNeuronNodeDestroy({ lifeTime: 5 });
+      .externalRunSchedulerNeuronNodeDestroy({ lifeTime: 3 });
 
     neuronNode.setPosition(this.node.position);
     this.neuronsNode.addChild(neuronNode);
