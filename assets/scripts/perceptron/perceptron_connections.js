@@ -8,8 +8,7 @@ cc.Class({
   },
 
   onLoad() {
-    const perceptronNode = this.node.parent;
-    this.neuronsNode = cc.find('neurons', perceptronNode);
+    this.neuronsNode = cc.find('neurons', this.node.parent);
 
     this.isCreatedShadowConnectionsNodes = false;
     this.connectionsNodes = [];
@@ -32,7 +31,6 @@ cc.Class({
   createConnectionsNodes(quantity = 2 ** 7) {
     for (let i = 0; i < quantity; i++) {
       const connectionNode = cc.instantiate(this.connectionPrefab);
-      connectionNode.deletionIndex = -1;
       connectionNode.neuronsNodes = {};
 
       this.connectionsNodesPool.put(connectionNode);
@@ -58,10 +56,8 @@ cc.Class({
     }
   },
 
-  // todo если соединение уже есть, еще одно создавать не нужно
   addConnectionNodeToScene({ capturedNeuronNode, neuronNode }) {
     const connectionNode = this.connectionsNodesPool.get();
-    connectionNode.deletionIndex = this.connectionsNodes.length;
     connectionNode.neuronsNodes = { capturedNeuronNode, neuronNode };
 
     this.changeConnectionNodeParameters(connectionNode);
@@ -98,16 +94,5 @@ cc.Class({
     // });
     //
     // this.connectionsNodes = [];
-  },
-
-  externalConnectionNodeDestroy(connectionNode) {
-    this.isCreatedShadowConnectionsNodes = false;
-    this.connectionsNodes.splice(connectionNode.deletionIndex, 1);
-
-    connectionNode.deletionIndex = -1;
-    connectionNode.neuronsNodes = {};
-
-    this.connectionsNodesPool.put(connectionNode);
-    this.isCreatedShadowConnectionsNodes = true;
   },
 });

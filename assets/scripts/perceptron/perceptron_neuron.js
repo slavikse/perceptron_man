@@ -27,18 +27,7 @@ cc.Class({
     this.node.off('touchcancel', this.onEndCapture, this);
   },
 
-  // todo эффект времени до уничтожения.
-  externalRunSchedulerNeuronNodeDestroy({ lifeTime }) {
-    this.scheduleOnce(this.neuronNodeDestroy, lifeTime);
-  },
-
-  // todo эффект разрушения нейрона: частицы.
-  neuronNodeDestroy() {
-    this.perceptronNeuronCreatorComponent.externalNeuronNodeDestroy(this.node);
-  },
-
   onStartCapture() {
-    this.unschedule(this.neuronNodeDestroy, this);
     this.perceptronConnectionsComponent.externalCreateShadowConnectionsNodes(this.node);
   },
 
@@ -49,10 +38,8 @@ cc.Class({
   },
 
   onEndCapture() {
-    // todo нейрон будет ловить зажатие для разрушения нейрона и его соединения.
-    this.removeEventsListeners();
-
-    // todo если нейрон остался без соединений - он разрушается.
+    // todo закрепленный в сети нейрон будет ловить клик для разрушения нейрона и его соединения.
+    // this.removeEventsListeners();
 
     // todo только после закрепления в сети вызывать: NeuronNodeDocked и MountingShadowConnections.
     // todo эффект пристыковки: частицы.
@@ -61,5 +48,10 @@ cc.Class({
 
     // todo удалять, если нейрон не был закреплен в сети.
     // this.neuronDestroyed();
+  },
+
+  // todo эффект разрушения нейрона: частицы.
+  neuronNodeDestroy() {
+    this.perceptronNeuronCreatorComponent.externalNeuronNodeDestroy(this.node);
   },
 });

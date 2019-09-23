@@ -47,11 +47,8 @@ cc.Class({
   // todo эффект появления: частицы.
   addNeuronNodeToScene() {
     const neuronNode = this.neuronsNodesPool.get();
-
-    neuronNode.getComponent('perceptron_neuron')
-      .externalRunSchedulerNeuronNodeDestroy({ lifeTime: 3 });
-
     neuronNode.setPosition(this.node.position);
+
     this.neuronsNode.addChild(neuronNode);
   },
 
