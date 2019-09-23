@@ -7,33 +7,24 @@ cc.Class({
     connectionPrefab: cc.Prefab,
   },
 
-  // todo разрушение соединения (разрушение через долгое зажатие)
-  //  если нейрон остался без соединений - он разрушается.
-  // todo эффект разрушения соединения.
   onLoad() {
-    this.isStageCreateShadowConnections = false;
+    const perceptronNode = this.node.parent;
+    this.neuronsNode = cc.find('neurons', perceptronNode);
 
     this.connectionsNodesPool = new cc.NodePool();
     this.createConnectionsNodes();
 
+    this.isCreateShadowConnectionsNodes = false;
     this.connectionsNodes = [];
-
-    this.node.on('touchstart', this.onRunSchedulerDestructionConnection, this);
-    // this.node.on('touchend', this.onDestructionConnection, this);
   },
 
   update() {
-    if (this.isStageCreateShadowConnections) {
+    if (this.isCreateShadowConnectionsNodes) {
       this.connectionsNodes.forEach(this.setStateConnectionNode);
     }
   },
 
-  onDestroy() {
-    this.node.off('touchstart', this.onRunSchedulerDestructionConnection, this);
-    // this.node.off('touchend', this.onDestructionConnection, this);
-  },
-
-  createConnectionsNodes(quantity = 2 ** 8) {
+  createConnectionsNodes(quantity = 2 ** 7) {
     for (let i = 0; i < quantity; i++) {
       const connectionNode = cc.instantiate(this.connectionPrefab);
       connectionNode.neuronsNodes = {};
@@ -42,25 +33,15 @@ cc.Class({
     }
   },
 
-  onRunSchedulerDestructionConnection() {
-
-  },
-
-  externalComponentCreateShadowConnections(capturedNeuronNode) {
-    const neuronsNode = this.node.parent;
-
-    if (neuronsNode.childrenCount < 1) {
-      return;
-    }
-
-    neuronsNode.children.forEach((neuronNode) => {
+  externalCreateShadowConnectionsNodes(capturedNeuronNode) {
+    this.neuronsNode.children.forEach((neuronNode) => {
       if (capturedNeuronNode.uuid !== neuronNode.uuid) {
         this.connectionsNodesPoolSizeCheck();
         this.addConnectionNodeToScene({ capturedNeuronNode, neuronNode });
       }
     });
 
-    this.isStageCreateShadowConnections = true;
+    this.isCreateShadowConnectionsNodes = true;
   },
 
   connectionsNodesPoolSizeCheck() {
@@ -69,14 +50,13 @@ cc.Class({
     }
   },
 
-  // todo соединение до должно быть поверх узла.
   addConnectionNodeToScene({ capturedNeuronNode, neuronNode }) {
     const connectionNode = this.connectionsNodesPool.get();
     connectionNode.neuronsNodes = { capturedNeuronNode, neuronNode };
 
     this.setStateConnectionNode(connectionNode);
 
-    neuronNode.addChild(connectionNode);
+    this.node.addChild(connectionNode);
     this.connectionsNodes.push(connectionNode);
   },
 
@@ -88,6 +68,7 @@ cc.Class({
     const degB = Math.atan(x / y) * radianToDegrees;
     const normalAngle = 90 - degB;
 
+    connectionNode.position = neuronNode.position;
     connectionNode.width = subtractedPosition.mag();
 
     if (y >= 0) {
@@ -98,14 +79,14 @@ cc.Class({
   },
 
   // todo визуализация связей при установке - прозрачные, после установки нормальные.
-  externalComponentMountingShadowConnections() {
-    this.isStageCreateShadowConnections = false;
+  externalMountingShadowConnectionsNodes() {
+    this.isCreateShadowConnectionsNodes = false;
 
-    // this.connectionsNodes.forEach((connectionNode) => {
-    //   connectionNode.neuronsNodes = {};
-    //   this.connectionsNodesPool.put(connectionNode);
-    // });
-    //
-    // this.connectionsNodes = [];
+    this.connectionsNodes.forEach((connectionNode) => {
+      connectionNode.neuronsNodes = {};
+      this.connectionsNodesPool.put(connectionNode);
+    });
+
+    this.connectionsNodes = [];
   },
 });

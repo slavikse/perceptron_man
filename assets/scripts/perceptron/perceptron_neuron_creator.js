@@ -47,18 +47,19 @@ cc.Class({
   // todo эффект появления: частицы.
   addNeuronNodeToScene() {
     const neuronNode = this.neuronsNodesPool.get();
-    const neuronComponent = neuronNode.getComponent('perceptron_neuron');
-    neuronComponent.externalComponentRunSchedulerNeuronNodeDestroy({ lifeTime: 5 });
+
+    neuronNode.getComponent('perceptron_neuron')
+      .externalRunSchedulerNeuronNodeDestroy({ lifeTime: 5 });
 
     neuronNode.setPosition(this.node.position);
     this.neuronsNode.addChild(neuronNode);
   },
 
-  externalComponentNeuronNodeDocked() {
+  externalNeuronNodeDocked() {
     this.isNotWaitingNeuronNodeDocking = true;
   },
 
-  externalComponentNeuronNodeDestroyed(neuronNode) {
+  externalNeuronNodeDestroy(neuronNode) {
     this.isNotWaitingNeuronNodeDocking = true;
     this.neuronsNodesPool.put(neuronNode);
   },

@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "creator",
+    "_name": "neuron_creator",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -107,7 +107,7 @@
     "_id": ""
   },
   {
-    "__type__": "115b208eidOP7qSTwdVeffs",
+    "__type__": "9b4847HNVFG1bfY92l7A/Oh",
     "_name": "",
     "_objFlags": 0,
     "node": {

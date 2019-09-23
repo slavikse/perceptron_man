@@ -23,9 +23,9 @@
 ### Функции
 **Примеры:**
 * Событие: `on${actionName}`
-* Внешние: `externalComponent${actionName}`
+* Внешние: `external${actionName}`
 * Редактор: `editor${actionName}`
-* Анимация: `editorAnimation${actionName}`
+* Анимация: `animation${actionName}`
 
 ## Общие соглашения
 * `Prefab` только для клонирования объекта из кода.
