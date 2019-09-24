@@ -17,10 +17,6 @@ cc.Class({
   },
 
   onDestroy() {
-    this.removeEventsListeners();
-  },
-
-  removeEventsListeners() {
     this.node.off('touchstart', this.onStartCapture, this);
     this.node.off('touchmove', this.onMoveCaptured, this);
     this.node.off('touchend', this.onEndCapture, this);
@@ -38,9 +34,6 @@ cc.Class({
   },
 
   onEndCapture() {
-    // todo закрепленный в сети нейрон будет ловить клик для разрушения нейрона и его соединения.
-    // this.removeEventsListeners();
-
     // todo только после закрепления в сети вызывать: NeuronNodeDocked и MountingShadowConnections.
     // todo эффект пристыковки: частицы.
     this.perceptronNeuronCreatorComponent.externalNeuronNodeDocked();

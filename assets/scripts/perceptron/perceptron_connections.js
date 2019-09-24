@@ -41,6 +41,7 @@ cc.Class({
     this.isCreatedShadowConnectionsNodes = false;
 
     this.neuronsNode.children.forEach((neuronNode) => {
+      // Предотвращение добавления соединения схваченного узла с самим собой.
       if (capturedNeuronNode.uuid !== neuronNode.uuid) {
         this.connectionsNodesPoolSizeCheck();
         this.addConnectionNodeToScene({ capturedNeuronNode, neuronNode });
@@ -56,14 +57,28 @@ cc.Class({
     }
   },
 
-  addConnectionNodeToScene({ capturedNeuronNode, neuronNode }) {
+  addConnectionNodeToScene(neuronsNodes) {
+    if (this.preventReAddingConnectionNode(neuronsNodes)) {
+      return;
+    }
+
     const connectionNode = this.connectionsNodesPool.get();
-    connectionNode.neuronsNodes = { capturedNeuronNode, neuronNode };
+    connectionNode.neuronsNodes = neuronsNodes;
 
     this.changeConnectionNodeParameters(connectionNode);
 
     this.node.addChild(connectionNode);
     this.connectionsNodes.push(connectionNode);
+  },
+
+  preventReAddingConnectionNode({ capturedNeuronNode, neuronNode }) {
+    return this.connectionsNodes.find(({ neuronsNodes }) => (
+      capturedNeuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid
+      && neuronNode.uuid === neuronsNodes.neuronNode.uuid
+    ) || (
+      capturedNeuronNode.uuid === neuronsNodes.neuronNode.uuid
+      && neuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid
+    ));
   },
 
   changeConnectionNodeParameters(connectionNode) {
@@ -84,7 +99,8 @@ cc.Class({
     }
   },
 
-  // todo визуализация связей при установке - прозрачные, после установки нормальные.
+  // todo визуализация связей при установке - прозрачные, после установки постоянные.
+  //  заменять префаб?
   externalMountingShadowConnectionsNodes() {
     this.isCreatedShadowConnectionsNodes = false;
 
