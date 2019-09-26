@@ -4,12 +4,10 @@ cc.Class({
   onLoad() {
     this.levelNode = cc.find('level');
 
-    const perceptronNode = cc.find('perceptron', this.levelNode);
-
-    this.perceptronConnectionsComponent = cc.find('connections', perceptronNode)
+    this.connectionsComponent = cc.find('level/perceptron/connections')
       .getComponent('perceptron_connections');
 
-    this.perceptronNeuronCreatorComponent = cc.find('neuron_creator', perceptronNode)
+    this.neuronCreatorComponent = cc.find('level/perceptron/neuron_creator')
       .getComponent('perceptron_neuron_creator');
 
     this.node.on('touchstart', this.onStartCapture, this);
@@ -26,7 +24,7 @@ cc.Class({
   },
 
   onStartCapture() {
-    this.perceptronConnectionsComponent.externalCreateConnectionsNodes(this.node);
+    this.connectionsComponent.externalCreateConnectionsNodes(this.node);
   },
 
   // todo связи можно будет создать при выполнении условий.
@@ -57,8 +55,8 @@ cc.Class({
   onEndCapture() {
     // todo только после закрепления в сети вызывать: NeuronNodeDocked и MountingShadowConnections.
     // todo эффект пристыковки: частицы.
-    this.perceptronNeuronCreatorComponent.externalNeuronNodeDocked();
-    this.perceptronConnectionsComponent.externalMountingConnectionsNodes();
+    this.neuronCreatorComponent.externalNeuronNodeDocked();
+    this.connectionsComponent.externalMountingConnectionsNodes();
 
     // todo удалять, если нейрон не был закреплен в сети.
     // this.neuronDestroyed();
@@ -66,6 +64,6 @@ cc.Class({
 
   // todo эффект разрушения нейрона: частицы.
   neuronNodeDestroy() {
-    this.perceptronNeuronCreatorComponent.externalNeuronNodeDestroy(this.node);
+    this.neuronCreatorComponent.externalNeuronNodeDestroy(this.node);
   },
 });
