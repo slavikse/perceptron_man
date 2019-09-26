@@ -6,8 +6,7 @@ cc.Class({
   },
 
   onLoad() {
-    const perceptronNode = this.node.parent;
-    this.neuronsNode = cc.find('neurons', perceptronNode);
+    this.neuronsNode = cc.find('level/neurons');
 
     this.neuronsNodesPool = new cc.NodePool();
     this.createNeuronsNodes();

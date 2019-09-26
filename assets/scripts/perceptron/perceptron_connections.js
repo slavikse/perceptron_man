@@ -8,9 +8,9 @@ cc.Class({
   },
 
   onLoad() {
-    this.neuronsNode = cc.find('neurons', this.node.parent);
+    this.neuronsNode = cc.find('level/neurons');
 
-    this.isCreatedShadowConnectionsNodes = false;
+    this.isCreatedConnectionsNodes = false;
     this.connectionsNodes = [];
 
     this.connectionsNodesPool = new cc.NodePool();
@@ -18,7 +18,7 @@ cc.Class({
   },
 
   update() {
-    if (this.isCreatedShadowConnectionsNodes) {
+    if (this.isCreatedConnectionsNodes) {
       this.connectionsNodes.forEach(this.changeConnectionNodeParameters);
     }
   },
@@ -37,8 +37,8 @@ cc.Class({
     }
   },
 
-  externalCreateShadowConnectionsNodes(capturedNeuronNode) {
-    this.isCreatedShadowConnectionsNodes = false;
+  externalCreateConnectionsNodes(capturedNeuronNode) {
+    this.isCreatedConnectionsNodes = false;
 
     this.neuronsNode.children.forEach((neuronNode) => {
       // Предотвращение добавления соединения схваченного узла с самим собой.
@@ -48,7 +48,7 @@ cc.Class({
       }
     });
 
-    this.isCreatedShadowConnectionsNodes = true;
+    this.isCreatedConnectionsNodes = true;
   },
 
   connectionsNodesPoolSizeCheck() {
@@ -99,8 +99,8 @@ cc.Class({
     }
   },
 
-  externalMountingShadowConnectionsNodes() {
-    this.isCreatedShadowConnectionsNodes = false;
+  externalMountingConnectionsNodes() {
+    this.isCreatedConnectionsNodes = false;
 
     // todo
     // this.connectionsNodes.forEach((connectionNode) => {
