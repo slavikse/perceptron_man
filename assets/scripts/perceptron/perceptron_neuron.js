@@ -2,6 +2,8 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
+    this.levelNode = cc.director.getScene().getChildByName('level');
+
     const perceptronNode = this.node.parent.parent; // neuronNode.neuronsNode.perceptronNode
 
     this.perceptronConnectionsComponent = cc.find('connections', perceptronNode)
@@ -30,7 +32,7 @@ cc.Class({
   // todo связи можно будет создать при выполнении условий.
   //  ограничения: можно располагать нейрон только в ряд в новом слое, либо в существующем.
   onMoveCaptured(e) {
-    this.node.position = this.node.position.add(e.getDelta());
+    this.setPositionLimitedByLevelSize(e);
   },
 
   onEndCapture() {
@@ -41,6 +43,25 @@ cc.Class({
 
     // todo удалять, если нейрон не был закреплен в сети.
     // this.neuronDestroyed();
+  },
+
+  setPositionLimitedByLevelSize(e) {
+    const { x, y } = this.node.position.add(e.getDelta());
+
+    const halfLevelWidth = this.levelNode.width / 2;
+    const halfLevelHeight = this.levelNode.height / 2;
+
+    const halfNodeWidth = this.node.width / 2;
+    const halfNodeHeight = this.node.height / 2;
+
+    if (
+      x > -halfLevelWidth + halfNodeWidth
+      && x < halfLevelWidth - halfNodeWidth
+      && y > -halfLevelHeight + halfNodeHeight
+      && y < halfLevelHeight - halfNodeHeight
+    ) {
+      this.node.position = cc.v2(x, y);
+    }
   },
 
   // todo эффект разрушения нейрона: частицы.
