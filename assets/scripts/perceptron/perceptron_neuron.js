@@ -2,7 +2,7 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
-    this.levelNode = cc.director.getScene().getChildByName('level');
+    this.levelNode = cc.find('level');
 
     const perceptronNode = this.node.parent.parent; // neuronNode.neuronsNode.perceptronNode
 
