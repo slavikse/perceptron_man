@@ -42,11 +42,13 @@ cc.Class({
     const halfNodeWidth = this.node.width / 2;
     const halfNodeHeight = this.node.height / 2;
 
+    const border = 4;
+
     if (
-      x > -halfLevelWidth + halfNodeWidth
-      && x < halfLevelWidth - halfNodeWidth
-      && y > -halfLevelHeight + halfNodeHeight
-      && y < halfLevelHeight - halfNodeHeight
+      x > -halfLevelWidth + halfNodeWidth + border
+      && x < halfLevelWidth - halfNodeWidth - border
+      && y > -halfLevelHeight + halfNodeHeight + border
+      && y < halfLevelHeight - halfNodeHeight - border
     ) {
       this.node.position = cc.v2(x, y);
     }

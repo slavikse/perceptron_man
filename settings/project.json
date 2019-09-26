@@ -7,6 +7,12 @@
     [
       false,
       true,
+      true,
+      false
+    ],
+    [
+      false,
+      true,
       false,
       false
     ],
@@ -20,9 +26,11 @@
       false,
       false,
       false,
+      false,
       false
     ],
     [
+      false,
       false,
       false,
       false,
@@ -66,7 +74,8 @@
   "fit-width": true,
   "group-list": [
     "default",
-    "neuron"
+    "neuron",
+    "border"
   ],
   "last-module-event-record-time": 1569177317767,
   "simulator-orientation": false,
@@ -75,6 +84,5 @@
     "width": 960
   },
   "use-customize-simulator": true,
-  "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "use-project-simulator-setting": false
 }
