@@ -99,11 +99,10 @@ cc.Class({
     }
   },
 
-  // todo визуализация связей при установке - прозрачные, после установки постоянные.
-  //  заменять префаб?
   externalMountingShadowConnectionsNodes() {
     this.isCreatedShadowConnectionsNodes = false;
 
+    // todo
     // this.connectionsNodes.forEach((connectionNode) => {
     //   connectionNode.neuronsNodes = {};
     //   this.connectionsNodesPool.put(connectionNode);

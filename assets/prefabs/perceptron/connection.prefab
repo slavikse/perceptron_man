@@ -27,18 +27,18 @@
     "_prefab": {
       "__id__": 3
     },
-    "_opacity": 100,
+    "_opacity": 100.215,
     "_color": {
       "__type__": "cc.Color",
-      "r": 253,
-      "g": 244,
-      "b": 152,
+      "r": 250,
+      "g": 255,
+      "b": 217,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 100,
-      "height": 20
+      "height": 10
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
