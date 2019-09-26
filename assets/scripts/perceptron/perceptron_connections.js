@@ -8,7 +8,7 @@ cc.Class({
   },
 
   onLoad() {
-    this.neuronsNode = cc.find('level/neurons');
+    this.neuronsNode = cc.find('level/perceptron/neurons');
 
     this.isCreatedConnectionsNodes = false;
     this.connectionsNodes = [];
