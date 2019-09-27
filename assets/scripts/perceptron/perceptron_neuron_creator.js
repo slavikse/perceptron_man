@@ -55,6 +55,7 @@ cc.Class({
     this.isNotWaitingNeuronNodeDocking = true;
   },
 
+  // todo утилизация, там, где создал
   externalNeuronNodeDestroy(neuronNode) {
     this.isNotWaitingNeuronNodeDocking = true;
     this.neuronsNodesPool.put(neuronNode);
