@@ -102,13 +102,5 @@ cc.Class({
   externalMountingConnectionsNodes() {
     this.isCreatedConnectionsNodes = false;
     this.connectionsNodes.forEach(this.changeConnectionNodeParameters);
-
-    // todo
-    // this.connectionsNodes.forEach((connectionNode) => {
-    //   connectionNode.neuronsNodes = {};
-    //   this.connectionsNodesPool.put(connectionNode);
-    // });
-    //
-    // this.connectionsNodes = [];
   },
 });
