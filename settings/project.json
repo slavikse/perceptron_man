@@ -38,8 +38,8 @@
       false
     ]
   ],
-  "design-resolution-height": 720,
-  "design-resolution-width": 1280,
+  "design-resolution-height": 768,
+  "design-resolution-width": 1366,
   "excluded-modules": [
     "Label Effect",
     "Mask",
@@ -77,7 +77,7 @@
     "neuron",
     "border"
   ],
-  "last-module-event-record-time": 1569177317767,
+  "last-module-event-record-time": 1570347017097,
   "simulator-orientation": false,
   "simulator-resolution": {
     "height": 640,

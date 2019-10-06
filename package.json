@@ -1,15 +1,17 @@
 {
   "name": "perceptron_man",
-  "version": "0.1.0",
-  "description": "Игровой проект на движке Cocos2d-x",
+  "version": "0.1.1",
+  "description": "Игровой проект на движке Cocos Creator",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^6.4.0",
+    "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-promise": "^4.2.1"
   },
-  "scripts": {},
+  "scripts": {
+    "fix": "eslint --fix ./assets/**"
+  },
   "author": "slavikse <gslavikse@gmail.com>",
   "license": "MIT"
 }
