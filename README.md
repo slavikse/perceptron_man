@@ -2,7 +2,7 @@
 
 ## Соглашения по именованию
 ### Файлы
-Имя файла-компонента должно иметь уникальное имя.  
+Имя файла-компонента должно иметь уникальное имя.
 Именовать файл нужно по правилу **одноуровневого** именования.
 
 **Пример для компонентов:**
@@ -34,13 +34,11 @@
 
 ## Общие соглашения
 * `Prefab` только для клонирования объекта из кода.
+* Размеры графики в степенях двойки. ex: 2^4.
 
 ## Директории собранного проекта:
-> exe:  
-`C:\Projects\perceptron_man\build\jsb-default\frameworks\runtime-src\proj.win32\Release.win32`
+> exe: `C:\Projects\perceptron_man\build\jsb-default\publish\win32`
 
-> web:  
-`C:\Projects\perceptron_man\build\web-desktop`
+> apk: `C:\Projects\perceptron_man\build\jsb-default\publish\android`
 
-> apk:  
-`C:\Projects\perceptron_man\build\jsb-default\frameworks\runtime-src\proj.android-studio\app\build\outputs\apk\release`
+> web: `C:\Projects\perceptron_man\build\web-desktop`

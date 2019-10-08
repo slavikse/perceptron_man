@@ -43,7 +43,7 @@ cc.Class({
     }
   },
 
-  // todo эффект появления: частицы.
+  // TODO эффект появления: частицы.
   addNeuronNodeToScene() {
     const neuronNode = this.neuronsNodesPool.get();
     neuronNode.setPosition(this.node.position);
@@ -55,7 +55,7 @@ cc.Class({
     this.isNotWaitingNeuronNodeDocking = true;
   },
 
-  // todo утилизация, там, где создал
+  // TODO утилизация, там, где создал
   externalNeuronNodeDestroy(neuronNode) {
     this.isNotWaitingNeuronNodeDocking = true;
     this.neuronsNodesPool.put(neuronNode);

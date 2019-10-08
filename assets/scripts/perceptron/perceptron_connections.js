@@ -1,5 +1,3 @@
-const radianToDegrees = 180 / Math.PI;
-
 cc.Class({
   extends: cc.Component,
 
@@ -12,8 +10,8 @@ cc.Class({
 
     this.isCreatedConnectionsNodes = false;
     this.connectionsNodes = [];
-
     this.connectionsNodesPool = new cc.NodePool();
+
     this.createConnectionsNodes();
   },
 
@@ -41,7 +39,7 @@ cc.Class({
     this.isCreatedConnectionsNodes = false;
 
     this.neuronsNode.children.forEach((neuronNode) => {
-      // Предотвращение добавления соединения схваченного узла с самим собой.
+      // Предотвращение добавления соединения для схваченного узла с самим собой.
       if (capturedNeuronNode.uuid !== neuronNode.uuid) {
         this.connectionsNodesPoolSizeCheck();
         this.addConnectionNodeToScene({ capturedNeuronNode, neuronNode });
@@ -86,7 +84,7 @@ cc.Class({
     const subtractedPosition = capturedNeuronNode.position.sub(neuronNode.position);
 
     const { x, y } = subtractedPosition;
-    const degB = Math.atan(x / y) * radianToDegrees;
+    const degB = Math.atan(x / y) * cc.macro.DEG;
     const normalAngle = 90 - degB;
 
     connectionNode.position = neuronNode.position;

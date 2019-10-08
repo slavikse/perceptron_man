@@ -2,25 +2,10 @@
 /temp/
 /local/
 /build/
-
-npm-debug.log
 node_modules/
-
-*.log
-*.sql
-*.sqlite
-
-*.sln
-*.csproj
-*.pidb
-*.unityproj
-*.suo
-
-.DS_Store
-ehthumbs.db
-Thumbs.db
 
 .idea/
 .vscode/
 
+*.log
 creator.d.ts

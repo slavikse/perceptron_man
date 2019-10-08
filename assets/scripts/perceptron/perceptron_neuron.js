@@ -27,7 +27,7 @@ cc.Class({
     this.connectionsComponent.externalCreateConnectionsNodes(this.node);
   },
 
-  // todo связи можно будет создать при выполнении условий.
+  // TODO связи можно будет создать при выполнении условий.
   //  ограничения: можно располагать нейрон только в ряд в новом слое, либо в существующем.
   onMoveCaptured(e) {
     this.setPositionLimitedByLevelSize(e);
@@ -55,17 +55,20 @@ cc.Class({
   },
 
   onEndCapture() {
-    // todo только после закрепления в сети вызывать: NeuronNodeDocked и MountingShadowConnections.
-    // todo эффект пристыковки: частицы.
+    // TODO только после закрепления в сети вызывать: NeuronNodeDocked и MountingShadowConnections.
+    // TODO эффект пристыковки: частицы.
     this.neuronCreatorComponent.externalNeuronNodeDocked();
     this.connectionsComponent.externalMountingConnectionsNodes();
 
-    // todo удалять, если нейрон не был закреплен в сети.
+    // TODO удалять, если нейрон не был закреплен в сети.
     // this.neuronDestroyed();
   },
 
-  // todo эффект разрушения нейрона: частицы.
+  // TODO эффект разрушения нейрона: частицы.
   neuronNodeDestroy() {
     this.neuronCreatorComponent.externalNeuronNodeDestroy(this.node);
   },
 });
+
+// TODO не нужны отдельные кадры для поворота нейрона, просто крутить один нейрон.
+// TODO не крутить на пульсировать: scale?
