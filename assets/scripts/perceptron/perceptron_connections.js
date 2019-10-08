@@ -9,7 +9,7 @@ cc.Class({
     this.neuronsNode = cc.find('level/perceptron/neurons');
 
     this.isCreatedConnectionsNodes = false;
-    this.connectionsNodes = [];
+    this.connectionsNodes = new Set();
     this.connectionsNodesPool = new cc.NodePool();
 
     this.createConnectionsNodes();
@@ -22,7 +22,7 @@ cc.Class({
   },
 
   onDestroy() {
-    this.connectionsNodes = [];
+    this.connectionsNodes.clear();
     this.connectionsNodesPool.clear();
   },
 
@@ -35,6 +35,8 @@ cc.Class({
     }
   },
 
+  // TODO связи можно будет создать при выполнении условий.
+  //  ограничения: можно располагать нейрон только в ряд в новом слое, либо в существующем.
   externalCreateConnectionsNodes(capturedNeuronNode) {
     this.isCreatedConnectionsNodes = false;
 
@@ -66,19 +68,28 @@ cc.Class({
     this.changeConnectionNodeParameters(connectionNode);
 
     this.node.addChild(connectionNode);
-    this.connectionsNodes.push(connectionNode);
+    this.connectionsNodes.add(connectionNode);
   },
 
   preventReAddingConnectionNode({ capturedNeuronNode, neuronNode }) {
-    return this.connectionsNodes.find(({ neuronsNodes }) => (
-      capturedNeuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid
-      && neuronNode.uuid === neuronsNodes.neuronNode.uuid
-    ) || (
-      capturedNeuronNode.uuid === neuronsNodes.neuronNode.uuid
-      && neuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid
-    ));
+    let isPrevented = false;
+
+    this.connectionsNodes.forEach(({ neuronsNodes }) => {
+      if ((
+        capturedNeuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid
+          && neuronNode.uuid === neuronsNodes.neuronNode.uuid
+      ) || (
+        capturedNeuronNode.uuid === neuronsNodes.neuronNode.uuid
+          && neuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid
+      )) {
+        isPrevented = true;
+      }
+    });
+
+    return isPrevented;
   },
 
+  // TODO связь рвется, если длинее, чем...
   changeConnectionNodeParameters(connectionNode) {
     const { capturedNeuronNode, neuronNode } = connectionNode.neuronsNodes;
     const subtractedPosition = capturedNeuronNode.position.sub(neuronNode.position);
@@ -100,5 +111,21 @@ cc.Class({
   externalMountingConnectionsNodes() {
     this.isCreatedConnectionsNodes = false;
     this.connectionsNodes.forEach(this.changeConnectionNodeParameters);
+  },
+
+  externalDestroingConnectionsNodes(neuronNode) {
+    this.connectionsNodes.forEach((connectionNode) => {
+      if (neuronNode.uuid === connectionNode.neuronsNodes.capturedNeuronNode.uuid
+        || neuronNode.uuid === connectionNode.neuronsNodes.neuronNode.uuid) {
+        this.connectionNodeDestroy(connectionNode);
+      }
+    });
+  },
+
+  connectionNodeDestroy(connectionNode) {
+    connectionNode.neuronsNodes = {};
+
+    this.connectionsNodes.delete(connectionNode);
+    this.connectionsNodesPool.put(connectionNode);
   },
 });
