@@ -5,8 +5,13 @@ module.exports = {
     node: true,
   },
   extends: [
-    'airbnb-base',
+    "prettier",
+    "airbnb-base",
   ],
+  plugins: ["prettier"],
+  rules: {
+    "prettier/prettier": ["error"],
+  },
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',

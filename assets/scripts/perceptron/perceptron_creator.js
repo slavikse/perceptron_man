@@ -51,21 +51,23 @@ cc.Class({
 
   addNeuronNodeToScene() {
     const neuronNode = this.neuronsNodesPool.get();
+    neuronNode.position = this.node.position;
+
     this.neuronsNode.addChild(neuronNode);
   },
 
   // TODO анимация готовности создателя нейронов принять нейрон для уничтожения.
   //  две стадии создателя: когда пересекается с нейроном - подготовливается,
   //  когда нейрон полностью в создателе - готов к уничтожению.
-  preparationNeuronNodeDestroying(other, self) {
+  preparationNeuronNodeDestroying(neuron, creator) {
     if (this.isReadyCreateNeuronNode) {
-      const [{ x, y }] = self.world.points; // top left
-      const { width, height } = self.node;
-      const centerPoint = cc.v2(x + width / 2, y - height / 2); // neuron creator
-      const isIntersection = cc.Intersection.pointInPolygon(centerPoint, other.world.points);
+      const [{ x, y }] = creator.world.points; // top left
+      const { width, height } = creator.node;
+      const creatorCenterPoint = cc.v2(x + width / 2, y - height / 2);
+      const isInside = cc.Intersection.pointInPolygon(creatorCenterPoint, neuron.world.points);
 
-      if (isIntersection) {
-        this.neuronNodeDestroy(other.node);
+      if (isInside) {
+        this.neuronNodeDestroy(neuron.node);
       }
     } else {
       // TODO если брошен на этой стадии, то?
