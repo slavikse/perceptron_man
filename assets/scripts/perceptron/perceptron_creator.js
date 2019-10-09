@@ -51,8 +51,6 @@ cc.Class({
 
   addNeuronNodeToScene() {
     const neuronNode = this.neuronsNodesPool.get();
-    neuronNode.setPosition(this.node.position);
-
     this.neuronsNode.addChild(neuronNode);
   },
 

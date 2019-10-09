@@ -31,11 +31,11 @@ cc.Class({
       default: [],
       tooltip: `Активация режима - 1, Деактивация режима - 0.
 
-        0: aabbBit
-        1: pairBit
-        2: centerOfMassBit
-        3: jointBit
-        4: shapeBit`,
+        [0]: aabbBit
+        [1]: pairBit
+        [2]: centerOfMassBit
+        [3]: jointBit
+        [4]: shapeBit`,
     },
   },
 

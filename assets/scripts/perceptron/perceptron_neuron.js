@@ -2,15 +2,19 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
-    this.levelNode = cc.find('level');
+    const levelNode = cc.find('level');
+    this.levelNodeSize = { width: levelNode.width, height: levelNode.height };
 
-    this.neuronCreatorComponent = cc.find('level/perceptron/neuron_creator')
-      .getComponent('perceptron_neuron_creator');
+    const perceptronNode = cc.find('perceptron', levelNode);
 
-    this.connectionsComponent = cc.find('level/perceptron/connections')
+    this.neuronCreatorComponent = cc.find('creator', perceptronNode)
+      .getComponent('perceptron_creator');
+
+    this.connectionsComponent = cc.find('connections', perceptronNode)
       .getComponent('perceptron_connections');
 
-    this.animationComponent = this.node.getComponent(cc.Animation);
+    this.textureAnimationComponent = cc.find('texture', this.node)
+      .getComponent(cc.Animation);
 
     this.node.on('touchstart', this.onStartCapture, this);
     this.node.on('touchmove', this.onMoveCaptured, this);
@@ -45,8 +49,8 @@ cc.Class({
   setPositionLimitedByLevelSize(e) {
     const { x, y } = this.node.position.add(e.getDelta());
 
-    const halfLevelWidth = this.levelNode.width / 2;
-    const halfLevelHeight = this.levelNode.height / 2;
+    const halfLevelWidth = this.levelNodeSize.width / 2;
+    const halfLevelHeight = this.levelNodeSize.height / 2;
 
     const halfNodeWidth = this.node.width / 2;
     const halfNodeHeight = this.node.height / 2;
@@ -65,8 +69,8 @@ cc.Class({
 
   onEndCapture() {
     // TODO включать только после закрепления в сети.
-    if (!this.animationComponent.getAnimationState('idle').isPlaying) {
-      this.animationComponent.play('idle');
+    if (!this.textureAnimationComponent.getAnimationState('idle').isPlaying) {
+      this.textureAnimationComponent.play('idle');
     }
 
     // TODO только после закрепления в сети вызывать: NeuronNodeDocked и MountingShadowConnections.

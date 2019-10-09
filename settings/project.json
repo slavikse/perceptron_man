@@ -85,7 +85,7 @@
     "default",
     "border",
     "neuron",
-    "neuron_creator"
+    "creator"
   ],
   "last-module-event-record-time": 1570347017097,
   "simulator-orientation": false,

@@ -9,6 +9,7 @@ cc.Class({
     this.neuronsNode = cc.find('level/perceptron/neurons');
 
     this.isCreatedConnectionsNodes = false;
+
     this.connectionsNodes = new Set();
     this.connectionsNodesPool = new cc.NodePool();
 
@@ -96,15 +97,14 @@ cc.Class({
 
     const { x, y } = subtractedPosition;
     const degB = Math.atan(x / y) * cc.macro.DEG;
-    const normalAngle = 90 - degB;
 
     connectionNode.position = neuronNode.position;
     connectionNode.width = subtractedPosition.mag();
 
     if (y >= 0) {
-      connectionNode.angle = normalAngle;
+      connectionNode.angle = 90 - degB;
     } else {
-      connectionNode.angle = 180 + normalAngle;
+      connectionNode.angle = 270 - degB;
     }
   },
 
