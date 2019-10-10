@@ -1,12 +1,9 @@
 cc.Class({
   extends: cc.Component,
 
-  properties: {
-    connectionPrefab: cc.Prefab,
-  },
-
   onLoad() {
     this.neuronsNode = cc.find('level/perceptron/neurons');
+    this.connectionComponent = this.node.getComponent('perceptron_connection');
 
     this.isCreatedConnectionsNodes = false;
 
@@ -18,7 +15,7 @@ cc.Class({
 
   update() {
     if (this.isCreatedConnectionsNodes) {
-      this.connectionsNodes.forEach(this.changeConnectionNodeParameters);
+      this.connectionsNodes.forEach(this.connectionComponent.externalChangeConnectionNodeParameters);
     }
   },
 
@@ -29,7 +26,7 @@ cc.Class({
 
   createConnectionsNodes(quantity = 2 ** 7) {
     for (let i = 0; i < quantity; i++) {
-      const connectionNode = cc.instantiate(this.connectionPrefab);
+      const connectionNode = cc.instantiate(this.connectionComponent.externalConnectionPrefab);
       connectionNode.neuronsNodes = {};
 
       this.connectionsNodesPool.put(connectionNode);
@@ -59,57 +56,22 @@ cc.Class({
   // TODO связи можно будет создать при выполнении условий.
   //  ограничения: можно располагать нейрон только в ряд в новом слое, либо в существующем.
   addConnectionNodeToScene(neuronsNodes) {
-    if (this.preventReAddingConnectionNode(neuronsNodes)) {
+    if (this.connectionComponent.externalPreventReAddingConnectionNode(this.connectionsNodes, neuronsNodes)) {
       return;
     }
 
     const connectionNode = this.connectionsNodesPool.get();
     connectionNode.neuronsNodes = neuronsNodes;
 
-    this.changeConnectionNodeParameters(connectionNode);
+    this.connectionComponent.externalChangeConnectionNodeParameters(connectionNode);
 
     this.node.addChild(connectionNode);
     this.connectionsNodes.add(connectionNode);
   },
 
-  preventReAddingConnectionNode({ capturedNeuronNode, neuronNode }) {
-    let isPrevented = false;
-
-    this.connectionsNodes.forEach(({ neuronsNodes }) => {
-      if (
-        (capturedNeuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid
-          && neuronNode.uuid === neuronsNodes.neuronNode.uuid)
-        || (capturedNeuronNode.uuid === neuronsNodes.neuronNode.uuid
-          && neuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid)
-      ) {
-        isPrevented = true;
-      }
-    });
-
-    return isPrevented;
-  },
-
-  // TODO связь рвется, если длинее, чем ограничения правилами строения - послойное.
-  changeConnectionNodeParameters(connectionNode) {
-    const { capturedNeuronNode, neuronNode } = connectionNode.neuronsNodes;
-    const subtractedPosition = capturedNeuronNode.position.sub(neuronNode.position);
-
-    const { x, y } = subtractedPosition;
-    const degB = Math.atan(x / y) * cc.macro.DEG;
-
-    connectionNode.position = neuronNode.position;
-    connectionNode.width = subtractedPosition.mag();
-
-    if (y >= 0) {
-      connectionNode.angle = 90 - degB;
-    } else {
-      connectionNode.angle = 270 - degB;
-    }
-  },
-
   externalMountingConnectionsNodes() {
     this.isCreatedConnectionsNodes = false;
-    this.connectionsNodes.forEach(this.changeConnectionNodeParameters);
+    this.connectionsNodes.forEach(this.connectionComponent.externalChangeConnectionNodeParameters);
   },
 
   externalDestroingConnectionsNodes(neuronNode) {

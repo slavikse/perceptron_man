@@ -169,17 +169,17 @@
     "_custom": true,
     "_file": null,
     "_spriteFrame": {
-      "__uuid__": "4f69eb6b-e22d-4833-a391-cf0b60baa8ca"
+      "__uuid__": "7fd36237-4ec2-42d6-8f07-fa14a085db2c"
     },
     "_texture": {
-      "__uuid__": "1b341ffa-ee1e-4268-9384-7f874df0e109"
+      "__uuid__": "ebf2dd59-ca5b-4ef5-a569-294be6679dc3"
     },
-    "_stopped": true,
+    "_stopped": false,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
     "totalParticles": 10,
     "duration": -1,
-    "emissionRate": 4,
+    "emissionRate": 5,
     "life": 1,
     "lifeVar": 0,
     "_startColor": {
@@ -212,8 +212,8 @@
     },
     "angle": 0,
     "angleVar": 0,
-    "startSize": 0,
-    "startSizeVar": 0,
+    "startSize": 20,
+    "startSizeVar": 20,
     "endSize": 80,
     "endSizeVar": 80,
     "startSpin": 0,
@@ -251,7 +251,7 @@
     "endRadiusVar": 0,
     "rotatePerS": 0,
     "rotatePerSVar": 0,
-    "_N$preview": false,
+    "_N$preview": true,
     "_id": ""
   },
   {

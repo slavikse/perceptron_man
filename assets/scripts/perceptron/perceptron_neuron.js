@@ -6,7 +6,7 @@ cc.Class({
     this.levelNodeSize = { width: levelNode.width, height: levelNode.height };
 
     const perceptronNode = cc.find('perceptron', levelNode);
-    this.neuronCreatorComponent = cc.find('creator', perceptronNode).getComponent('perceptron_creator');
+    this.creatorComponent = cc.find('creator', perceptronNode).getComponent('perceptron_creator');
     this.connectionsComponent = cc.find('connections', perceptronNode).getComponent('perceptron_connections');
 
     this.radiationNode = cc.find('radiation', this.node);
@@ -34,15 +34,14 @@ cc.Class({
   },
 
   onStartCapture() {
-    this.neuronCreatorComponent.externalSetReadyCreateNeuronNode({ isReady: false });
+    this.creatorComponent.externalSetReadyCreateNeuronNode({ isReady: false });
     this.connectionsComponent.externalCreateConnectionsNodes(this.node);
   },
 
+  // TODO если нет соединений.
+  // this.textureAnimationComponent.stop('neuron');
   onMoveCaptured(e) {
     this.setPositionLimitedByLevelSize(e);
-
-    // TODO если нет соединений.
-    // this.textureAnimationComponent.stop('neuron');
   },
 
   setPositionLimitedByLevelSize(e) {
@@ -78,12 +77,12 @@ cc.Class({
 
     // TODO только после закрепления в сети вызывать: NeuronNodeDocked и MountingShadowConnections.
     // TODO эффект пристыковки.
-    this.neuronCreatorComponent.externalSetReadyCreateNeuronNode({ isReady: true });
+    this.creatorComponent.externalSetReadyCreateNeuronNode({ isReady: true });
     this.connectionsComponent.externalMountingConnectionsNodes();
 
     // TODO удалять, если нейрон не был закреплен в сети.
     // TODO эффект разрушения нейрона.
     // TODO наложение радиции на соседей + эффект радиции.
-    // this.neuronCreatorComponent.externalNeuronNodeDestroy(this.node);
+    // this.creatorComponent.externalNeuronNodeDestroy(this.node);
   },
 });
