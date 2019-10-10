@@ -36,8 +36,6 @@ cc.Class({
     }
   },
 
-  // TODO связи можно будет создать при выполнении условий.
-  //  ограничения: можно располагать нейрон только в ряд в новом слое, либо в существующем.
   externalCreateConnectionsNodes(capturedNeuronNode) {
     this.isCreatedConnectionsNodes = false;
 
@@ -58,6 +56,8 @@ cc.Class({
     }
   },
 
+  // TODO связи можно будет создать при выполнении условий.
+  //  ограничения: можно располагать нейрон только в ряд в новом слое, либо в существующем.
   addConnectionNodeToScene(neuronsNodes) {
     if (this.preventReAddingConnectionNode(neuronsNodes)) {
       return;

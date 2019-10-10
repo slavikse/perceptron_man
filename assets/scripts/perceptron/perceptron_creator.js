@@ -64,9 +64,9 @@ cc.Class({
       const [{ x, y }] = creator.world.points; // top left
       const { width, height } = creator.node;
       const creatorCenterPoint = cc.v2(x + width / 2, y - height / 2);
-      const isInside = cc.Intersection.pointInPolygon(creatorCenterPoint, neuron.world.points);
+      const isNeuronInside = cc.Intersection.pointInPolygon(creatorCenterPoint, neuron.world.points);
 
-      if (isInside) {
+      if (isNeuronInside) {
         this.neuronNodeDestroy(neuron.node);
       }
     } else {

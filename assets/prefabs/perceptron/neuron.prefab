@@ -93,13 +93,13 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "particle",
+    "_name": "radiation",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [
       {
@@ -169,17 +169,17 @@
     "_custom": true,
     "_file": null,
     "_spriteFrame": {
-      "__uuid__": "685f8e0a-9b69-4585-9555-c3266ddc6a53"
+      "__uuid__": "4f69eb6b-e22d-4833-a391-cf0b60baa8ca"
     },
     "_texture": {
-      "__uuid__": "dadbe9a3-e452-432d-aefc-99613265e379"
+      "__uuid__": "1b341ffa-ee1e-4268-9384-7f874df0e109"
     },
     "_stopped": true,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
-    "totalParticles": 150,
+    "totalParticles": 10,
     "duration": -1,
-    "emissionRate": 10,
+    "emissionRate": 4,
     "life": 1,
     "lifeVar": 0,
     "_startColor": {
@@ -210,12 +210,12 @@
       "b": 0,
       "a": 0
     },
-    "angle": 90,
-    "angleVar": 20,
-    "startSize": 50,
+    "angle": 0,
+    "angleVar": 0,
+    "startSize": 0,
     "startSizeVar": 0,
-    "endSize": 0,
-    "endSizeVar": 0,
+    "endSize": 80,
+    "endSizeVar": 80,
     "startSpin": 0,
     "startSpinVar": 0,
     "endSpin": 0,
@@ -230,17 +230,17 @@
       "x": 0,
       "y": 0
     },
-    "_positionType": 0,
-    "positionType": 0,
-    "emitterMode": 0,
+    "_positionType": 1,
+    "positionType": 1,
+    "emitterMode": 1,
     "gravity": {
       "__type__": "cc.Vec2",
       "x": 0,
       "y": 0
     },
-    "speed": 180,
-    "speedVar": 50,
-    "tangentialAccel": 80,
+    "speed": 0,
+    "speedVar": 0,
+    "tangentialAccel": 0,
     "tangentialAccelVar": 0,
     "radialAccel": 0,
     "radialAccelVar": 0,
@@ -251,7 +251,7 @@
     "endRadiusVar": 0,
     "rotatePerS": 0,
     "rotatePerSVar": 0,
-    "_N$preview": true,
+    "_N$preview": false,
     "_id": ""
   },
   {
@@ -371,12 +371,8 @@
     "_defaultClip": {
       "__uuid__": "aced8695-c4f9-46f4-8edf-39753923db06"
     },
-    "_clips": [
-      {
-        "__uuid__": "aced8695-c4f9-46f4-8edf-39753923db06"
-      }
-    ],
-    "playOnLoad": true,
+    "_clips": [],
+    "playOnLoad": false,
     "_id": ""
   },
   {

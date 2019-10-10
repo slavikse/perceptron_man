@@ -6,15 +6,10 @@ cc.Class({
     this.levelNodeSize = { width: levelNode.width, height: levelNode.height };
 
     const perceptronNode = cc.find('perceptron', levelNode);
+    this.neuronCreatorComponent = cc.find('creator', perceptronNode).getComponent('perceptron_creator');
+    this.connectionsComponent = cc.find('connections', perceptronNode).getComponent('perceptron_connections');
 
-    this.neuronCreatorComponent = cc
-      .find('creator', perceptronNode)
-      .getComponent('perceptron_creator');
-
-    this.connectionsComponent = cc
-      .find('connections', perceptronNode)
-      .getComponent('perceptron_connections');
-
+    this.radiationNode = cc.find('radiation', this.node);
     this.textureAnimationComponent = cc.find('texture', this.node).getComponent(cc.Animation);
 
     this.node.on('touchstart', this.onStartCapture, this);
@@ -45,6 +40,9 @@ cc.Class({
 
   onMoveCaptured(e) {
     this.setPositionLimitedByLevelSize(e);
+
+    // TODO если нет соединений.
+    // this.textureAnimationComponent.stop('neuron');
   },
 
   setPositionLimitedByLevelSize(e) {
@@ -69,9 +67,13 @@ cc.Class({
   },
 
   onEndCapture() {
-    // TODO включать только после закрепления в сети.
-    if (!this.textureAnimationComponent.getAnimationState('neuron_idle').isPlaying) {
-      this.textureAnimationComponent.play('neuron_idle');
+    // TODO только после закрепления в сети.
+    // TODO не перезапускать при перемещениях, пока не разорвутся все связи.
+    this.radiationNode.active = true;
+
+    // TODO только после закрепления в сети.
+    if (!this.textureAnimationComponent.getAnimationState('neuron').isPlaying) {
+      this.textureAnimationComponent.play('neuron');
     }
 
     // TODO только после закрепления в сети вызывать: NeuronNodeDocked и MountingShadowConnections.
