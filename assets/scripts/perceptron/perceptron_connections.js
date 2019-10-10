@@ -76,13 +76,12 @@ cc.Class({
     let isPrevented = false;
 
     this.connectionsNodes.forEach(({ neuronsNodes }) => {
-      if ((
-        capturedNeuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid
-          && neuronNode.uuid === neuronsNodes.neuronNode.uuid
-      ) || (
-        capturedNeuronNode.uuid === neuronsNodes.neuronNode.uuid
-          && neuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid
-      )) {
+      if (
+        (capturedNeuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid
+          && neuronNode.uuid === neuronsNodes.neuronNode.uuid)
+        || (capturedNeuronNode.uuid === neuronsNodes.neuronNode.uuid
+          && neuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid)
+      ) {
         isPrevented = true;
       }
     });
@@ -90,7 +89,7 @@ cc.Class({
     return isPrevented;
   },
 
-  // TODO связь рвется, если длинее, чем...
+  // TODO связь рвется, если длинее, чем ограничения правилами строения - послойное.
   changeConnectionNodeParameters(connectionNode) {
     const { capturedNeuronNode, neuronNode } = connectionNode.neuronsNodes;
     const subtractedPosition = capturedNeuronNode.position.sub(neuronNode.position);
@@ -115,8 +114,10 @@ cc.Class({
 
   externalDestroingConnectionsNodes(neuronNode) {
     this.connectionsNodes.forEach((connectionNode) => {
-      if (neuronNode.uuid === connectionNode.neuronsNodes.capturedNeuronNode.uuid
-        || neuronNode.uuid === connectionNode.neuronsNodes.neuronNode.uuid) {
+      if (
+        neuronNode.uuid === connectionNode.neuronsNodes.capturedNeuronNode.uuid
+        || neuronNode.uuid === connectionNode.neuronsNodes.neuronNode.uuid
+      ) {
         this.connectionNodeDestroy(connectionNode);
       }
     });

@@ -7,14 +7,15 @@ cc.Class({
 
     const perceptronNode = cc.find('perceptron', levelNode);
 
-    this.neuronCreatorComponent = cc.find('creator', perceptronNode)
+    this.neuronCreatorComponent = cc
+      .find('creator', perceptronNode)
       .getComponent('perceptron_creator');
 
-    this.connectionsComponent = cc.find('connections', perceptronNode)
+    this.connectionsComponent = cc
+      .find('connections', perceptronNode)
       .getComponent('perceptron_connections');
 
-    this.textureAnimationComponent = cc.find('texture', this.node)
-      .getComponent(cc.Animation);
+    this.textureAnimationComponent = cc.find('texture', this.node).getComponent(cc.Animation);
 
     this.node.on('touchstart', this.onStartCapture, this);
     this.node.on('touchmove', this.onMoveCaptured, this);
@@ -23,7 +24,7 @@ cc.Class({
   },
 
   // TODO эффект появления: частицы.
-  onEnable() { },
+  onEnable() {},
 
   // TODO эффект разрушения нейрона.
   onDisable() {
@@ -69,8 +70,8 @@ cc.Class({
 
   onEndCapture() {
     // TODO включать только после закрепления в сети.
-    if (!this.textureAnimationComponent.getAnimationState('idle').isPlaying) {
-      this.textureAnimationComponent.play('idle');
+    if (!this.textureAnimationComponent.getAnimationState('neuron_idle').isPlaying) {
+      this.textureAnimationComponent.play('neuron_idle');
     }
 
     // TODO только после закрепления в сети вызывать: NeuronNodeDocked и MountingShadowConnections.
@@ -78,9 +79,9 @@ cc.Class({
     this.neuronCreatorComponent.externalSetReadyCreateNeuronNode({ isReady: true });
     this.connectionsComponent.externalMountingConnectionsNodes();
 
-  // TODO удалять, если нейрон не был закреплен в сети.
-  // TODO эффект разрушения нейрона.
-  // TODO наложение радиции на соседей + эффект радиции.
-  // this.neuronCreatorComponent.externalNeuronNodeDestroy(this.node);
+    // TODO удалять, если нейрон не был закреплен в сети.
+    // TODO эффект разрушения нейрона.
+    // TODO наложение радиции на соседей + эффект радиции.
+    // this.neuronCreatorComponent.externalNeuronNodeDestroy(this.node);
   },
 });

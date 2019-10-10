@@ -4,13 +4,10 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: [
-    "prettier",
-    "airbnb-base",
-  ],
-  plugins: ["prettier"],
+  extends: ['prettier', 'airbnb-base'],
+  plugins: ['prettier'],
   rules: {
-    "prettier/prettier": ["error"],
+    'prettier/prettier': ['error'],
   },
   globals: {
     Atomics: 'readonly',
@@ -25,9 +22,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        paths: [
-          'assets/scripts/utils',
-        ],
+        paths: ['assets/scripts/utils'],
       },
     },
   },
