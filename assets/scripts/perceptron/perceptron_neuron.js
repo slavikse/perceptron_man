@@ -5,12 +5,13 @@ cc.Class({
     const levelNode = cc.find('level');
     this.levelNodeSize = { width: levelNode.width, height: levelNode.height };
 
-    this.particleNode = cc.find('particle', this.node);
-
+    // TODO утащить в отдельный компонент - уже создан.
     this.spriteAnimationComponentState = cc
       .find('sprite', this.node)
       .getComponent(cc.Animation)
       .getAnimationState('sprite');
+
+    this.isAnimationFirstRunning = true;
 
     this.node.on('touchstart', this.onStartCapture, this);
     this.node.on('touchmove', this.onMoveCaptured, this);
@@ -40,7 +41,7 @@ cc.Class({
 
   setReadyCreateNeuronNode({ isReady }) {
     const event = new cc.Event.EventCustom(
-      'perceptron/neuron/setReadyCreateNeuronNode',
+      'perceptron/neuron/creator/setReadyCreateNeuronNode',
     );
     event.detail = { isReady };
     cc.director.dispatchEvent(event);
@@ -48,7 +49,7 @@ cc.Class({
 
   addConnectionsNodes() {
     const event = new cc.Event.EventCustom(
-      'perceptron/neuron/addConnectionsNodes',
+      'perceptron/connections/addConnectionsNodes',
     );
     event.detail = { capturedNeuronNode: this.node };
     cc.director.dispatchEvent(event);
@@ -57,7 +58,7 @@ cc.Class({
   // TODO если нет соединений.
   // this.spriteAnimationComponentState.stop('neuron');
 
-  // setPositionLimitedByLevelSize
+  // Выполняет роль: setPositionLimitedByLevelSize
   onMoveCaptured(e) {
     const { x, y } = this.node.position.add(e.getDelta());
 
@@ -80,19 +81,20 @@ cc.Class({
   },
 
   onEndCapture() {
-    // TODO только после закрепления в сети.
-    this.particleNode.active = true;
+    if (this.isAnimationFirstRunning) {
+      this.isAnimationFirstRunning = false;
 
-    // TODO только после закрепления в сети.
-    if (!this.spriteAnimationComponentState.isPlaying) {
+      // TODO только после закрепления в сети.
+      this.activateParticleRadiation();
+      // TODO по событию
       this.spriteAnimationComponentState.play('sprite');
+
+      this.mountingConnectionsNodes();
     }
 
-    // TODO только после закрепления в сети вызывать: NeuronNodeDocked и MountingShadowConnections.
+    // TODO только после закрепления в сети.
     // TODO эффект пристыковки.
-
     this.setReadyCreateNeuronNode({ isReady: true });
-    this.mountingConnectionsNodes();
 
     // TODO удалять, если нейрон не был закреплен в сети.
     // TODO эффект разрушения нейрона.
@@ -100,16 +102,25 @@ cc.Class({
     // this.neuronCreatorComponent.externalNeuronNodeDestroy(this.node);
   },
 
-  mountingConnectionsNodes() {
-    const event = new cc.Event.EventCustom(
-      'perceptron/neuron/mountingConnectionsNodes',
+  activateParticleRadiation() {
+    cc.director.dispatchEvent(
+      new cc.Event.EventCustom(
+        'perceptron/neuron/radiation/activateParticleRadiation',
+      ),
     );
-    cc.director.dispatchEvent(event);
+  },
+
+  mountingConnectionsNodes() {
+    cc.director.dispatchEvent(
+      new cc.Event.EventCustom(
+        'perceptron/connections/mountingConnectionsNodes',
+      ),
+    );
   },
 
   destroingConnectionsNodes() {
     const event = new cc.Event.EventCustom(
-      'perceptron/neuron/destroingConnectionsNodes',
+      'perceptron/connections/destroingConnectionsNodes',
     );
     event.detail = { nodeDestroyed: this.node };
     cc.director.dispatchEvent(event);

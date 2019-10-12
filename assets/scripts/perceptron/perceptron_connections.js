@@ -21,19 +21,19 @@ cc.Class({
     this.createConnectionsNodes();
 
     cc.director.on(
-      'perceptron/neuron/addConnectionsNodes',
+      'perceptron/connections/addConnectionsNodes',
       this.addConnectionsNodes,
       this,
     );
 
     cc.director.on(
-      'perceptron/neuron/mountingConnectionsNodes',
+      'perceptron/connections/mountingConnectionsNodes',
       this.mountingConnectionsNodes,
       this,
     );
 
     cc.director.on(
-      'perceptron/neuron/destroingConnectionsNodes',
+      'perceptron/connections/destroingConnectionsNodes',
       this.destroingConnectionsNodes,
       this,
     );
@@ -48,19 +48,19 @@ cc.Class({
 
   onDestroy() {
     cc.director.off(
-      'perceptron/neuron/addConnectionsNodes',
+      'perceptron/connections/addConnectionsNodes',
       this.addConnectionsNodes,
       this,
     );
 
     cc.director.off(
-      'perceptron/neuron/mountingConnectionsNodes',
+      'perceptron/connections/mountingConnectionsNodes',
       this.mountingConnectionsNodes,
       this,
     );
 
     cc.director.off(
-      'perceptron/neuron/destroingConnectionsNodes',
+      'perceptron/connections/destroingConnectionsNodes',
       this.destroingConnectionsNodes,
       this,
     );
@@ -114,6 +114,7 @@ cc.Class({
     this.connectionsNodes.add(connectionNode);
   },
 
+  // TODO активация анимации после закрепления в сети.
   mountingConnectionsNodes() {
     this.isCreatedConnectionsNodes = false;
     this.connectionsNodes.forEach(changeConnectionNodeParameters);

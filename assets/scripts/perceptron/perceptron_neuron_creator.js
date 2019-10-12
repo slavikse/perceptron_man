@@ -14,7 +14,7 @@ cc.Class({
     this.isReadyCreateNeuronNode = true;
 
     cc.director.on(
-      'perceptron/neuron/setReadyCreateNeuronNode',
+      'perceptron/neuron/creator/setReadyCreateNeuronNode',
       this.setReadyCreateNeuronNode,
       this,
     );
@@ -24,7 +24,7 @@ cc.Class({
 
   onDestroy() {
     cc.director.off(
-      'perceptron/neuron/setReadyCreateNeuronNode',
+      'perceptron/neuron/creator/setReadyCreateNeuronNode',
       this.setReadyCreateNeuronNode,
       this,
     );
@@ -101,7 +101,7 @@ cc.Class({
   },
 
   // TODO ослабление связности через собятие.
-  externalNeuronNodeDestroy(neuronNode) {
-    this.neuronNodeDestroy(neuronNode);
-  },
+  // externalNeuronNodeDestroy(neuronNode) {
+  //   this.neuronNodeDestroy(neuronNode);
+  // },
 });

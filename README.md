@@ -18,7 +18,12 @@
 - Имя файла = Имя функции на экспорт: `hasPermissibleInfelicity`
 - Результат имени файла: `perceptron_utils_hasPermissibleInfelicity.js`
 
+### События
+
 **Пример создания события:**
+
+- Имя файла компонента, куда будет доставляться событие. ex: `perceptron_neuron_radiation`
+- Имя для обработки события этим компонентом. ex: `perceptron/neuron/radiation`
 
 ```js
 const event = new cc.Event.EventCustom('hierarchy/directory/functionName');
