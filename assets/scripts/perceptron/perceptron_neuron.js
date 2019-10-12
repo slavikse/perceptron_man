@@ -5,12 +5,6 @@ cc.Class({
     const levelNode = cc.find('level');
     this.levelNodeSize = { width: levelNode.width, height: levelNode.height };
 
-    // TODO утащить в отдельный компонент - уже создан.
-    this.spriteAnimationComponentState = cc
-      .find('sprite', this.node)
-      .getComponent(cc.Animation)
-      .getAnimationState('sprite');
-
     this.isAnimationFirstRunning = true;
 
     this.node.on('touchstart', this.onStartCapture, this);
@@ -55,9 +49,6 @@ cc.Class({
     cc.director.dispatchEvent(event);
   },
 
-  // TODO если нет соединений.
-  // this.spriteAnimationComponentState.stop('neuron');
-
   // Выполняет роль: setPositionLimitedByLevelSize
   onMoveCaptured(e) {
     const { x, y } = this.node.position.add(e.getDelta());
@@ -85,10 +76,8 @@ cc.Class({
       this.isAnimationFirstRunning = false;
 
       // TODO только после закрепления в сети.
+      this.playSpriteAnimation();
       this.activateParticleRadiation();
-      // TODO по событию
-      this.spriteAnimationComponentState.play('sprite');
-
       this.mountingConnectionsNodes();
     }
 
@@ -100,6 +89,12 @@ cc.Class({
     // TODO эффект разрушения нейрона.
     // TODO наложение радиции на соседей + эффект радиции.
     // this.neuronCreatorComponent.externalNeuronNodeDestroy(this.node);
+  },
+
+  playSpriteAnimation() {
+    cc.director.dispatchEvent(
+      new cc.Event.EventCustom('perceptron/neuron/sprite/playSpriteAnimation'),
+    );
   },
 
   activateParticleRadiation() {

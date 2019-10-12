@@ -7,21 +7,21 @@ cc.Class({
       .getAnimationState('connection');
 
     cc.director.on(
-      'perceptron/connection/playAnimation',
-      this.playAnimation,
+      'perceptron/connection/playConnectionAnimation',
+      this.playConnectionAnimation,
       this,
     );
   },
 
   onDestroy() {
     cc.director.off(
-      'perceptron/connection/playAnimation',
-      this.playAnimation,
+      'perceptron/connection/playConnectionAnimation',
+      this.playConnectionAnimation,
       this,
     );
   },
 
-  playAnimation() {
+  playConnectionAnimation() {
     if (!this.connectionAnimationComponentState.isPlaying) {
       this.connectionAnimationComponentState.play('connection');
     }

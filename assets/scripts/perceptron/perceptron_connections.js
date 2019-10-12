@@ -120,7 +120,7 @@ cc.Class({
     this.connectionsNodes.forEach(changeConnectionNodeParameters);
 
     cc.director.dispatchEvent(
-      new cc.Event.EventCustom('perceptron/connection/playAnimation'),
+      new cc.Event.EventCustom('perceptron/connection/playConnectionAnimation'),
     );
   },
 
