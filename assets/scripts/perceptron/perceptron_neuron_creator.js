@@ -13,11 +13,24 @@ cc.Class({
 
     this.isReadyCreateNeuronNode = true;
 
+    cc.director.on(
+      'perceptron/neuron/setReadyCreateNeuronNode',
+      this.setReadyCreateNeuronNode,
+      this,
+    );
+
     this.node.on('touchstart', this.onAddNeuronNodeToScene, this);
   },
 
   onDestroy() {
-    this.node.off('touchstart', this.onAddNeuronToScene, this);
+    cc.director.off(
+      'perceptron/neuron/setReadyCreateNeuronNode',
+      this.setReadyCreateNeuronNode,
+      this,
+    );
+
+    this.node.off('touchstart', this.onAddNeuronNodeToScene, this);
+
     this.neuronsNodesPool.clear();
   },
 
@@ -34,6 +47,11 @@ cc.Class({
     }
   },
 
+  setReadyCreateNeuronNode({ detail: { isReady } }) {
+    this.isReadyCreateNeuronNode = isReady;
+  },
+
+  // TODO анимация при создании.
   onAddNeuronNodeToScene() {
     if (this.isReadyCreateNeuronNode) {
       this.isReadyCreateNeuronNode = false;
@@ -64,7 +82,10 @@ cc.Class({
       const [{ x, y }] = creator.world.points; // top left
       const { width, height } = creator.node;
       const creatorCenterPoint = cc.v2(x + width / 2, y - height / 2);
-      const isNeuronInside = cc.Intersection.pointInPolygon(creatorCenterPoint, neuron.world.points);
+      const isNeuronInside = cc.Intersection.pointInPolygon(
+        creatorCenterPoint,
+        neuron.world.points,
+      );
 
       if (isNeuronInside) {
         this.neuronNodeDestroy(neuron.node);
@@ -79,10 +100,7 @@ cc.Class({
     this.isReadyCreateNeuronNode = true;
   },
 
-  externalSetReadyCreateNeuronNode({ isReady }) {
-    this.isReadyCreateNeuronNode = isReady;
-  },
-
+  // TODO ослабление связности через собятие.
   externalNeuronNodeDestroy(neuronNode) {
     this.neuronNodeDestroy(neuronNode);
   },

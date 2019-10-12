@@ -1,42 +1,31 @@
 cc.Class({
   extends: cc.Component,
 
-  properties: {
-    externalConnectionPrefab: cc.Prefab,
+  onLoad() {
+    this.connectionAnimationComponentState = this.node
+      .getComponent(cc.Animation)
+      .getAnimationState('connection');
+
+    cc.director.on(
+      'perceptron/connection/playAnimation',
+      this.playAnimation,
+      this,
+    );
   },
 
-  externalPreventReAddingConnectionNode(connectionsNodes, { capturedNeuronNode, neuronNode }) {
-    let isPrevented = false;
-
-    connectionsNodes.forEach(({ neuronsNodes }) => {
-      if (
-        (capturedNeuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid
-          && neuronNode.uuid === neuronsNodes.neuronNode.uuid)
-        || (capturedNeuronNode.uuid === neuronsNodes.neuronNode.uuid
-          && neuronNode.uuid === neuronsNodes.capturedNeuronNode.uuid)
-      ) {
-        isPrevented = true;
-      }
-    });
-
-    return isPrevented;
+  onDestroy() {
+    cc.director.off(
+      'perceptron/connection/playAnimation',
+      this.playAnimation,
+      this,
+    );
   },
 
-  // TODO связь рвется, если длинее, чем ограничения правилами строения - послойное.
-  externalChangeConnectionNodeParameters(connectionNode) {
-    const { capturedNeuronNode, neuronNode } = connectionNode.neuronsNodes;
-    const subtractedPosition = capturedNeuronNode.position.sub(neuronNode.position);
-
-    const { x, y } = subtractedPosition;
-    const degB = Math.atan(x / y) * cc.macro.DEG;
-
-    connectionNode.position = neuronNode.position;
-    connectionNode.width = subtractedPosition.mag();
-
-    if (y >= 0) {
-      connectionNode.angle = 90 - degB;
-    } else {
-      connectionNode.angle = 270 - degB;
+  // TODO активация анимации, когда нейрон отпущен.
+  // TODO активация анимации после закрепления в сети.
+  playAnimation() {
+    if (!this.connectionAnimationComponentState.isPlaying) {
+      this.connectionAnimationComponentState.play('connection');
     }
   },
 });

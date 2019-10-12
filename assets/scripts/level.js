@@ -10,12 +10,6 @@ cc.Class({
   },
 
   onGameOver() {
-    console.log('onGameOver');
     // cc.director.loadScene('start');
   },
 });
-
-// TODO остабить связность в проекте через систему событий
-// cc.director.dispatchEvent(new Event('star/picked'));
-// cc.director.on('star/picked', this.onReSpawnStar, this);
-// cc.audioEngine.playEffect(this.gainAudio, false);

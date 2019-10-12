@@ -1,6 +1,6 @@
 {
   "name": "perceptron_man",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Игровой проект на движке Cocos Creator",
   "dependencies": {},
   "devDependencies": {
@@ -13,7 +13,7 @@
     "prettier": "^1.18.2"
   },
   "scripts": {
-    "fix": "eslint --fix ./assets/**"
+    "fix": "eslint --fix ./assets/**/*.js"
   },
   "author": "slavikse <gslavikse@gmail.com>",
   "license": "MIT"

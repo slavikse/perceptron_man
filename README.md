@@ -14,9 +14,24 @@
 
 **Пример для функций:**
 
-- Директория файла с функцией: `utils`
+- Директория файла с функцией: `perceptron/utils`
 - Имя файла = Имя функции на экспорт: `hasPermissibleInfelicity`
-- Результат имени файла: `utils_hasPermissibleInfelicity.js`
+- Результат имени файла: `perceptron_utils_hasPermissibleInfelicity.js`
+
+**Пример создания события:**
+
+```js
+const event = new cc.Event.EventCustom('hierarchy/directory/functionName');
+event.detail = { data: {} };
+cc.director.dispatchEvent(event);
+```
+
+**Пример подписки на событие:**
+
+```js
+cc.director.on('hierarchy/directory/functionName', this.functionName, this);
+this.functionName({ detail: { data } }) { };
+```
 
 ### Свойства компонента
 
@@ -38,11 +53,12 @@
 
 - Событие: `on${actionName}`
 - Внешние: `external${actionName}`
-- Редактор: `editor${actionName}`
-- Анимация: `animation${actionName}`
+- Редактор: `onEditor${actionName}`
+- Анимация: `onAnimation${actionName}`
 
 ## Общие соглашения
 
+- В компоненте по порядку реализуются методы из Cocos, а затем все остальные.
 - `Prefab` только для клонирования объекта из кода.
 - Размеры графики в степенях двойки. _ex: 2^4._
 
