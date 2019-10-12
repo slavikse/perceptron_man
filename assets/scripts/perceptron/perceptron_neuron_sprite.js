@@ -2,9 +2,8 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
-    this.spriteAnimationComponentState = this.node
-      .getComponent(cc.Animation)
-      .getAnimationState('sprite');
+    this.animationComponent = this.node.getComponent(cc.Animation);
+    this.animationState = this.animationComponent.getAnimationState('sprite');
 
     cc.director.on(
       'perceptron/neuron/sprite/playSpriteAnimation',
@@ -21,11 +20,14 @@ cc.Class({
     );
   },
 
-  // TODO если нет соединений, то вызвать:
-  // this.spriteAnimationComponentState.stop('neuron');
+  onDisable() {
+    this.animationComponent.stop('sprite');
+    this.animationComponent.setCurrentTime(0, 'sprite');
+  },
+
   playSpriteAnimation() {
-    if (!this.spriteAnimationComponentState.isPlaying) {
-      this.spriteAnimationComponentState.play('sprite');
+    if (!this.animationState.isPlaying) {
+      this.animationState.play('sprite');
     }
   },
 });

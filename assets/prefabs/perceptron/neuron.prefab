@@ -359,7 +359,7 @@
     "_texture": {
       "__uuid__": "ebf2dd59-ca5b-4ef5-a569-294be6679dc3"
     },
-    "_stopped": true,
+    "_stopped": false,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
     "totalParticles": 2,

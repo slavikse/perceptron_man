@@ -23,9 +23,18 @@ cc.Class({
     );
   },
 
+  onDisable() {
+    this.resetParticleSystemComponent();
+  },
+
   activateParticleRadiation() {
     if (!this.particleSystemComponent.file) {
       this.particleSystemComponent.file = this.padiationParticleAsset;
     }
+  },
+
+  resetParticleSystemComponent() {
+    this.node.removeComponent(cc.ParticleSystem);
+    this.particleSystemComponent = this.node.addComponent(cc.ParticleSystem);
   },
 });

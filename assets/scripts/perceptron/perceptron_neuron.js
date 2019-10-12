@@ -5,8 +5,6 @@ cc.Class({
     const levelNode = cc.find('level');
     this.levelNodeSize = { width: levelNode.width, height: levelNode.height };
 
-    this.isAnimationFirstRunning = true;
-
     this.node.on('touchstart', this.onStartCapture, this);
     this.node.on('touchmove', this.onMoveCaptured, this);
     this.node.on('touchend', this.onEndCapture, this);
@@ -14,11 +12,8 @@ cc.Class({
   },
 
   // TODO эффект появления: частицы.
-  onEnable() {},
-
-  // TODO эффект разрушения нейрона.
-  onDisable() {
-    this.destroingConnectionsNodes();
+  onEnable() {
+    this.isAnimationFirstRunning = true;
   },
 
   onDestroy() {
@@ -26,6 +21,11 @@ cc.Class({
     this.node.off('touchmove', this.onMoveCaptured, this);
     this.node.off('touchend', this.onEndCapture, this);
     this.node.off('touchcancel', this.onEndCapture, this);
+  },
+
+  // TODO эффект разрушения нейрона.
+  onDisable() {
+    this.destroingConnectionsNodes();
   },
 
   onStartCapture() {
@@ -113,6 +113,8 @@ cc.Class({
     );
   },
 
+  // TODO когда удалены все нейроны, проверить, что все соединения сброшены
+  //  так как первый нейрон будет питать из реактора, то вероятно всё нормально.
   destroingConnectionsNodes() {
     const event = new cc.Event.EventCustom(
       'perceptron/connections/destroingConnectionsNodes',

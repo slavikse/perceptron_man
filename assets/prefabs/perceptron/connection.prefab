@@ -134,6 +134,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "connectionSpriteBaseFrame": {
+      "__uuid__": "7cabe03d-c6ba-418a-ba8b-2d5c83fa92a4"
+    },
     "_id": ""
   },
   {
