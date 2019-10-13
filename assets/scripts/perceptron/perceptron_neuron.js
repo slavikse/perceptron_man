@@ -16,16 +16,16 @@ cc.Class({
     this.isAnimationFirstRunning = true;
   },
 
+  // TODO эффект разрушения нейрона.
+  onDisable() {
+    this.destroingConnectionsNodes();
+  },
+
   onDestroy() {
     this.node.off('touchstart', this.onStartCapture, this);
     this.node.off('touchmove', this.onMoveCaptured, this);
     this.node.off('touchend', this.onEndCapture, this);
     this.node.off('touchcancel', this.onEndCapture, this);
-  },
-
-  // TODO эффект разрушения нейрона.
-  onDisable() {
-    this.destroingConnectionsNodes();
   },
 
   onStartCapture() {

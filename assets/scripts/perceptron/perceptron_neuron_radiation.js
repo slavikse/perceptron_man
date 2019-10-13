@@ -15,16 +15,16 @@ cc.Class({
     );
   },
 
+  onDisable() {
+    this.resetParticleSystemComponent();
+  },
+
   onDestroy() {
     cc.director.off(
       'perceptron/neuron/radiation/activateParticleRadiation',
       this.activateParticleRadiation,
       this,
     );
-  },
-
-  onDisable() {
-    this.resetParticleSystemComponent();
   },
 
   activateParticleRadiation() {

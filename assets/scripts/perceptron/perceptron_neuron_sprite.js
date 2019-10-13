@@ -12,17 +12,17 @@ cc.Class({
     );
   },
 
+  onDisable() {
+    this.animationComponent.stop('sprite');
+    this.animationComponent.setCurrentTime(0, 'sprite');
+  },
+
   onDestroy() {
     cc.director.off(
       'perceptron/neuron/sprite/playSpriteAnimation',
       this.playSpriteAnimation,
       this,
     );
-  },
-
-  onDisable() {
-    this.animationComponent.stop('sprite');
-    this.animationComponent.setCurrentTime(0, 'sprite');
   },
 
   playSpriteAnimation() {

@@ -20,19 +20,19 @@ cc.Class({
     );
   },
 
+  onDisable() {
+    this.animationComponent.stop('connection');
+    this.animationComponent.setCurrentTime(0, 'connection');
+
+    this.spriteComponent.spriteFrame = this.connectionSpriteBaseFrame;
+  },
+
   onDestroy() {
     cc.director.off(
       'perceptron/connection/playConnectionAnimation',
       this.playConnectionAnimation,
       this,
     );
-  },
-
-  onDisable() {
-    this.animationComponent.stop('connection');
-    this.animationComponent.setCurrentTime(0, 'connection');
-
-    this.spriteComponent.spriteFrame = this.connectionSpriteBaseFrame;
   },
 
   playConnectionAnimation() {

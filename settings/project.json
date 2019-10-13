@@ -14,6 +14,7 @@
       false,
       true,
       true,
+      true,
       true
     ],
     [
@@ -25,6 +26,14 @@
     [
       false,
       false,
+      true,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
       false,
       false,
       false
@@ -35,9 +44,11 @@
       false,
       false,
       false,
+      false,
       false
     ],
     [
+      false,
       false,
       false,
       false,
@@ -85,7 +96,8 @@
     "default",
     "border",
     "neuron",
-    "neuron_creator"
+    "neuron_creator",
+    "track"
   ],
   "last-module-event-record-time": 1570347017097,
   "simulator-orientation": false,
