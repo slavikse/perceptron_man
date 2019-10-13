@@ -15,6 +15,7 @@
       true,
       true,
       true,
+      true,
       true
     ],
     [
@@ -33,6 +34,15 @@
     [
       false,
       false,
+      true,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
       false,
       false,
       false,
@@ -45,9 +55,11 @@
       false,
       false,
       false,
+      false,
       false
     ],
     [
+      false,
       false,
       false,
       false,
@@ -96,7 +108,8 @@
     "default",
     "border",
     "neuron",
-    "neuron_creator",
+    "creator",
+    "destroyer",
     "track"
   ],
   "last-module-event-record-time": 1570347017097,
@@ -106,6 +119,5 @@
     "width": 960
   },
   "use-customize-simulator": true,
-  "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "use-project-simulator-setting": false
 }

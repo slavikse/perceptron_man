@@ -4,52 +4,31 @@
 
 ### Файлы
 
-Имя файла-компонента должно иметь уникальное имя.
-Именовать файл нужно по правилу **одноуровневого** именования.
+- Имя файла-компонента должно иметь уникальное имя по правилу **одноуровневого** именования.
 
 **Пример для компонентов:**
 
-- Директория файла с компонентом: `perceptron`
+- Директория: `perceptron`
 - Имя файла компонента: `perceptron_neuron`
 
 **Пример для функций:**
 
-- Директория файла с функцией: `perceptron/utils`
+- Директория: `perceptron/utils`
 - Имя файла = Имя функции на экспорт: `hasPermissibleInfelicity`
-- Результат имени файла: `perceptron_utils_hasPermissibleInfelicity.js`
-
-### События
-
-**Пример создания события:**
-
-- Имя файла компонента, куда будет доставляться событие. ex: `perceptron_neuron_radiation`
-- Имя для обработки события этим компонентом. ex: `perceptron/neuron/radiation`
-
-```js
-const event = new cc.Event.EventCustom('hierarchy/directory/functionName');
-event.detail = { data: {} };
-cc.director.dispatchEvent(event);
-```
-
-**Пример подписки на событие:**
-
-```js
-cc.director.on('hierarchy/directory/functionName', this.functionName, this);
-this.functionName({ detail: { data } }) { };
-```
+- Имя файла компонента: `perceptron_utils_hasPermissibleInfelicity.js`
 
 ### Свойства компонента
 
-- Тип _prefab_: `namePrefab`
-- Тип _audio_: `nameAudio`
+- Тип _prefab_: `${name}Prefab`
+- Тип _audio_: `${name}Audio`
 
 ### Переменные
 
 **Примеры:**
 
-- Узел: `${name}Node` = `cc.find(name)`
-- Клон: `${name}Node = cc.instantiate(prefab)`
-- Компонент: `${name}Component` = `this.node.getComponent(name)`
+- Узел: `${name}Node` = `cc.find(${name})`
+- Клон: `${namePrefab}Node = cc.instantiate(${namePrefab})`
+- Компонент: `${name}Component` = `this.node.getComponent(${name})`
 - Состояние: `this.node.state = {}`
 
 ### Функции
@@ -63,7 +42,7 @@ this.functionName({ detail: { data } }) { };
 
 ## Общие соглашения
 
-- В компоненте по порядку реализуются методы из Cocos, а затем все остальные.
+- В компоненте сначала описываются методы Cocos, а затем все остальные.
 - `Prefab` только для клонирования объекта из кода.
 - Размеры графики в степенях двойки. _ex: 2^4._
 

@@ -11,56 +11,55 @@ cc.Class({
   },
 
   onLoad() {
-    this.neuronsNode = cc.find('level/perceptron/neurons');
+    this.neuronsNode = cc.find('neurons', this.node.parent);
 
     this.connectionsNodes = new Set();
     this.connectionsNodesPool = new cc.NodePool();
 
-    this.isCreatedConnectionsNodes = false;
+    this.isCapturedNeuronNode = false;
 
     this.createConnectionsNodes();
 
     cc.director.on(
-      'perceptron/connections/addConnectionsNodes',
-      this.addConnectionsNodes,
+      'perceptron/captureNeuronNode',
+      this.captureNeuronNode,
       this,
     );
 
     cc.director.on(
-      'perceptron/connections/mountingConnectionsNodes',
-      this.mountingConnectionsNodes,
+      'perceptron/addingConnectionsNodes',
+      this.addingConnectionsNodes,
       this,
     );
 
     cc.director.on(
-      'perceptron/connections/destroingConnectionsNodes',
+      'perceptron/destroingConnectionsNodes',
       this.destroingConnectionsNodes,
       this,
     );
   },
 
-  // TODO связь рвется, если длинее, чем ограничения правилами строения - послойное.
   update() {
-    if (this.isCreatedConnectionsNodes) {
-      this.connectionsNodes.forEach(changeConnectionNodeParameters);
+    if (this.isCapturedNeuronNode) {
+      this.connectionsNodes.forEach(this.showOrHideConnection);
     }
   },
 
   onDestroy() {
     cc.director.off(
-      'perceptron/connections/addConnectionsNodes',
-      this.addConnectionsNodes,
+      'perceptron/captureNeuronNode',
+      this.captureNeuronNode,
       this,
     );
 
     cc.director.off(
-      'perceptron/connections/mountingConnectionsNodes',
-      this.mountingConnectionsNodes,
+      'perceptron/addingConnectionsNodes',
+      this.addingConnectionsNodes,
       this,
     );
 
     cc.director.off(
-      'perceptron/connections/destroingConnectionsNodes',
+      'perceptron/destroingConnectionsNodes',
       this.destroingConnectionsNodes,
       this,
     );
@@ -78,18 +77,18 @@ cc.Class({
     }
   },
 
-  addConnectionsNodes({ detail: { capturedNeuronNode } }) {
-    this.isCreatedConnectionsNodes = false;
+  captureNeuronNode({ detail: { isCaptured } }) {
+    this.isCapturedNeuronNode = isCaptured;
+  },
 
+  addingConnectionsNodes({ detail: { capturedNeuronNode } }) {
     this.neuronsNode.children.forEach((neuronNode) => {
       // Предотвращение добавления соединения с собой для схваченного узла.
       if (capturedNeuronNode.uuid !== neuronNode.uuid) {
         this.connectionsNodesPoolSizeCheck();
-        this.addConnectionNodeToScene({ capturedNeuronNode, neuronNode });
+        this.addConnectionNode({ capturedNeuronNode, neuronNode });
       }
     });
-
-    this.isCreatedConnectionsNodes = true;
   },
 
   connectionsNodesPoolSizeCheck() {
@@ -98,9 +97,8 @@ cc.Class({
     }
   },
 
-  // TODO связи можно будет создать при выполнении условий.
-  //  ограничения: можно располагать нейрон только в ряд в новом слое, либо в существующем.
-  addConnectionNodeToScene(neuronsNodes) {
+  // TODO не производить вычисления для скрытого соединения?
+  addConnectionNode(neuronsNodes) {
     if (preventReAddingConnectionNode(this.connectionsNodes, neuronsNodes)) {
       return;
     }
@@ -114,25 +112,15 @@ cc.Class({
     this.connectionsNodes.add(connectionNode);
   },
 
-  // TODO активация анимации после закрепления в сети.
-  mountingConnectionsNodes() {
-    this.isCreatedConnectionsNodes = false;
-    this.connectionsNodes.forEach(changeConnectionNodeParameters);
-
-    cc.director.dispatchEvent(
-      new cc.Event.EventCustom('perceptron/connection/playConnectionAnimation'),
-    );
-  },
-
-  destroingConnectionsNodes({ detail: { nodeDestroyed } }) {
+  destroingConnectionsNodes({ detail: { destroyedNeuronNode } }) {
     this.connectionsNodes.forEach((connectionNode) => {
       const {
         neuronsNodes: { capturedNeuronNode, neuronNode },
       } = connectionNode;
 
       if (
-        nodeDestroyed.uuid === capturedNeuronNode.uuid
-        || nodeDestroyed.uuid === neuronNode.uuid
+        destroyedNeuronNode.uuid === capturedNeuronNode.uuid
+        || destroyedNeuronNode.uuid === neuronNode.uuid
       ) {
         this.connectionNodeDestroy(connectionNode);
       }
@@ -144,5 +132,23 @@ cc.Class({
 
     this.connectionsNodes.delete(connectionNode);
     this.connectionsNodesPool.put(connectionNode);
+  },
+
+  showOrHideConnection(connectionNode) {
+    // const { capturedNeuronNode, neuronNode } = connectionNode.neuronsNodes;
+    // const trackIdDifference = Math.abs(
+    //   capturedNeuronNode.state.trackId - neuronNode.state.trackId,
+    // );
+
+    // if (trackIdDifference === 1) {
+    //   connectionNode.active = true;
+    //   changeConnectionNodeParameters(connectionNode);
+    // } else {
+    //   connectionNode.active = false;
+    //   // this.connectionNodeDestroy(connectionNode);
+    //   // TODO пересоздав нейрон при хватании, пересоздаст соединения.
+    // }
+
+    changeConnectionNodeParameters(connectionNode);
   },
 });
