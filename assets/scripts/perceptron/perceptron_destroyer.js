@@ -2,7 +2,8 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
-    this.isInsideNeuronNode = false;
+    this.isNeuronNodeInside = false;
+    this.destroyNeuronNodeId = '';
 
     cc.director.on(
       'perceptron/captureNeuronNode',
@@ -19,24 +20,29 @@ cc.Class({
     );
   },
 
-  // TODO удаляется не тот нейрон, если его затолкнуть захваченным нейроном.
-  onCollisionEnter() {
-    this.isInsideNeuronNode = true;
+  onCollisionEnter(neuronNode) {
+    this.destroyNeuronNodeId = neuronNode.node.uuid;
+    this.isNeuronNodeInside = true;
   },
 
   onCollisionExit() {
-    this.isInsideNeuronNode = false;
+    this.destroyNeuronNodeId = '';
+    this.isNeuronNodeInside = false;
   },
 
-  captureNeuronNode({ detail: { isCaptured, neuronNode } }) {
-    if (this.isInsideNeuronNode && !isCaptured) {
-      this.neuronNodeDestroy(neuronNode);
+  captureNeuronNode({ detail: { isCaptured, capturedNeuronNode } }) {
+    if (
+      this.isNeuronNodeInside
+      && !isCaptured
+      && this.destroyNeuronNodeId === capturedNeuronNode.uuid
+    ) {
+      this.neuronNodeDestroy(capturedNeuronNode);
     }
   },
 
-  neuronNodeDestroy(neuronNode) {
+  neuronNodeDestroy(nodeDestroyed) {
     const e = new cc.Event.EventCustom('perceptron/neuronNodeDestroy');
-    e.detail = { nodeDestroyed: neuronNode };
+    e.detail = { nodeDestroyed };
     cc.director.dispatchEvent(e);
   },
 });

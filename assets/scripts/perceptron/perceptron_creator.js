@@ -13,7 +13,7 @@ cc.Class({
     this.createNeuronsNodes();
     this.addNeuronNode();
 
-    this.isInsideNeuronNode = true;
+    this.isNeuronNodeInside = true;
 
     cc.director.on(
       'perceptron/captureNeuronNode',
@@ -45,11 +45,11 @@ cc.Class({
   },
 
   onCollisionStay() {
-    this.isInsideNeuronNode = true;
+    this.isNeuronNodeInside = true;
   },
 
   onCollisionExit() {
-    this.isInsideNeuronNode = false;
+    this.isNeuronNodeInside = false;
   },
 
   createNeuronsNodes(quantity = 2 ** 5) {
@@ -59,7 +59,8 @@ cc.Class({
     }
   },
 
-  // TODO анимация создания.
+  // TODO не создавать соединения с только что созданным нейроном.
+  //  только сам захваченный нейрон, должен создавать соединения.
   addNeuronNode() {
     const neuronNode = this.neuronsNodesPool.get();
     // TODO со смещением под будущую подставку.
@@ -69,7 +70,7 @@ cc.Class({
   },
 
   captureNeuronNode({ detail: { isCaptured } }) {
-    if (!this.isInsideNeuronNode && !isCaptured) {
+    if (!this.isNeuronNodeInside && !isCaptured) {
       this.neuronsNodesPoolSizeCheck();
       this.addNeuronNode();
     }

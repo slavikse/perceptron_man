@@ -19,7 +19,7 @@ cc.Class({
     this.trackNodeId = -1;
   },
 
-  // TODO эффект разрушения нейрона.
+  // TODO эффект разрушения: частицы.
   onDisable() {
     this.destroingConnectionsNodes();
   },
@@ -38,7 +38,7 @@ cc.Class({
 
   captureNeuronNode({ isCaptured }) {
     const e = new cc.Event.EventCustom('perceptron/captureNeuronNode');
-    e.detail = { isCaptured, neuronNode: this.node };
+    e.detail = { isCaptured, capturedNeuronNode: this.node };
     cc.director.dispatchEvent(e);
   },
 
@@ -74,7 +74,6 @@ cc.Class({
     this.captureNeuronNode({ isCaptured: false });
   },
 
-  // TODO когда удалены все нейроны, проверить, что все соединения сброшены
   destroingConnectionsNodes() {
     const e = new cc.Event.EventCustom('perceptron/destroingConnectionsNodes');
     e.detail = { destroyedNeuronNode: this.node };
