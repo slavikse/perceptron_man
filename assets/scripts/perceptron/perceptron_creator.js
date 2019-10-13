@@ -59,11 +59,9 @@ cc.Class({
     }
   },
 
-  // TODO не создавать соединения с только что созданным нейроном.
-  //  только сам захваченный нейрон, должен создавать соединения.
+  // TODO созданный нейрон сделать невозможным для сдвига толканием другими.
   addNeuronNode() {
     const neuronNode = this.neuronsNodesPool.get();
-    // TODO со смещением под будущую подставку.
     neuronNode.position = this.node.position;
 
     this.neuronsNode.addChild(neuronNode);

@@ -14,14 +14,24 @@ cc.Class({
 
   // TODO эффект появления: частицы.
   onEnable() {
-    // TODO вводить через событие
-    // this.node.state.trackId = -1;
-    this.trackNodeId = -1;
+    this.node.state = { trackId: -1 };
+
+    cc.director.on(
+      `perceptron/neuronNodeTrackChange/${this.node.uuid}`,
+      this.neuronNodeTrackChange,
+      this,
+    );
   },
 
   // TODO эффект разрушения: частицы.
   onDisable() {
     this.destroingConnectionsNodes();
+
+    cc.director.off(
+      `perceptron/neuronNodeTrackChange/${this.node.uuid}`,
+      this.neuronNodeTrackChange,
+      this,
+    );
   },
 
   onDestroy() {
@@ -72,6 +82,10 @@ cc.Class({
 
   onEndCapture() {
     this.captureNeuronNode({ isCaptured: false });
+  },
+
+  neuronNodeTrackChange({ detail: { trackId } }) {
+    this.node.state.trackId = trackId;
   },
 
   destroingConnectionsNodes() {

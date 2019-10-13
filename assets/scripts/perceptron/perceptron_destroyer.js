@@ -21,20 +21,20 @@ cc.Class({
   },
 
   onCollisionEnter(neuronNode) {
-    this.destroyNeuronNodeId = neuronNode.node.uuid;
     this.isNeuronNodeInside = true;
+    this.destroyNeuronNodeId = neuronNode.node.uuid;
   },
 
   onCollisionExit() {
-    this.destroyNeuronNodeId = '';
     this.isNeuronNodeInside = false;
+    this.destroyNeuronNodeId = '';
   },
 
   captureNeuronNode({ detail: { isCaptured, capturedNeuronNode } }) {
     if (
       this.isNeuronNodeInside
       && !isCaptured
-      && this.destroyNeuronNodeId === capturedNeuronNode.uuid
+      && capturedNeuronNode.uuid === this.destroyNeuronNodeId
     ) {
       this.neuronNodeDestroy(capturedNeuronNode);
     }

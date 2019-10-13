@@ -18,12 +18,12 @@ cc.Class({
     }
   },
 
-  addTrackNode(i, trackNodeHeight) {
+  addTrackNode(trackId, trackNodeHeight) {
     const trackNode = cc.instantiate(this.trackPrefab);
-    trackNode.name = `track:${i}`;
+    trackNode.name = `track:${trackId}`;
 
     const widgetComponent = trackNode.getComponent(cc.Widget);
-    widgetComponent.top = trackNodeHeight * i;
+    widgetComponent.top = trackNodeHeight * trackId;
 
     this.node.addChild(trackNode);
   },

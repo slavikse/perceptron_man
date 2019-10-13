@@ -41,7 +41,7 @@ cc.Class({
 
   update() {
     if (this.isCapturedNeuronNode) {
-      this.connectionsNodes.forEach(this.showOrHideConnection);
+      this.connectionsNodes.forEach(this.setConnectionNodeActivation);
     }
   },
 
@@ -84,7 +84,11 @@ cc.Class({
   addingConnectionsNodes({ detail: { capturedNeuronNode } }) {
     this.neuronsNode.children.forEach((neuronNode) => {
       // Предотвращение добавления соединения с собой для схваченного узла.
-      if (capturedNeuronNode.uuid !== neuronNode.uuid) {
+      // А так же для нейрона, который только что создался.
+      if (
+        capturedNeuronNode.uuid !== neuronNode.uuid
+        && neuronNode.state.trackId !== -1
+      ) {
         this.connectionsNodesPoolSizeCheck();
         this.addConnectionNode({ capturedNeuronNode, neuronNode });
       }
@@ -97,7 +101,7 @@ cc.Class({
     }
   },
 
-  // TODO не производить вычисления для скрытого соединения?
+  // TODO анимация появления?
   addConnectionNode(neuronsNodes) {
     if (preventReAddingConnectionNode(this.connectionsNodes, neuronsNodes)) {
       return;
@@ -110,6 +114,20 @@ cc.Class({
 
     this.node.addChild(connectionNode);
     this.connectionsNodes.add(connectionNode);
+  },
+
+  setConnectionNodeActivation(connectionNode) {
+    const { capturedNeuronNode, neuronNode } = connectionNode.neuronsNodes;
+    const trackIdDifference = Math.abs(
+      capturedNeuronNode.state.trackId - neuronNode.state.trackId,
+    );
+
+    if (trackIdDifference === 1) {
+      connectionNode.active = true;
+      changeConnectionNodeParameters(connectionNode);
+    } else {
+      connectionNode.active = false;
+    }
   },
 
   destroingConnectionsNodes({ detail: { destroyedNeuronNode } }) {
@@ -132,23 +150,5 @@ cc.Class({
 
     this.connectionsNodes.delete(connectionNode);
     this.connectionsNodesPool.put(connectionNode);
-  },
-
-  showOrHideConnection(connectionNode) {
-    // const { capturedNeuronNode, neuronNode } = connectionNode.neuronsNodes;
-    // const trackIdDifference = Math.abs(
-    //   capturedNeuronNode.state.trackId - neuronNode.state.trackId,
-    // );
-
-    // if (trackIdDifference === 1) {
-    //   connectionNode.active = true;
-    //   changeConnectionNodeParameters(connectionNode);
-    // } else {
-    //   connectionNode.active = false;
-    //   // this.connectionNodeDestroy(connectionNode);
-    //   // TODO пересоздав нейрон при хватании, пересоздаст соединения.
-    // }
-
-    changeConnectionNodeParameters(connectionNode);
   },
 });
