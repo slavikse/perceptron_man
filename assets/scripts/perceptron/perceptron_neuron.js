@@ -1,6 +1,7 @@
 cc.Class({
   extends: cc.Component,
 
+  // TODO блокировать пересечения нейронов с помощью проверки пересечения.
   // TODO наложение радиции на соседей + эффект радиции.
   onLoad() {
     const { width, height } = cc.find('level');

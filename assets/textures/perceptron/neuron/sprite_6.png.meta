@@ -3,11 +3,15 @@
   "uuid": "31d55191-cff6-4998-8eaa-f2b66d89667d",
   "type": "sprite",
   "wrapMode": "clamp",
-  "filterMode": "bilinear",
+  "filterMode": "point",
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
-  "platformSettings": {},
+  "platformSettings": {
+    "default": {
+      "formats": []
+    }
+  },
   "subMetas": {
     "sprite_6": {
       "ver": "1.0.4",

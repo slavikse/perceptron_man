@@ -3,15 +3,19 @@
   "uuid": "ebf2dd59-ca5b-4ef5-a569-294be6679dc3",
   "type": "sprite",
   "wrapMode": "clamp",
-  "filterMode": "bilinear",
+  "filterMode": "point",
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
-  "platformSettings": {},
+  "platformSettings": {
+    "default": {
+      "formats": []
+    }
+  },
   "subMetas": {
     "radiation": {
       "ver": "1.0.4",
-      "uuid": "7fd36237-4ec2-42d6-8f07-fa14a085db2c",
+      "uuid": "de13e33a-d572-4b4d-a394-1d6e93f7e623",
       "rawTextureUuid": "ebf2dd59-ca5b-4ef5-a569-294be6679dc3",
       "trimType": "auto",
       "trimThreshold": 1,

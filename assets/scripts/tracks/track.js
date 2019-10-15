@@ -12,15 +12,17 @@ cc.Class({
     );
   },
 
-  // TODO проверить, если заталкать нейрон захваченным на другую дорожку.
-  // TODO проверять, в какой части нейрон находится больше.
   onCollisionStay(other, self) {
     if (
       this.isCapturedNeuronNode
       && this.capturedNeuronNodeId === other.node.uuid
     ) {
       const [trackId] = self.node.name.match(/\d+$/);
-      this.neuronNodeTrackChange(Number(trackId));
+
+      // Проверка, что нейрон сменил дорожку.
+      if (other.node.state.trackId !== trackId) {
+        this.neuronNodeTrackChange(Number(trackId));
+      }
     }
   },
 
@@ -34,12 +36,7 @@ cc.Class({
 
   captureNeuronNode({ detail: { isCaptured, capturedNeuronNode } }) {
     this.isCapturedNeuronNode = isCaptured;
-
-    if (isCaptured) {
-      this.capturedNeuronNodeId = capturedNeuronNode.uuid;
-    } else {
-      this.capturedNeuronNodeId = '';
-    }
+    this.capturedNeuronNodeId = capturedNeuronNode.uuid;
   },
 
   neuronNodeTrackChange(trackId) {

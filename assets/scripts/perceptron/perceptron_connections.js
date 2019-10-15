@@ -84,7 +84,7 @@ cc.Class({
   addingConnectionsNodes({ detail: { capturedNeuronNode } }) {
     this.neuronsNode.children.forEach((neuronNode) => {
       // Предотвращение добавления соединения с собой для схваченного узла.
-      // А так же для нейрона, который только что создался.
+      // А так же для нейрона, который только что был создан.
       if (
         capturedNeuronNode.uuid !== neuronNode.uuid
         && neuronNode.state.trackId !== -1
@@ -101,7 +101,7 @@ cc.Class({
     }
   },
 
-  // TODO анимация появления?
+  // TODO эффект появления: частицы.
   addConnectionNode(neuronsNodes) {
     if (preventReAddingConnectionNode(this.connectionsNodes, neuronsNodes)) {
       return;
@@ -123,8 +123,8 @@ cc.Class({
     );
 
     if (trackIdDifference === 1) {
-      connectionNode.active = true;
       changeConnectionNodeParameters(connectionNode);
+      connectionNode.active = true;
     } else {
       connectionNode.active = false;
     }

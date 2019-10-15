@@ -6,13 +6,6 @@
     ],
     [
       false,
-      false,
-      true,
-      false
-    ],
-    [
-      false,
-      true,
       true,
       true,
       true,
@@ -20,21 +13,30 @@
     ],
     [
       false,
-      false,
       true,
-      false
-    ],
-    [
       false,
       false,
-      true,
       false,
       false
     ],
     [
       false,
+      true,
+      false,
+      false
+    ],
+    [
       false,
       true,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
       false,
       false,
       false
@@ -73,19 +75,26 @@
   "design-resolution-height": 768,
   "design-resolution-width": 1366,
   "excluded-modules": [
+    "Canvas Renderer",
     "Label Effect",
     "Mask",
     "Spine Skeleton",
+    "DragonBones",
     "RichText",
     "MotionStreak",
+    "ProgressBar",
     "ScrollBar",
     "ScrollView",
+    "Toggle",
     "PageView",
     "PageViewIndicator",
+    "Slider",
     "Layout",
+    "EditBox",
     "VideoPlayer",
     "WebView",
     "Action",
+    "Physics",
     "StudioComponent",
     "Native Socket",
     "Geom Utils",
@@ -106,19 +115,18 @@
   "fit-width": true,
   "group-list": [
     "default",
-    "border",
     "neuron",
     "creator",
     "destroyer",
-    "track"
+    "track",
+    ""
   ],
-  "last-module-event-record-time": 1570347017097,
+  "last-module-event-record-time": 1571012050315,
   "simulator-orientation": false,
   "simulator-resolution": {
     "height": 640,
     "width": 960
   },
   "use-customize-simulator": true,
-  "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "use-project-simulator-setting": false
 }

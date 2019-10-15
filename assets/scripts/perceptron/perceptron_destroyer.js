@@ -3,7 +3,6 @@ cc.Class({
 
   onLoad() {
     this.isNeuronNodeInside = false;
-    this.destroyNeuronNodeId = '';
 
     cc.director.on(
       'perceptron/captureNeuronNode',
@@ -20,22 +19,16 @@ cc.Class({
     );
   },
 
-  onCollisionEnter(neuronNode) {
+  onCollisionEnter() {
     this.isNeuronNodeInside = true;
-    this.destroyNeuronNodeId = neuronNode.node.uuid;
   },
 
   onCollisionExit() {
     this.isNeuronNodeInside = false;
-    this.destroyNeuronNodeId = '';
   },
 
   captureNeuronNode({ detail: { isCaptured, capturedNeuronNode } }) {
-    if (
-      this.isNeuronNodeInside
-      && !isCaptured
-      && capturedNeuronNode.uuid === this.destroyNeuronNodeId
-    ) {
+    if (this.isNeuronNodeInside && !isCaptured) {
       this.neuronNodeDestroy(capturedNeuronNode);
     }
   },

@@ -59,7 +59,6 @@ cc.Class({
     }
   },
 
-  // TODO созданный нейрон сделать невозможным для сдвига толканием другими.
   addNeuronNode() {
     const neuronNode = this.neuronsNodesPool.get();
     neuronNode.position = this.node.position;
