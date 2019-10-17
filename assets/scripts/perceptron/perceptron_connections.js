@@ -39,10 +39,18 @@ cc.Class({
     );
   },
 
+  // TODO: эффект появления: частицы.
+  onEnable() {
+  },
+
   update() {
     if (this.isCapturedNeuronNode) {
       this.connectionsNodes.forEach(this.setConnectionNodeActivation);
     }
+  },
+
+  // TODO: эффект разрушения: частицы.
+  onDisable() {
   },
 
   onDestroy() {
@@ -101,7 +109,6 @@ cc.Class({
     }
   },
 
-  // TODO эффект появления: частицы.
   addConnectionNode(neuronsNodes) {
     if (preventReAddingConnectionNode(this.connectionsNodes, neuronsNodes)) {
       return;

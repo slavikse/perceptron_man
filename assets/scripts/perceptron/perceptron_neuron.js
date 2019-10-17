@@ -1,7 +1,6 @@
 cc.Class({
   extends: cc.Component,
 
-  // TODO: блокировать пересечения нейронов с помощью проверки пересечения.
   // TODO: наложение радиции на соседей + эффект радиции.
   onLoad() {
     const { width, height } = cc.find('level');
@@ -29,6 +28,12 @@ cc.Class({
     this.node.off('touchmove', this.onMoveCaptured, this);
     this.node.off('touchend', this.onEndCapture, this);
     this.node.off('touchcancel', this.onEndCapture, this);
+  },
+
+  onCollisionEnter(other, self) {
+    if (other.node.name === 'neuron') {
+      this.destroyIntersectedNeuronsNodes(other, self);
+    }
   },
 
   onStartCapture() {
@@ -72,6 +77,19 @@ cc.Class({
 
   onEndCapture() {
     this.captureNeuronNode({ isCaptured: false });
+  },
+
+  destroyIntersectedNeuronsNodes(other, self) {
+    this.captureNeuronNode({ isCaptured: false });
+
+    this.neuronNodeDestroy(other.node);
+    this.neuronNodeDestroy(self.node);
+  },
+
+  neuronNodeDestroy(nodeDestroyed) {
+    const e = new cc.Event.EventCustom('perceptron/neuronNodeDestroy');
+    e.detail = { nodeDestroyed };
+    cc.director.dispatchEvent(e);
   },
 
   destroingConnectionsNodes() {
