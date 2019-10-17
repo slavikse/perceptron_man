@@ -240,7 +240,7 @@
     "_id": ""
   },
   {
-    "__type__": "cc.PolygonCollider",
+    "__type__": "cc.BoxCollider",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -253,32 +253,15 @@
       "x": 0,
       "y": 0
     },
-    "points": [
-      {
-        "__type__": "cc.Vec2",
-        "x": -683,
-        "y": -50
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": -683,
-        "y": 50
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": 683,
-        "y": 50
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": 683,
-        "y": -50
-      }
-    ],
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 1366,
+      "height": 100
+    },
     "_id": ""
   },
   {
-    "__type__": "c48aa00DGdFIZG+vQFkOgVS",
+    "__type__": "4de581r5kJC3LNbscVGmA9I",
     "_name": "",
     "_objFlags": 0,
     "node": {

@@ -4,16 +4,17 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['prettier', 'airbnb-base'],
-  plugins: ['prettier'],
+  extends: ['airbnb-base'],
   rules: {
-    'prettier/prettier': ['error'],
+    'no-plusplus': 'off',
+    'no-param-reassign': 'off',
   },
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
     cc: 'readonly',
     CC_DEV: 'readonly',
+    Global: 'writable',
   },
   parserOptions: {
     ecmaVersion: 2018,
@@ -25,10 +26,5 @@ module.exports = {
         paths: ['assets/scripts/utils', 'assets/scripts/perceptron/utils'],
       },
     },
-  },
-  rules: {
-    'no-plusplus': 'off',
-    'no-param-reassign': 'off',
-    'max-len': 'off',
   },
 };

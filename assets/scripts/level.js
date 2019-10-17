@@ -1,3 +1,5 @@
+window.Global = {};
+
 cc.Class({
   extends: cc.Component,
 
