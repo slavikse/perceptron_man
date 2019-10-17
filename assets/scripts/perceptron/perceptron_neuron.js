@@ -1,8 +1,8 @@
 cc.Class({
   extends: cc.Component,
 
-  // TODO блокировать пересечения нейронов с помощью проверки пересечения.
-  // TODO наложение радиции на соседей + эффект радиции.
+  // TODO: блокировать пересечения нейронов с помощью проверки пересечения.
+  // TODO: наложение радиции на соседей + эффект радиции.
   onLoad() {
     const { width, height } = cc.find('level');
     this.levelNodeSize = { width, height };
@@ -13,13 +13,13 @@ cc.Class({
     this.node.on('touchcancel', this.onEndCapture, this);
   },
 
-  // TODO эффект появления: частицы.
+  // TODO: эффект появления: частицы.
   onEnable() {
     // Изменяется в track.js
     this.node.state = { trackId: -1 };
   },
 
-  // TODO эффект разрушения: частицы.
+  // TODO: эффект разрушения: частицы.
   onDisable() {
     this.destroingConnectionsNodes();
   },

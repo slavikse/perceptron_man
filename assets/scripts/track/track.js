@@ -5,59 +5,40 @@ cc.Class({
     this.isCapturedNeuronNode = false;
     this.capturedNeuronNodeId = '';
 
-    // Будет равняться 2, когда нейрон находится на 2х дорожках.
-    // this.doubleCrossing = 0;
+    // Для предотвращения присвоения trackId,
+    // когда нейрон находится на двух дорожках.
+    this.isCrossingTrackEdge = false;
 
     cc.director.on(
       'perceptron/captureNeuronNode',
       this.captureNeuronNode,
       this,
     );
+
+    cc.director.on(
+      'track/crossingTrackEdge',
+      this.setCrossingTrackEdge,
+      this,
+    );
   },
 
-  update() {
-    // this.doubleCrossing = 0;
-  },
-
-  // onCollisionEnter(other, self) {
-  //   const [trackId] = self.node.name.match(/\d+$/);
-  //   console.log(trackId, other.node.state.trackId);
-  //   console.log('start');
-  //   // Проверка, что нейрон сменил дорожку.
-  //   if (other.node.state.trackId !== Number(trackId)) {
-  //     other.node.state.trackId = Number(trackId);
-  //   }
-  // },
-
-  // TODO: нужно дождаться, когда сработают оба пересечения, если 2 дорожки.
   onCollisionStay(other, self) {
-    // this.doubleCrossing += 1;
-    // TODO игнорировать пересечения с той дорожкой, на которой нейрон был
-    // if (
-    //   // this.doubleCrossing === 1
-    //   this.isCapturedNeuronNode
-    //   && this.capturedNeuronNodeId === other.node.uuid
-    // ) {
-    //   const [trackId] = self.node.name.match(/\d+$/);
-    //   // console.log(trackId, other.node.state.trackId);
-    //   // Проверка, что нейрон сменил дорожку.
-    //   if (other.node.state.trackId !== Number(trackId)) {
-    //     other.node.state.trackId = Number(trackId);
-    //   }
-    // }
+    if (
+      this.isCapturedNeuronNode
+      && this.capturedNeuronNodeId === other.node.uuid
+    ) {
+      let trackId = -1;
+
+      if (!this.isCrossingTrackEdge) {
+        trackId = Number(self.node.name.match(/\d+$/)[0]);
+      }
+
+      // Проверка, что нейрон сменил дорожку.
+      if (other.node.state.trackId !== trackId) {
+        other.node.state.trackId = trackId;
+      }
+    }
   },
-
-  // onCollisionExit(other, self) {
-  //   const [trackId] = self.node.name.match(/\d+$/);
-  //   console.log(trackId, other.node.state.trackId);
-
-  //   console.log('exit');
-
-  //   // Проверка, что нейрон сменил дорожку.
-  //   if (other.node.state.trackId !== Number(trackId)) {
-  //     other.node.state.trackId = Number(trackId);
-  //   }
-  // },
 
   onDestroy() {
     cc.director.off(
@@ -65,10 +46,20 @@ cc.Class({
       this.captureNeuronNode,
       this,
     );
+
+    cc.director.off(
+      'track/crossingTrackEdge',
+      this.setCrossingTrackEdge,
+      this,
+    );
   },
 
   captureNeuronNode({ detail: { isCaptured, capturedNeuronNode } }) {
     this.isCapturedNeuronNode = isCaptured;
     this.capturedNeuronNodeId = capturedNeuronNode.uuid;
+  },
+
+  setCrossingTrackEdge({ detail: { isCrossing } }) {
+    this.isCrossingTrackEdge = isCrossing;
   },
 });

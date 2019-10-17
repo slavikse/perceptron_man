@@ -10,7 +10,7 @@
       true,
       true,
       true,
-      false
+      true
     ],
     [
       false,
@@ -36,7 +36,7 @@
     ],
     [
       false,
-      false,
+      true,
       false,
       false,
       false,
@@ -120,7 +120,7 @@
     "creator",
     "destroyer",
     "track",
-    ""
+    "track_edge"
   ],
   "last-module-event-record-time": 1571012050315,
   "simulator-orientation": false,
@@ -129,6 +129,5 @@
     "width": 960
   },
   "use-customize-simulator": true,
-  "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "use-project-simulator-setting": false
 }
