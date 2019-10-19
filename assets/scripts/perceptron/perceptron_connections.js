@@ -85,13 +85,62 @@ cc.Class({
     }
   },
 
-  captureNeuronNode({ detail: { isCaptured } }) {
+  captureNeuronNode({ detail: { isCaptured, capturedNeuronNode } }) {
     this.isCapturedNeuronNode = isCaptured;
+
+    if (!isCaptured) {
+      this.checkConnectionsNodesActivityFor(capturedNeuronNode);
+    }
+  },
+
+  checkConnectionsNodesActivityFor(currentCapturedNeuronNode) {
+    if (this.connectionsNodes.size > 0) {
+      let activeConnectionNode = 0;
+
+      this.walkConnectionsNodes({
+        inspectNeuronNode: currentCapturedNeuronNode,
+        executeForConnectionNode: (connectionNode) => {
+          if (connectionNode.active) {
+            activeConnectionNode += 1;
+          }
+        },
+      });
+
+      // TODO: не разрушать, если нейрон на стартовой площадке
+      // стартовая площадка не будет иметь возможности держать на себе нейрон,
+      // когда нейрон схвачен, то площадка закрывается (анимация), обратно
+      // положить нейрон нельзя.
+      if (activeConnectionNode === 0) {
+        console.log('событие для разрушения нейрона');
+        this.neuronNodeDestroy(currentCapturedNeuronNode);
+      }
+    }
+  },
+
+  walkConnectionsNodes({ inspectNeuronNode, executeForConnectionNode }) {
+    this.connectionsNodes.forEach((connectionNode) => {
+      const {
+        neuronsNodes: { capturedNeuronNode, neuronNode },
+      } = connectionNode;
+
+      if (
+        inspectNeuronNode.uuid === capturedNeuronNode.uuid
+        || inspectNeuronNode.uuid === neuronNode.uuid
+      ) {
+        executeForConnectionNode(connectionNode);
+      }
+    });
+  },
+
+  neuronNodeDestroy(nodeDestroyed) {
+    const e = new cc.Event.EventCustom('perceptron/neuronNodeDestroy');
+    e.detail = { nodeDestroyed };
+    cc.director.dispatchEvent(e);
   },
 
   addingConnectionsNodes({ detail: { capturedNeuronNode } }) {
     this.neuronsNode.children.forEach((neuronNode) => {
-      // Предотвращение добавления соединения с собой для схваченного узла.
+      // Предотвращение добавления соединения с собой для захваченного узла.
       // А так же для нейрона, который только что был создан.
       if (
         capturedNeuronNode.uuid !== neuronNode.uuid
@@ -130,6 +179,7 @@ cc.Class({
     );
 
     if (trackIdDifference === 1) {
+      console.log(trackIdDifference);
       changeConnectionNodeParameters(connectionNode);
       connectionNode.active = true;
     } else {
@@ -137,18 +187,15 @@ cc.Class({
     }
   },
 
+  // TODO: проверка: все нейроны имеют соединение с питающим сеть (начальным).
+  // могут остаться одинокие нейроны соединённым между собой, которые
+  // должны быть уничтожены.
   destroingConnectionsNodes({ detail: { destroyedNeuronNode } }) {
-    this.connectionsNodes.forEach((connectionNode) => {
-      const {
-        neuronsNodes: { capturedNeuronNode, neuronNode },
-      } = connectionNode;
-
-      if (
-        destroyedNeuronNode.uuid === capturedNeuronNode.uuid
-        || destroyedNeuronNode.uuid === neuronNode.uuid
-      ) {
+    this.walkConnectionsNodes({
+      inspectNeuronNode: destroyedNeuronNode,
+      executeForConnectionNode: (connectionNode) => {
         this.connectionNodeDestroy(connectionNode);
-      }
+      },
     });
   },
 

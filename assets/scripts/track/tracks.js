@@ -13,7 +13,7 @@ cc.Class({
     const trackNode = cc.instantiate(this.trackPrefab);
     const countOfTracks = Math.ceil(this.node.height / trackNode.height);
 
-    for (let i = 0; i < countOfTracks; i++) {
+    for (let i = 1; i <= countOfTracks; i++) {
       this.addTrackNode(i, trackNode.height);
     }
   },
@@ -23,7 +23,7 @@ cc.Class({
     trackNode.name = `track:${trackId}`;
 
     const widgetComponent = trackNode.getComponent(cc.Widget);
-    widgetComponent.top = trackNodeHeight * trackId;
+    widgetComponent.top = trackNodeHeight * (trackId - 1);
 
     this.node.addChild(trackNode);
   },

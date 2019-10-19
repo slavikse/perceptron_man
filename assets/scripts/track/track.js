@@ -17,25 +17,25 @@ cc.Class({
 
     cc.director.on(
       'track/crossingTrackEdge',
-      this.setCrossingTrackEdge,
+      this.crossingTrackEdge,
       this,
     );
   },
 
-  onCollisionStay(other, self) {
+  onCollisionStay(neuron, track) {
     if (
       this.isCapturedNeuronNode
-      && this.capturedNeuronNodeId === other.node.uuid
+      && this.capturedNeuronNodeId === neuron.node.uuid
     ) {
       let trackId = -1;
 
       if (!this.isCrossingTrackEdge) {
-        trackId = Number(self.node.name.match(/\d+$/)[0]);
+        trackId = Number(track.node.name.match(/\d+$/)[0]);
       }
 
       // Проверка, что нейрон сменил дорожку.
-      if (other.node.state.trackId !== trackId) {
-        other.node.state.trackId = trackId;
+      if (neuron.node.state.trackId !== trackId) {
+        neuron.node.state.trackId = trackId;
       }
     }
   },
@@ -49,7 +49,7 @@ cc.Class({
 
     cc.director.off(
       'track/crossingTrackEdge',
-      this.setCrossingTrackEdge,
+      this.crossingTrackEdge,
       this,
     );
   },
@@ -59,7 +59,7 @@ cc.Class({
     this.capturedNeuronNodeId = capturedNeuronNode.uuid;
   },
 
-  setCrossingTrackEdge({ detail: { isCrossing } }) {
+  crossingTrackEdge({ detail: { isCrossing } }) {
     this.isCrossingTrackEdge = isCrossing;
   },
 });
