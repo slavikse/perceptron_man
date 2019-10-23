@@ -30,11 +30,18 @@ cc.Class({
   captureNeuronNode({ detail: { isCaptured, capturedNeuronNode } }) {
     if (this.isNeuronNodeInside && !isCaptured) {
       this.neuronNodeDestroy(capturedNeuronNode);
+      this.destroingConnectionsNodes(capturedNeuronNode);
     }
   },
 
   neuronNodeDestroy(nodeDestroyed) {
     const e = new cc.Event.EventCustom('perceptron/neuronNodeDestroy');
+    e.detail = { nodeDestroyed };
+    cc.director.dispatchEvent(e);
+  },
+
+  destroingConnectionsNodes(nodeDestroyed) {
+    const e = new cc.Event.EventCustom('perceptron/destroingConnectionsNodes');
     e.detail = { nodeDestroyed };
     cc.director.dispatchEvent(e);
   },

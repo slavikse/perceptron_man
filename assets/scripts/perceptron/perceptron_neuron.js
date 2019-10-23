@@ -9,7 +9,8 @@ cc.Class({
 
   // TODO: эффект появления: частицы.
   onEnable() {
-    // -2 - новый нейрон; -1 - установлен где запрещено.
+    // Новый нейрон: -2
+    // Установлен где запрещено: -1
     this.node.state.trackId = -2;
 
     this.node.on('touchstart', this.onStartCapture, this);
