@@ -9,9 +9,12 @@ cc.Class({
 
   // TODO: эффект появления: частицы.
   onEnable() {
-    // Новый нейрон: -2
-    // Установлен где запрещено: -1
-    this.node.state.trackId = -2;
+    // isBase: Когда нейрон на 0 дорожке, значит он будет базовым.
+    // trackId: Новый нейрон: -2 | Установлен где запрещено: -1
+    this.node.state = {
+      isBase: false,
+      trackId: -2,
+    };
 
     this.node.on('touchstart', this.onStartCapture, this);
     this.node.on('touchmove', this.onMoveCaptured, this);

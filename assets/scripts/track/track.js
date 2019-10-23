@@ -2,6 +2,9 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
+    const tracksNode = cc.find('level/tracks');
+    this.countOfTracks = Math.ceil(tracksNode.height / this.node.height);
+
     this.isCapturedNeuronNode = false;
     this.capturedNeuronNodeId = '';
 
@@ -35,6 +38,8 @@ cc.Class({
 
       // Проверка, что нейрон сменил дорожку.
       if (neuron.node.state.trackId !== trackId) {
+        // Последний нейрон, является базовым.
+        neuron.node.state.isBase = trackId === this.countOfTracks;
         neuron.node.state.trackId = trackId;
       }
     }
