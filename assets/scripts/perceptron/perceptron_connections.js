@@ -31,26 +31,12 @@ cc.Class({
       this.addingConnectionsNodes,
       this,
     );
-
-    cc.director.on(
-      'perceptron/destroingConnectionsNodes',
-      this.destroingConnectionsNodes,
-      this,
-    );
-  },
-
-  // TODO: эффект появления: частицы.
-  onEnable() {
   },
 
   update() {
     if (this.isCapturedNeuronNode) {
       this.connectionsNodes.forEach(this.setConnectionNodeActivation);
     }
-  },
-
-  // TODO: эффект разрушения: частицы.
-  onDisable() {
   },
 
   onDestroy() {
@@ -63,12 +49,6 @@ cc.Class({
     cc.director.off(
       'perceptron/addingConnectionsNodes',
       this.addingConnectionsNodes,
-      this,
-    );
-
-    cc.director.off(
-      'perceptron/destroingConnectionsNodes',
-      this.destroingConnectionsNodes,
       this,
     );
 
@@ -85,51 +65,118 @@ cc.Class({
     }
   },
 
+  // TODO: больше смахивает на отдельный контролирующий всё, модуль.
   captureNeuronNode({ detail: { isCaptured, capturedNeuronNode } }) {
     this.isCapturedNeuronNode = isCaptured;
 
-    if (!isCaptured) {
-      this.checkConnectionsNodesActivityFor(capturedNeuronNode);
+    // TODO: isBase
+    if (!this.isCapturedNeuronNode && !capturedNeuronNode.state.isBase) {
+      this.сlearingUnconnectedNeuronsNodesFromBaseNode();
     }
   },
 
-  checkConnectionsNodesActivityFor(currentCapturedNeuronNode) {
-    if (this.connectionsNodes.size > 0) {
-      let activeConnectionNode = 0;
+  // TODO: проверка: все нейроны имеют соединение с питающим сеть (начальным).
+  // могут остаться одинокие нейроны соединённым между собой,
+  // которые должны быть уничтожены, а так же нейроны не соединённые ни с кем.
+  сlearingUnconnectedNeuronsNodesFromBaseNode() {
+    const {
+      activeConnectionsNodes,
+      neuronsNodesConnectedToBase,
+    } = this.prepareClearingUnconnectedNeuronsNodesFromBaseNode();
 
-      this.walkConnectionsNodes({
-        inspectNeuronNode: currentCapturedNeuronNode,
-        executeForConnectionNode: (connectionNode) => {
-          if (connectionNode.active) {
-            activeConnectionNode += 1;
-          }
-        },
-      });
+    this.clearingUnconnectedNeuronsNodesFromBaseNode({
+      activeConnectionsNodes,
+      neuronsNodesConnectedToBase,
+    });
 
-      // TODO: не разрушать, если нейрон на стартовой площадке
-      // стартовая площадка не будет иметь возможности держать на себе нейрон,
-      // когда нейрон схвачен, то площадка закрывается (анимация), обратно
-      // положить нейрон нельзя.
-      if (activeConnectionNode === 0) {
-        console.log('событие для разрушения нейрона');
-        this.neuronNodeDestroy(currentCapturedNeuronNode);
-      }
-    }
-  },
+    // TODO: после этого, останутся нейроны, которые не связаны с базовыми.
+    //  найти их и удалить.
 
-  walkConnectionsNodes({ inspectNeuronNode, executeForConnectionNode }) {
-    this.connectionsNodes.forEach((connectionNode) => {
-      const {
-        neuronsNodes: { capturedNeuronNode, neuronNode },
-      } = connectionNode;
+    // TODO: -> FN
+    // TODO: не разрушаются при пересечении трека.
+    this.neuronsNode.children.forEach((neuronNode) => {
+      console.log(
+        'trackId', neuronNode.state.trackId,
+        'has', neuronsNodesConnectedToBase.has(neuronNode),
+      );
 
       if (
-        inspectNeuronNode.uuid === capturedNeuronNode.uuid
-        || inspectNeuronNode.uuid === neuronNode.uuid
+        // TODO: пока так. базовый зафиксирован.
+        !neuronNode.state.isBase
+        && neuronNode.state.trackId !== -2
+        && (
+          neuronNode.state.trackId === -1
+          || !neuronsNodesConnectedToBase.has(neuronNode)
+        )
       ) {
-        executeForConnectionNode(connectionNode);
+        // TODO: при удалении нейрона, удаляется его соединение,
+        // при этом останется его сосед. поэтому лучше наверное удалять всё тут.
+        // this.connectionNodeDestroy(connectionNode);
+        this.neuronNodeDestroy(neuronNode);
+        this.destroingConnectionsNodes(neuronNode);
       }
     });
+  },
+
+  // TODO: вынести в отдельный модуль
+  prepareClearingUnconnectedNeuronsNodesFromBaseNode() {
+    const activeConnectionsNodes = new Set();
+    const neuronsNodesConnectedToBase = new Set();
+
+    this.connectionsNodes.forEach((connectionNode) => {
+      if (connectionNode.active) {
+        activeConnectionsNodes.add(connectionNode);
+
+        const {
+          neuronsNodes: {
+            capturedNeuronNode,
+            neuronNode,
+          },
+        } = connectionNode;
+
+        if (capturedNeuronNode.state.isBase) {
+          neuronsNodesConnectedToBase.add(capturedNeuronNode);
+        } else if (neuronNode.state.isBase) {
+          neuronsNodesConnectedToBase.add(neuronNode);
+        }
+      }
+    });
+
+    return { activeConnectionsNodes, neuronsNodesConnectedToBase };
+  },
+
+  // TODO: вынести в отдельный модуль
+  clearingUnconnectedNeuronsNodesFromBaseNode({
+    activeConnectionsNodes,
+    neuronsNodesConnectedToBase,
+  }) {
+    activeConnectionsNodes.forEach((connectionNode) => {
+      const {
+        neuronsNodes: {
+          capturedNeuronNode,
+          neuronNode,
+        },
+      } = connectionNode;
+
+      if (neuronsNodesConnectedToBase.has(capturedNeuronNode)) {
+        neuronsNodesConnectedToBase.add(neuronNode);
+        // TODO: когда удаляется соединение, то нейроны должны быть удалены.
+        activeConnectionsNodes.delete(connectionNode);
+      } else if (neuronsNodesConnectedToBase.has(neuronNode)) {
+        neuronsNodesConnectedToBase.add(capturedNeuronNode);
+        activeConnectionsNodes.delete(connectionNode);
+      }
+    });
+
+    console.log('activeConnectionsNodes.size', activeConnectionsNodes.size, this.connectionsNodes.size);
+
+    // TODO: обязательно останется сколько то соединений...
+    // if (activeConnectionsNodes.size > 0) {
+    //   this.clearingUnconnectedNeuronsNodesFromBaseNode({
+    //     activeConnectionsNodes,
+    //     neuronsNodesConnectedToBase,
+    //   });
+    // }
   },
 
   neuronNodeDestroy(nodeDestroyed) {
@@ -138,13 +185,31 @@ cc.Class({
     cc.director.dispatchEvent(e);
   },
 
+  destroingConnectionsNodes(destroyedNeuronNode) {
+    this.connectionsNodes.forEach((connectionNode) => {
+      const {
+        neuronsNodes: {
+          capturedNeuronNode,
+          neuronNode,
+        },
+      } = connectionNode;
+
+      if (
+        destroyedNeuronNode.uuid === capturedNeuronNode.uuid
+        || destroyedNeuronNode.uuid === neuronNode.uuid
+      ) {
+        this.connectionNodeDestroy(connectionNode);
+      }
+    });
+  },
+
   addingConnectionsNodes({ detail: { capturedNeuronNode } }) {
     this.neuronsNode.children.forEach((neuronNode) => {
       // Предотвращение добавления соединения с собой для захваченного узла.
       // А так же для нейрона, который только что был создан.
       if (
         capturedNeuronNode.uuid !== neuronNode.uuid
-        && neuronNode.state.trackId !== -1
+        && neuronNode.state.trackId !== -2
       ) {
         this.connectionsNodesPoolSizeCheck();
         this.addConnectionNode({ capturedNeuronNode, neuronNode });
@@ -179,24 +244,12 @@ cc.Class({
     );
 
     if (trackIdDifference === 1) {
-      console.log(trackIdDifference);
       changeConnectionNodeParameters(connectionNode);
+
       connectionNode.active = true;
     } else {
       connectionNode.active = false;
     }
-  },
-
-  // TODO: проверка: все нейроны имеют соединение с питающим сеть (начальным).
-  // могут остаться одинокие нейроны соединённым между собой, которые
-  // должны быть уничтожены.
-  destroingConnectionsNodes({ detail: { destroyedNeuronNode } }) {
-    this.walkConnectionsNodes({
-      inspectNeuronNode: destroyedNeuronNode,
-      executeForConnectionNode: (connectionNode) => {
-        this.connectionNodeDestroy(connectionNode);
-      },
-    });
   },
 
   connectionNodeDestroy(connectionNode) {

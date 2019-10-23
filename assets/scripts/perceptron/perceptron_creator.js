@@ -7,8 +7,10 @@ cc.Class({
 
   onLoad() {
     this.neuronsNode = cc.find('neurons', this.node.parent);
-
     this.neuronsNodesPool = new cc.NodePool();
+
+    // TODO:
+    this.isFirst = true;
 
     this.createNeuronsNodes();
     this.addNeuronNode();
@@ -59,9 +61,22 @@ cc.Class({
     }
   },
 
+  // TODO: стартовая площадка не будет иметь возможности держать на себе нейрон:
+  // когда нейрон схвачен, то площадка закрывается (анимация),
+  // обратно положить нейрон нельзя!
   addNeuronNode() {
     const neuronNode = this.neuronsNodesPool.get();
     neuronNode.position = this.node.position;
+
+    // TODO: когда в сеть добавляется самый первый нейрон - он базовый.
+    // базовый, когда подключён к питанию!
+    neuronNode.state = {
+      // TODO: если будет нужно переназначить основной нейрон при уничтожении
+      // или создавать несколько
+      isBase: this.isFirst,
+    };
+
+    this.isFirst = false;
 
     this.neuronsNode.addChild(neuronNode);
   },

@@ -5,6 +5,12 @@ cc.Class({
   onLoad() {
     const { width, height } = cc.find('level');
     this.levelNodeSize = { width, height };
+  },
+
+  // TODO: эффект появления: частицы.
+  onEnable() {
+    // -2 - новый нейрон; -1 - установлен где запрещено.
+    this.node.state.trackId = -2;
 
     this.node.on('touchstart', this.onStartCapture, this);
     this.node.on('touchmove', this.onMoveCaptured, this);
@@ -12,28 +18,12 @@ cc.Class({
     this.node.on('touchcancel', this.onEndCapture, this);
   },
 
-  // TODO: эффект появления: частицы.
-  onEnable() {
-    // Изменяется в track.js
-    this.node.state = { trackId: -1 };
-  },
-
   // TODO: эффект разрушения: частицы.
   onDisable() {
-    this.destroingConnectionsNodes();
-  },
-
-  onDestroy() {
     this.node.off('touchstart', this.onStartCapture, this);
     this.node.off('touchmove', this.onMoveCaptured, this);
     this.node.off('touchend', this.onEndCapture, this);
     this.node.off('touchcancel', this.onEndCapture, this);
-  },
-
-  onCollisionEnter(other, self) {
-    if (other.node.name === 'neuron') {
-      this.destroyIntersectedNeuronsNodes(other, self);
-    }
   },
 
   onStartCapture() {
@@ -53,7 +43,6 @@ cc.Class({
     cc.director.dispatchEvent(e);
   },
 
-  // Выполняет роль: setPositionLimitedByLevelSize
   onMoveCaptured(e) {
     const { x, y } = this.node.position.add(e.getDelta());
 
@@ -77,24 +66,5 @@ cc.Class({
 
   onEndCapture() {
     this.captureNeuronNode({ isCaptured: false });
-  },
-
-  destroyIntersectedNeuronsNodes(other, self) {
-    this.captureNeuronNode({ isCaptured: false });
-
-    this.neuronNodeDestroy(other.node);
-    this.neuronNodeDestroy(self.node);
-  },
-
-  neuronNodeDestroy(nodeDestroyed) {
-    const e = new cc.Event.EventCustom('perceptron/neuronNodeDestroy');
-    e.detail = { nodeDestroyed };
-    cc.director.dispatchEvent(e);
-  },
-
-  destroingConnectionsNodes() {
-    const e = new cc.Event.EventCustom('perceptron/destroingConnectionsNodes');
-    e.detail = { destroyedNeuronNode: this.node };
-    cc.director.dispatchEvent(e);
   },
 });
