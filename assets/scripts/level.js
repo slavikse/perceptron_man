@@ -14,4 +14,9 @@ cc.Class({
   onGameOver() {
     // cc.director.loadScene('start');
   },
+
+  onEditorAutoFullScreen() {
+    cc.screen.init();
+    cc.screen.autoFullScreen();
+  },
 });

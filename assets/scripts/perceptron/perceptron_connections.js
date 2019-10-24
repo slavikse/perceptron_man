@@ -88,10 +88,10 @@ cc.Class({
     }
   },
 
-  captureNeuronNode({ detail: { isCaptured, capturedNeuronNode } }) {
+  captureNeuronNode({ detail: { isCaptured } }) {
     this.isCapturedNeuronNode = isCaptured;
 
-    if (!isCaptured && !capturedNeuronNode.state.isBase) {
+    if (!isCaptured) {
       this.cleanUpOrphanedNeuronsNodes();
     }
   },
@@ -116,6 +116,8 @@ cc.Class({
         this.destroingConnectionsNodes(neuronNode);
         this.neuronNodeDestroy(neuronNode);
 
+        // Могут остаться нейроны, которые после удаления нейрона,
+        // остались соединены между собой, но не соединены с базовыми.
         this.cleanUpOrphanedNeuronsNodes();
       }
     });

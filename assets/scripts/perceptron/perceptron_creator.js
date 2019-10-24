@@ -58,9 +58,7 @@ cc.Class({
     }
   },
 
-  // TODO: стартовая площадка не будет иметь возможности держать на себе нейрон:
-  // когда нейрон схвачен, то площадка закрывается (анимация),
-  // обратно положить нейрон нельзя!
+  // Нельзя создавать нейроны на пересечении track_edge!
   addNeuronNode() {
     const neuronNode = this.neuronsNodesPool.get();
     neuronNode.position = this.node.position;

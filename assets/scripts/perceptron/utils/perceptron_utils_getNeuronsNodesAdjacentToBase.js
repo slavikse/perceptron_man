@@ -2,7 +2,7 @@ function getNeuronsNodesAdjacentToBase({
   activeConnectionsNodes,
   neuronsNodesConnectedToBase,
 }) {
-  let wasDeletion = false;
+  let wasConnectionDeletion = false;
 
   activeConnectionsNodes.forEach((connectionNode) => {
     const {
@@ -16,16 +16,16 @@ function getNeuronsNodesAdjacentToBase({
       neuronsNodesConnectedToBase.add(neuronNode);
 
       activeConnectionsNodes.delete(connectionNode);
-      wasDeletion = true;
+      wasConnectionDeletion = true;
     } else if (neuronsNodesConnectedToBase.has(neuronNode)) {
       neuronsNodesConnectedToBase.add(capturedNeuronNode);
 
       activeConnectionsNodes.delete(connectionNode);
-      wasDeletion = true;
+      wasConnectionDeletion = true;
     }
   });
 
-  if (wasDeletion) {
+  if (wasConnectionDeletion) {
     getNeuronsNodesAdjacentToBase({
       activeConnectionsNodes,
       neuronsNodesConnectedToBase,

@@ -14,6 +14,7 @@ module.exports = {
     SharedArrayBuffer: 'readonly',
     cc: 'readonly',
     CC_DEV: 'readonly',
+    CC_BUILD: 'readonly',
     Global: 'writable',
   },
   parserOptions: {

@@ -30,15 +30,15 @@ cc.Class({
       this.isCapturedNeuronNode
       && this.capturedNeuronNodeId === neuron.node.uuid
     ) {
-      let trackId = -1;
+      let trackId = Number(track.node.name);
 
-      if (!this.isCrossingTrackEdge) {
-        trackId = Number(track.node.name.match(/\d+$/)[0]);
+      if (this.isCrossingTrackEdge) {
+        trackId = -1;
       }
 
       // Проверка, что нейрон сменил дорожку.
       if (neuron.node.state.trackId !== trackId) {
-        // Последний нейрон, является базовым.
+        // Нейроны на последней дорожке - являются базовыми.
         neuron.node.state.isBase = trackId === this.countOfTracks;
         neuron.node.state.trackId = trackId;
       }

@@ -1,7 +1,6 @@
 cc.Class({
   extends: cc.Component,
 
-  // TODO: наложение радиции на соседей + эффект радиции.
   onLoad() {
     const { width, height } = cc.find('level');
     this.levelNodeSize = { width, height };
@@ -9,8 +8,8 @@ cc.Class({
 
   // TODO: эффект появления: частицы.
   onEnable() {
-    // isBase: Когда нейрон на 0 дорожке, значит он будет базовым.
-    // trackId: Новый нейрон: -2 | Установлен где запрещено: -1
+    // isBase: Когда нейрон на последней дорожке, значит он будет базовым.
+    // trackId: Новый нейрон: -2 | Установлен где запрещено: -1.
     this.node.state = {
       isBase: false,
       trackId: -2,
@@ -28,6 +27,8 @@ cc.Class({
     this.node.off('touchmove', this.onMoveCaptured, this);
     this.node.off('touchend', this.onEndCapture, this);
     this.node.off('touchcancel', this.onEndCapture, this);
+
+    this.destroingConnectionsNodes();
   },
 
   onStartCapture() {
@@ -70,5 +71,11 @@ cc.Class({
 
   onEndCapture() {
     this.captureNeuronNode({ isCaptured: false });
+  },
+
+  destroingConnectionsNodes() {
+    const e = new cc.Event.EventCustom('perceptron/destroingConnectionsNodes');
+    e.detail = { nodeDestroyed: this.node };
+    cc.director.dispatchEvent(e);
   },
 });
