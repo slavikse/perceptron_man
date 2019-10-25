@@ -69,19 +69,16 @@
       },
       {
         "__id__": 20
-      },
-      {
-        "__id__": 28
       }
     ],
     "_active": true,
     "_level": 1,
     "_components": [
       {
-        "__id__": 30
+        "__id__": 28
       },
       {
-        "__id__": 31
+        "__id__": 29
       }
     ],
     "_prefab": null,
@@ -165,7 +162,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 542.1253260524587
+      "z": 532.6056233274298
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -309,7 +306,7 @@
     "_id": "0b0yCgeBhDFqQ+f9x+XCp5"
   },
   {
-    "__type__": "16f1aroSNdL6a38A5rLPEew",
+    "__type__": "21193fwlE5IOLUTghObiYY6",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -317,9 +314,9 @@
     },
     "_enabled": true,
     "trackPrefab": {
-      "__uuid__": "5aff23f3-dcca-42d2-88f2-1bf85e3791a9"
+      "__uuid__": "18523275-e569-4004-ba3a-f5a33f66878f"
     },
-    "_id": "53z3IcVE9O9K75udiVqPYd"
+    "_id": "357uJsWf1N9KEJm/tZPcYQ"
   },
   {
     "__type__": "cc.Node",
@@ -506,7 +503,7 @@
     "_id": "89xZECTU9Ij5z7nDdofPUV"
   },
   {
-    "__type__": "01794tj/NlC9KDfS1nvcKAD",
+    "__type__": "377e4XQyelOwI1TzIcgnxY1",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -514,9 +511,9 @@
     },
     "_enabled": true,
     "neuronPrefab": {
-      "__uuid__": "39893b63-e353-4743-a901-7afdaf70643d"
+      "__uuid__": "914986ff-0f01-42a4-9e03-eca17709e901"
     },
-    "_id": "91FnmFkvBKeI4W8wx55FNJ"
+    "_id": "0cSydHZA5B0oVF/QnB9k0v"
   },
   {
     "__type__": "cc.Node",
@@ -636,14 +633,14 @@
     "_id": "17c5DpcF1M9bx5I/iwXsKk"
   },
   {
-    "__type__": "3f81fEpKzpPEYyXYiu2Ibmm",
+    "__type__": "97b2enOnwBNdb8+FZkKD7eY",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 13
     },
     "_enabled": true,
-    "_id": "84ts0aFvVAqJTVkGMYkO9w"
+    "_id": "07RQUNsxtHR7X36n4tnejb"
   },
   {
     "__type__": "cc.Node",
@@ -704,7 +701,7 @@
     "_id": "2bEm1vphJF7atbZ1BmwTlU"
   },
   {
-    "__type__": "fb991wnSxZHspgwz/zQLg8g",
+    "__type__": "45637PhfNVGOpOGdN/qblXJ",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -712,9 +709,9 @@
     },
     "_enabled": true,
     "connectionPrefab": {
-      "__uuid__": "c111f355-4426-4eae-bbd7-77496ecd7333"
+      "__uuid__": "1d0a64c1-bc0c-4cd1-b85f-f1b993d0e7a1"
     },
-    "_id": "1815wyIkxIB6f++T/NwV7p"
+    "_id": "7dHVCP0BZM/6yQoLOCxpio"
   },
   {
     "__type__": "cc.Node",
@@ -1137,96 +1134,6 @@
     "_componentId": "e1e58xd6oVKk54WQkvAej35",
     "handler": "onEditorAutoFullScreen",
     "customEventData": ""
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "sprite_0",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 2
-    },
-    "_children": [],
-    "_active": true,
-    "_level": 2,
-    "_components": [
-      {
-        "__id__": 29
-      }
-    ],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 64,
-      "height": 64
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_position": {
-      "__type__": "cc.Vec3",
-      "x": 440.642,
-      "y": 168.114,
-      "z": 0
-    },
-    "_scale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_is3DNode": false,
-    "groupIndex": 0,
-    "_id": "39wbvBXK9FGJe5Au4poz0h"
-  },
-  {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 28
-    },
-    "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
-      }
-    ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "f38aaab6-679e-48fc-82a1-1badc13833ed"
-    },
-    "_type": 0,
-    "_sizeMode": 1,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_atlas": null,
-    "_id": "43gTwrv6hACKygZikxTfJF"
   },
   {
     "__type__": "cc.Canvas",
