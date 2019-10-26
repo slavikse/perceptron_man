@@ -2,12 +2,10 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
-    const { width, height } = cc.find('level');
-    this.levelNodeSize = { width, height };
+    const { width, height } = cc.find('level/perceptron');
+    this.perceptronNodeSize = { width, height };
   },
 
-  // TODO: визуальный эффект, что нейрон теперь базовый.
-  // TODO: эффект появления: частицы.
   onEnable() {
     // isBase: Когда нейрон на последней дорожке, значит он будет базовым.
     // trackId: Новый нейрон: -2 | Установлен где запрещено: -1.
@@ -22,7 +20,6 @@ cc.Class({
     this.node.on('touchcancel', this.onEndCapture, this);
   },
 
-  // TODO: эффект разрушения: частицы.
   onDisable() {
     this.node.off('touchstart', this.onStartCapture, this);
     this.node.off('touchmove', this.onMoveCaptured, this);
@@ -52,8 +49,8 @@ cc.Class({
   onMoveCaptured(e) {
     const { x, y } = this.node.position.add(e.getDelta());
 
-    const halfLevelWidth = this.levelNodeSize.width / 2;
-    const halfLevelHeight = this.levelNodeSize.height / 2;
+    const halfLevelWidth = this.perceptronNodeSize.width / 2;
+    const halfLevelHeight = this.perceptronNodeSize.height / 2;
 
     const halfNodeWidth = this.node.width / 2;
     const halfNodeHeight = this.node.height / 2;

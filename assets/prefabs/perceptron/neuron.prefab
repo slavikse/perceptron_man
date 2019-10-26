@@ -170,7 +170,7 @@
     "_texture": {
       "__uuid__": "6698ae41-e825-4670-b94a-58b87f95864d"
     },
-    "_stopped": true,
+    "_stopped": false,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
     "totalParticles": 2,
@@ -344,7 +344,7 @@
     "_texture": {
       "__uuid__": "6698ae41-e825-4670-b94a-58b87f95864d"
     },
-    "_stopped": true,
+    "_stopped": false,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
     "totalParticles": 2,

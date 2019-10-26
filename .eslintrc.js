@@ -25,9 +25,9 @@ module.exports = {
     'import/resolver': {
       node: {
         paths: [
-          'assets/scripts/utils',
-          'assets/scripts/character/utils',
-          'assets/scripts/perceptron/utils',
+          'assets/scripts/utils/',
+          'assets/scripts/character/utils/',
+          'assets/scripts/perceptron/utils/',
         ],
       },
     },

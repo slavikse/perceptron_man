@@ -2,7 +2,7 @@ cc.Class({
   extends: cc.Component,
 
   onLoad() {
-    const tracksNode = cc.find('level/tracks');
+    const tracksNode = cc.find('level/perceptron/tracks');
     this.countOfTracks = Math.ceil(tracksNode.height / this.node.height);
 
     this.isCapturedNeuronNode = false;
