@@ -7,17 +7,20 @@ cc.Class({
 
   properties: {
     acceleration: 500,
-    speedLimiter: 3000,
+    speedLimiter: 10000,
   },
 
   onLoad() {
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
-    this.groundNode = cc.find('level/ground');
+    // TODO:
+    this.groundNode = cc.find('level/platform');
 
     this.rigidBodyComponent = this.node.getComponent(cc.RigidBody);
-    this.characterAnimationComponent = this.node.getComponent('character_animation');
+    // this.characterAnimationComponent = this.node.getComponent(
+    //   'character_animation',
+    // );
 
     this.speed = 0;
 
@@ -32,9 +35,9 @@ cc.Class({
 
   lateUpdate() {
     this.accelerationMovementPrevention();
-    this.dropoutMovementLimiter();
+    // this.dropoutMovementLimiter();
 
-    this.characterAnimationComponent.externalSwitchAnimationState(this.speed);
+    // this.characterAnimationComponent.externalSwitchAnimationState(this.speed);
   },
 
   onDestroy() {

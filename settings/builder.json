@@ -2,6 +2,7 @@
   "android-instant": {
     "REMOTE_SERVER_ROOT": "",
     "host": "",
+    "packageName": "org.cocos2d.perceptron_man",
     "pathPattern": "",
     "recordPath": "",
     "scheme": "https",
@@ -46,5 +47,16 @@
     "subContext": ""
   },
   "xxteaKey": "71c63143-329b-4d",
-  "zipCompressJs": true
+  "zipCompressJs": true,
+  "android": {
+    "packageName": "org.cocos2d.perceptron_man"
+  },
+  "ios": {
+    "packageName": "org.cocos2d.perceptron_man"
+  },
+  "mac": {
+    "packageName": "org.cocos2d.perceptron_man"
+  },
+  "win32": {},
+  "includeAnySDK": false
 }

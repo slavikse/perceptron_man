@@ -1,6 +1,6 @@
 {
   "name": "perceptron_man",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Игровой проект на движке Cocos Creator",
   "dependencies": {},
   "devDependencies": {

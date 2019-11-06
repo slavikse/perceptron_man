@@ -50,7 +50,9 @@ cc.Class({
   },
 
   jump() {
-    cc.audioEngine.playEffect(this.audio, false);
-    this.rigidBodyComponent.applyLinearImpulse(this.impulseVector, this.localCenter);
+    // cc.audioEngine.playEffect(this.audio, false);
+
+    this.rigidBodyComponent
+      .applyLinearImpulse(this.impulseVector, this.localCenter);
   },
 });
